@@ -1,5 +1,7 @@
 package edu.eci.cvds.Labtools.service;
 
+import org.springframework.boot.test.context.SpringBootTest;
 
-public class BasicHashServiceTest implements HashService{
+@SpringBootTest
+public class BasicHashServiceTest {
 }

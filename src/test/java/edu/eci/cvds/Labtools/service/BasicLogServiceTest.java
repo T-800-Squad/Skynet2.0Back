@@ -1,4 +1,7 @@
 package edu.eci.cvds.Labtools.service;
 
-public class BasicLogServiceTest implements LogService{
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class BasicLogServiceTest{
 }

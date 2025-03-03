@@ -1,7 +1,7 @@
-package edu.eci.cvds.Labtools.controller;
+package edu.eci.cvds.Labtools.repository;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class LoginControllerTest {
+public class BasicUserRepositoryTest {
 }

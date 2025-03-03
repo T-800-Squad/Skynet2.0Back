@@ -1,4 +1,7 @@
 package edu.eci.cvds.Labtools.service;
 
-public class BasicEmailVerificationServiceTest implements EmailVerificationService{
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class BasicEmailVerificationServiceTest {
 }
