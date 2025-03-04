@@ -1,22 +1,16 @@
 package edu.eci.cvds.Labtools.controller;
 
-import edu.eci.cvds.Labtools.model.Lab;
-import edu.eci.cvds.Labtools.repository.BookingRepository;
-import edu.eci.cvds.Labtools.repository.LabRepository;
-import edu.eci.cvds.Labtools.repository.UserRepository;
+import edu.eci.cvds.Labtools.model.BookingDTO;
+import edu.eci.cvds.Labtools.service.BookingService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/booking")
 public class BookingController {
-    private LabRepository labRepository;
-    private BookingRepository bookingRepository;
-    private UserRepository userRepository;
+    private BookingService bookingService;
 
-    public BookingController(LabRepository labRepository, BookingRepository bookingRepository, UserRepository userRepository) {
-        this.labRepository = labRepository;
-        this.bookingRepository = bookingRepository;
-        this.userRepository = userRepository;
+    public BookingController(BookingService bookingService) {
+        this.bookingService = bookingService;
     }
 
     @GetMapping
@@ -25,11 +19,11 @@ public class BookingController {
     }
 
     @PostMapping
-    public String createBooking(@RequestParam String userId,@RequestParam String labId, @RequestParam int day,@RequestParam int timeLine){
-        return userId+labId+day+timeLine;
+    public String createBooking(@RequestBody BookingDTO bookingDTO) {
+        return null;
     }
 
-    public String deleteBooking(String userId, String bookingId){
+    public String deleteBooking(BookingDTO bookingDTO) {
         return null;
     }
 

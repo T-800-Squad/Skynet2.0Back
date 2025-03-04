@@ -1,7 +1,10 @@
 package edu.eci.cvds.Labtools.model;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public abstract class User {
 
     protected String userId;
@@ -10,31 +13,12 @@ public abstract class User {
     protected String password;
     protected List<Booking> bookings;
 
-    public User(String userId, String name, String email, String password) {
-        this.userId = userId;
-        this.name = name;
-        this.email = email;
-        this.password = password;
+    public void addBooking(Booking booking) {
+
     }
 
-    public List<Booking> getBookings() {
-        return bookings;
-    }
+    public void deleteBooking(String bookingId) {
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
 }

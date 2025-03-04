@@ -3,13 +3,10 @@ package edu.eci.cvds.Labtools.model;
 import lombok.Data;
 
 @Data
-public class Booking {
-
+public class BookingDTO {
     private String bookingId;
     private int day;
     private int timeLine;
-    private User user;
-    private Lab lab;
-
-
+    private String userName;
+    private String labName;
 }
