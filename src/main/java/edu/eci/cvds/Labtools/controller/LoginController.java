@@ -16,7 +16,6 @@ public class LoginController {
     public LoginController(LogService logService, EmailVerificationService emailVerificationService) {
         this.logService = logService;
         this.emailVerificationService = emailVerificationService;
-
     }
 
     @PostMapping
