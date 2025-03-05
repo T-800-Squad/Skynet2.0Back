@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: edu.eci.cvds.Labtools.LabtoolsApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.327 s -- in edu.eci.cvds.Labtools.LabtoolsApplicationTests
