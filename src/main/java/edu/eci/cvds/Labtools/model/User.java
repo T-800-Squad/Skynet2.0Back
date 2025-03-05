@@ -11,6 +11,7 @@ public abstract class User {
     protected String name;
     protected String email;
     protected String password;
+    protected boolean logged;
     protected List<Booking> bookings;
 
     public void addBooking(Booking booking) {

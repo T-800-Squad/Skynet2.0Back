@@ -2,7 +2,8 @@ package edu.eci.cvds.Labtools.repository;
 
 import edu.eci.cvds.Labtools.model.Lab;
 
-public interface LabRepository {
+
+public interface LabRepository  {
 
     boolean[][] checkAvailability();
 

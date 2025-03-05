@@ -3,10 +3,12 @@ package edu.eci.cvds.Labtools.repository;
 import edu.eci.cvds.Labtools.model.Booking;
 import edu.eci.cvds.Labtools.model.BookingDTO;
 import edu.eci.cvds.Labtools.model.User;
+import edu.eci.cvds.Labtools.model.UserDTO;
+
 
 public interface UserRepository {
 
-    String userAuthentication(String email, String password);
+    boolean userAuthentication(UserDTO userDTO);
 
     void deleteBookingInUser(String bookingId, String userId);
 

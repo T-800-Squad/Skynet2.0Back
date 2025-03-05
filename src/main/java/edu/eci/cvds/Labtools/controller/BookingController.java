@@ -22,12 +22,12 @@ public class BookingController {
     public String createBooking(@RequestBody BookingDTO bookingDTO) {
         return null;
     }
-
-    public String deleteBooking(BookingDTO bookingDTO) {
+    @DeleteMapping
+    public String deleteBooking(@RequestBody BookingDTO bookingDTO) {
         return null;
     }
-
-    public String[] checkAvailabilityLabExactMoment(int day, int timeLine){
+    @GetMapping("/lab")
+    public String[] checkAvailabilityLabExactMoment(@RequestParam int day, @RequestParam int timeLine){
         return null;
     }
 
