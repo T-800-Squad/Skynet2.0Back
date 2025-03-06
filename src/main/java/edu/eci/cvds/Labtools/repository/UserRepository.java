@@ -1,18 +1,18 @@
 package edu.eci.cvds.Labtools.repository;
 
 import edu.eci.cvds.Labtools.model.Booking;
-import edu.eci.cvds.Labtools.model.BookingDTO;
 import edu.eci.cvds.Labtools.model.User;
-import edu.eci.cvds.Labtools.model.UserDTO;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository extends MongoRepository<User, String> {
 
-    boolean userAuthentication(String email, String password);
+    Optional<User> findByEmailAndPassword(String email, String password);
 
-    BookingDTO[] queryUserBooking(String userId);
+    List<Booking> findBookingsByUserId(String userId);
 
-    User getUser(String userId);
-    void setUser(String userId, Booking booking);
+    Optional<User> findByUserId(String userId);
 }
+

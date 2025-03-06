@@ -14,6 +14,4 @@ public class Booking {
     private int timeLine;
     private User user;
     private Lab lab;
-
-
 }
