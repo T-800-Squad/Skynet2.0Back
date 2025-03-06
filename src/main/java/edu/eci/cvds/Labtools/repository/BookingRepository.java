@@ -11,4 +11,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface BookingRepository extends MongoRepository<Booking, String> {
     String createBooking(Booking booking);
     String deleteBooking(String bookingId);
+    String getBookingsByBookingId(String bookingId);
 }
