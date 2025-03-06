@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 @Data
-@Document(collection = "usuarios")
+@Document(collection = "users")
 public abstract class User {
 
     @Id
