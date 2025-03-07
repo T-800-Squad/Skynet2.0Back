@@ -1,20 +1,21 @@
 package edu.eci.cvds.Labtools.service;
 
 import edu.eci.cvds.Labtools.model.BookingDTO;
+import edu.eci.cvds.Labtools.model.LabDTO;
+import edu.eci.cvds.Labtools.model.UserDTO;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class BasicBookingService implements BookingService{
-    public boolean[][] checkAvailability(){
-        return null;
+
+    public LabDTO[] checkAvailability(String date) {return null;}
+
+    public boolean createBooking(LabDTO labDTO, UserDTO userDTO) {
+        return false;
     }
-    public String createBooking(BookingDTO bookingDTO){
-        return null;
-    }
-    public String deleteBooking(BookingDTO bookingDTO){
-        return null;
-    }
-    public String[]checkAvailableLabExactMoment(int day, int timeLine){
-        return null;
+
+    public boolean deleteBooking(BookingDTO bookingDTO){
+        return false;
     }
 }

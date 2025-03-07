@@ -4,14 +4,15 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Data
 @Document(collection = "bookings")
 public class Booking {
 
     @Id
     private String bookingId;
-    private int day;
-    private int timeLine;
+    private LocalDateTime date;
     private User user;
     private Lab lab;
 }

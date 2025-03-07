@@ -5,12 +5,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import edu.eci.cvds.Labtools.repository.UserRepository;
+import edu.eci.cvds.Labtools.repository.MongoUserRepository;
 
 @SpringBootTest
 public class BasicEmailVerificationServiceTest {
     @Mock
-    private UserRepository userRepository;
+    private MongoUserRepository userRepository;
 
     @InjectMocks
     private BasicEmailVerificationService basicEmailVerificationService;

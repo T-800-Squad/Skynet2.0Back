@@ -19,8 +19,8 @@ public class LoginController {
     }
 
     @PostMapping
-    public String userLog(UserDTO userDTO) {
-        return null;
+    public boolean userLog(@RequestBody UserDTO userDTO) {
+        return false;
     }
 
     @GetMapping

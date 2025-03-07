@@ -1,10 +1,14 @@
 package edu.eci.cvds.Labtools.service;
 
 import edu.eci.cvds.Labtools.model.BookingDTO;
+import edu.eci.cvds.Labtools.model.LabDTO;
+import edu.eci.cvds.Labtools.model.UserDTO;
+
 
 public interface BookingService {
-    boolean[][] checkAvailability();
-    String createBooking(BookingDTO bookingDTO);
-    String deleteBooking(BookingDTO bookingDTO);
-    String[]checkAvailableLabExactMoment(int day, int timeLine);
+    LabDTO[] checkAvailability(String date);
+
+    boolean createBooking(LabDTO labDTO, UserDTO userDTO);
+
+    boolean deleteBooking(BookingDTO bookingDTO);
 }

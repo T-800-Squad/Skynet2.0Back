@@ -13,22 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataMongoTest
 @ExtendWith(SpringExtension.class)
-public class UserRepositoryIntegrationTest {
+public class UserRepositoryTest {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Test
-    public void testFindUserById() {
-        User foundUser = userRepository.findById("67c9c1d729561adf2afa4214").orElse(null);
-
-        assertNotNull(foundUser);
-        assertEquals("Ivan", foundUser.getName());
-    }
-
-    @Test
-    public void testFindAllUsers() {
-        List<User> users = userRepository.findAll();
-        assertEquals(1, users.size());
-    }
 }

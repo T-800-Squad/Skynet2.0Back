@@ -1,6 +1,6 @@
 package edu.eci.cvds.Labtools.service;
 
-import edu.eci.cvds.Labtools.repository.UserRepository;
+import edu.eci.cvds.Labtools.model.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,11 +8,9 @@ import org.springframework.stereotype.Service;
 public class BasicLogService implements LogService {
     @Autowired
     private HashService hashService;
-    @Autowired
-    private UserRepository userRepository;
 
-    public String userLog(String email, String password){
-        return null;
+    public boolean userLog(UserDTO userDTO){
+        return false;
     }
 
 }

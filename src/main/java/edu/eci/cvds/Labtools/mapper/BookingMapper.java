@@ -2,10 +2,18 @@ package edu.eci.cvds.Labtools.mapper;
 
 import edu.eci.cvds.Labtools.model.Booking;
 import edu.eci.cvds.Labtools.model.BookingDTO;
-import edu.eci.cvds.Labtools.model.User;
-import edu.eci.cvds.Labtools.repository.LabRepository;
+import edu.eci.cvds.Labtools.repository.MongoLabRepository;
+import edu.eci.cvds.Labtools.repository.MongoUserRepository;
 
 public class BookingMapper implements GenericMapper<Booking, BookingDTO> {
+
+    private final MongoUserRepository userRepository;
+    private final MongoLabRepository labRepository;
+
+    public BookingMapper(MongoUserRepository userRepository, MongoLabRepository labRepository) {
+        this.userRepository = userRepository;
+        this.labRepository = labRepository;
+    }
 
     @Override
     public BookingDTO toDTO(Booking booking) {
@@ -24,8 +32,8 @@ public class BookingMapper implements GenericMapper<Booking, BookingDTO> {
         booking.setBookingId(bookingDTO.getBookingId());
         booking.setDay(bookingDTO.getDay());
         booking.setTimeLine(bookingDTO.getTimeLine());
-        booking.setLab(LabRepository.getLab());
-        booking.setUser(Optional< User > findByUserId(String userId));
+        booking.setLab(this.labRepository.getLab(bookingDTO.getLabName()));
+        booking.setUser(this.userRepository.findByUserId(bookingDTO.getUserName()).orElse(null));
         return booking;
     }
 }

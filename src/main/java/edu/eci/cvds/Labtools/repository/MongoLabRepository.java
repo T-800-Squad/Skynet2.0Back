@@ -1,24 +1,10 @@
 package edu.eci.cvds.Labtools.repository;
 
 import edu.eci.cvds.Labtools.model.Lab;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-@Repository
-public interface MongoLabRepository extends LabRepository {
 
-    default boolean[][] checkAvailability() {
-        return null;
-    }
+public interface MongoLabRepository extends MongoRepository<Lab, String> {
 
-    default String[] checkAvailabilityLabExactMoment(int day, int timeLine) {
-        return null;
-    }
 
-    default Lab getLab(String labId) {
-        return null;
-    }
-
-    default void setLab(String labId, int day, int timeLine) {
-
-    }
 }

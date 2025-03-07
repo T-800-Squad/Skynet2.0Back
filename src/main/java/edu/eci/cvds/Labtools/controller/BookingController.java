@@ -1,6 +1,8 @@
 package edu.eci.cvds.Labtools.controller;
 
 import edu.eci.cvds.Labtools.model.BookingDTO;
+import edu.eci.cvds.Labtools.model.LabDTO;
+import edu.eci.cvds.Labtools.model.UserDTO;
 import edu.eci.cvds.Labtools.service.BookingService;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,21 +16,18 @@ public class BookingController {
     }
 
     @GetMapping
-    public boolean[][] checkAvailability() {
-        return new boolean[6][8];
+    public LabDTO[] checkAvailability(@RequestParam String date) {
+        return null;
     }
 
     @PostMapping
-    public String createBooking(@RequestBody BookingDTO bookingDTO) {
-        return null;
+    public boolean createBooking(@RequestBody LabDTO labDTO, UserDTO userDTO) {
+        return false;
     }
+
     @DeleteMapping
-    public String deleteBooking(@RequestBody BookingDTO bookingDTO) {
-        return null;
-    }
-    @GetMapping("/lab")
-    public String[] checkAvailabilityLabExactMoment(@RequestParam int day, @RequestParam int timeLine){
-        return null;
+    public boolean deleteBooking(@RequestBody BookingDTO bookingDTO) {
+        return false;
     }
 
 }

@@ -1,16 +1,10 @@
 package edu.eci.cvds.Labtools.repository;
 
+
 import edu.eci.cvds.Labtools.model.Booking;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-@Repository
-public interface MongoBookingRepository extends BookingRepository {
 
-    default String createBooking(Booking booking) {
-        return null;
-    }
+public interface MongoBookingRepository extends MongoRepository<Booking, String> {
 
-    default String deleteBooking(String bookingId) {
-        return null;
-    }
 }
