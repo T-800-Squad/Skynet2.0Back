@@ -12,6 +12,8 @@ public abstract class User {
 
     @Id
     protected String userId;
+    //Cambio para asegurar funcionamiento
+    protected String id;
     protected String name;
     protected String email;
     protected String password;

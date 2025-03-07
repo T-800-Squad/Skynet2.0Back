@@ -8,6 +8,7 @@ public class UserMapper implements GenericMapper<User, UserDTO> {
     @Override
     public UserDTO toDTO(User user) {
         UserDTO dto = new UserDTO();
+        dto.setUserId(user.getUserId());
         dto.setName(user.getName());
         dto.setEmail(user.getEmail());
         return dto;
