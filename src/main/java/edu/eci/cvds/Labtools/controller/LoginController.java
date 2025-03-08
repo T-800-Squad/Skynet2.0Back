@@ -1,7 +1,7 @@
 package edu.eci.cvds.Labtools.controller;
 
 import edu.eci.cvds.Labtools.LabToolsException;
-import edu.eci.cvds.Labtools.model.UserDTO;
+import edu.eci.cvds.Labtools.dto.UserDTO;
 import edu.eci.cvds.Labtools.service.EmailVerificationService;
 import edu.eci.cvds.Labtools.service.LogService;
 import org.springframework.web.bind.annotation.*;

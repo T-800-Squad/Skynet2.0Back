@@ -1,6 +1,6 @@
 package edu.eci.cvds.Labtools.service;
 
-import edu.eci.cvds.Labtools.model.UserDTO;
+import edu.eci.cvds.Labtools.dto.UserDTO;
 
 public interface LogService {
 

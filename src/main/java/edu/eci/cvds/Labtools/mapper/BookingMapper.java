@@ -1,7 +1,7 @@
 package edu.eci.cvds.Labtools.mapper;
 
 import edu.eci.cvds.Labtools.model.Booking;
-import edu.eci.cvds.Labtools.model.BookingDTO;
+import edu.eci.cvds.Labtools.dto.BookingDTO;
 import edu.eci.cvds.Labtools.repository.MongoLabRepository;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
 

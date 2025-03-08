@@ -1,4 +1,4 @@
-package edu.eci.cvds.Labtools.model;
+package edu.eci.cvds.Labtools.dto;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;

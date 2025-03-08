@@ -1,7 +1,7 @@
 package edu.eci.cvds.Labtools.mapper;
 
 import edu.eci.cvds.Labtools.model.User;
-import edu.eci.cvds.Labtools.model.UserDTO;
+import edu.eci.cvds.Labtools.dto.UserDTO;
 
 public class UserMapper implements GenericMapper<User, UserDTO> {
 

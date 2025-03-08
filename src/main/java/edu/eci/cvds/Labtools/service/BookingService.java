@@ -1,8 +1,8 @@
 package edu.eci.cvds.Labtools.service;
 
-import edu.eci.cvds.Labtools.model.BookingDTO;
-import edu.eci.cvds.Labtools.model.LabDTO;
-import edu.eci.cvds.Labtools.model.UserDTO;
+import edu.eci.cvds.Labtools.dto.BookingDTO;
+import edu.eci.cvds.Labtools.dto.LabDTO;
+import edu.eci.cvds.Labtools.dto.UserDTO;
 
 
 public interface BookingService {
