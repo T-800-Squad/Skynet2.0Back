@@ -3,6 +3,7 @@ package edu.eci.cvds.Labtools.repository;
 import edu.eci.cvds.Labtools.model.Booking;
 import edu.eci.cvds.Labtools.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
