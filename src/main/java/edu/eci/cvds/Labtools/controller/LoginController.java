@@ -1,5 +1,6 @@
 package edu.eci.cvds.Labtools.controller;
 
+import edu.eci.cvds.Labtools.LabToolsException;
 import edu.eci.cvds.Labtools.model.UserDTO;
 import edu.eci.cvds.Labtools.service.EmailVerificationService;
 import edu.eci.cvds.Labtools.service.LogService;
@@ -24,10 +25,9 @@ public class LoginController {
     }
 
     @GetMapping
-    public boolean emailFormtaVerification(@RequestParam String email) {
-        return false;
+    public boolean emailFormtaVerification(@RequestParam String email) throws LabToolsException {
+        return emailVerificationService.emailFormatVerification(email);
     }
-
 
 
 }
