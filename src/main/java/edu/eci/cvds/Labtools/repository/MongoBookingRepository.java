@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 public interface MongoBookingRepository extends MongoRepository<Booking, String> {
-    @Query("{ 'user.id' : ?0 }")
+    @Query("{ 'user.userId' : ?0 }")
     List<Booking> findByUserId(String userId);
 }

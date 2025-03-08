@@ -18,6 +18,7 @@ public class QueryController {
 
     @GetMapping
     public Booking[] queryUserBookings(@RequestParam String userId) {
+        System.out.println("Llamada al controlador con userId: " + userId);
         return basicQueryService.queryUserBookings(userId);
     }
 }

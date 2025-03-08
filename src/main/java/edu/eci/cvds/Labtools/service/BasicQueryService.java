@@ -18,6 +18,11 @@ public class BasicQueryService implements QueryService {
 
     @Override
     public Booking[] queryUserBookings(String userId) {
+        System.out.println("Entrando a queryUserBookings con userId: " + userId);
+
+        List<Booking> results = bookingRepository.findByUserId("1000096263");
+        System.out.println("Bookings encontrados: " + results);
+
         List<Booking> userBookings = bookingRepository.findByUserId(userId);
         Booking[] bookingsForUser = new Booking[userBookings.size()];
         for (int i = 0; i < userBookings.size(); i++) {

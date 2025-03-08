@@ -3,6 +3,7 @@ package edu.eci.cvds.Labtools.model;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public abstract class User {
 
     //Cambio para asegurar funcionamiento
     @Id
+    @Field("_id")
     protected String id;
     protected String name;
     protected String email;
