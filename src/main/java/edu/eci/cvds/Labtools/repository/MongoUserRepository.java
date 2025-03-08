@@ -3,7 +3,6 @@ package edu.eci.cvds.Labtools.repository;
 import edu.eci.cvds.Labtools.model.Booking;
 import edu.eci.cvds.Labtools.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,8 +11,9 @@ public interface MongoUserRepository extends MongoRepository<User, String> {
 
     Optional<User> findByEmail(String email, String password);
 
-    List<Booking> findBookingsById(String userId);
+    List<Booking> findBookingsById(String Id);
 
-    Optional<User> findByUserId(String userId);
+    @Override
+    Optional<User> findById(String Id);
 }
 

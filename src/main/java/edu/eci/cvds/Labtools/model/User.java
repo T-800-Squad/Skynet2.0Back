@@ -10,9 +10,11 @@ import java.util.List;
 @Document(collection = "users")
 public abstract class User {
 
-    @Id
-    protected String userId;
+
+    //protected String userId;
+
     //Cambio para asegurar funcionamiento
+    @Id
     protected String id;
     protected String name;
     protected String email;

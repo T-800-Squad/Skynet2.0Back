@@ -1,7 +1,7 @@
 package edu.eci.cvds.Labtools.service;
 
 import edu.eci.cvds.Labtools.model.Booking;
-import edu.eci.cvds.Labtools.repository.BookingRepository;
+import edu.eci.cvds.Labtools.repository.MongoBookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class BasicQueryService implements QueryService {
     @Autowired
-    private BookingRepository bookingRepository;
+    private MongoBookingRepository bookingRepository;
 
     @Override
     public List<Booking> getAllBookings(){
