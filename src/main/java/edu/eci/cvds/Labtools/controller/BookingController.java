@@ -1,6 +1,5 @@
 package edu.eci.cvds.Labtools.controller;
 
-import edu.eci.cvds.Labtools.model.BookingDTO;
 import edu.eci.cvds.Labtools.model.LabDTO;
 import edu.eci.cvds.Labtools.model.UserDTO;
 import edu.eci.cvds.Labtools.service.BookingService;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/booking")
 public class BookingController {
+
     private BookingService bookingService;
 
     public BookingController(BookingService bookingService) {
@@ -25,9 +25,9 @@ public class BookingController {
         return false;
     }
 
-    @DeleteMapping
+    /*@DeleteMapping
     public boolean deleteBooking(@RequestBody BookingDTO bookingDTO) {
         return false;
-    }
+    }*/
 
 }
