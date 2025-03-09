@@ -1,18 +1,20 @@
 package edu.eci.cvds.Labtools.controller;
 
-import edu.eci.cvds.Labtools.model.Booking;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import edu.eci.cvds.Labtools.dto.BookingDTO;
+import edu.eci.cvds.Labtools.service.QueryService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/query")
 public class QueryController {
+    private QueryService queryService;
 
+    public QueryController(QueryService queryService) {
+        this.queryService = queryService;
+    }
 
     @GetMapping
-    public Booking[] queryUserBookings(@RequestParam String userId) {
+    public BookingDTO[] findBookingsById(@RequestBody String userName) {
         return null;
     }
 }

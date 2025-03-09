@@ -1,9 +1,9 @@
 package edu.eci.cvds.Labtools.service;
 
-import edu.eci.cvds.Labtools.dto.UserDTO;
+import edu.eci.cvds.Labtools.dto.UserRegisterDTO;
 
 public interface LogService {
 
-    boolean userLog(UserDTO userDTO);
+    boolean userLog(UserRegisterDTO userRegisterDTO);
 
 }
