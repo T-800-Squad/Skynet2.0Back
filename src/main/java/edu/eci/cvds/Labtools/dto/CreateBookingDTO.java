@@ -1,8 +1,13 @@
 package edu.eci.cvds.Labtools.dto;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+
+@Getter
+@Setter
+@AllArgsConstructor
+@ToString
+
 public class CreateBookingDTO {
     public String userName;
     public String labName;
