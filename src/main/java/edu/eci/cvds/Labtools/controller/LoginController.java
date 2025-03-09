@@ -1,6 +1,7 @@
 package edu.eci.cvds.Labtools.controller;
 
-import edu.eci.cvds.Labtools.model.UserDTO;
+import edu.eci.cvds.Labtools.dto.UserDTO;
+import edu.eci.cvds.Labtools.dto.UserRegisterDTO;
 import edu.eci.cvds.Labtools.service.EmailVerificationService;
 import edu.eci.cvds.Labtools.service.LogService;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +20,13 @@ public class LoginController {
     }
 
     @PostMapping
-    public boolean userLog(@RequestBody UserDTO userDTO) {
-        return false;
+    public UserDTO userLog(@RequestBody UserRegisterDTO userRegisterDTO) {
+        return null;
     }
 
     @GetMapping
-    public boolean emailFormtaVerification(@RequestParam String email) {
-        return false;
+    public UserDTO emailFormtaVerification(@RequestBody String email) {
+        return null;
     }
 
 

@@ -1,6 +1,6 @@
 package edu.eci.cvds.Labtools.service;
 
-import edu.eci.cvds.Labtools.model.UserDTO;
+import edu.eci.cvds.Labtools.dto.UserRegisterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,7 @@ public class BasicLogService implements LogService {
     @Autowired
     private HashService hashService;
 
-    public boolean userLog(UserDTO userDTO){
+    public boolean userLog(UserRegisterDTO userRegisterDTO){
         return false;
     }
 

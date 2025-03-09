@@ -12,13 +12,14 @@ public abstract class User {
 
     @Id
     protected String userId;
-    //Cambio para asegurar funcionamiento
     protected String id;
     protected String name;
     protected String email;
     protected String password;
     protected boolean logged;
     protected List<Booking> bookings;
+    protected boolean rol;
+    protected int attempsTimes;
 
     public void addBooking(Booking booking) {
 
