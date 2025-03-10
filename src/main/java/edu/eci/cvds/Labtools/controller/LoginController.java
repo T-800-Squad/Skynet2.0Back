@@ -1,5 +1,6 @@
 package edu.eci.cvds.Labtools.controller;
 
+import edu.eci.cvds.Labtools.LabToolsException;
 import edu.eci.cvds.Labtools.dto.UserDTO;
 import edu.eci.cvds.Labtools.dto.UserRegisterDTO;
 import edu.eci.cvds.Labtools.service.EmailVerificationService;
@@ -20,13 +21,13 @@ public class LoginController {
     }
 
     @PostMapping
-    public UserDTO userLog(@RequestBody UserRegisterDTO userRegisterDTO) {
-        return null;
+    public UserDTO userLog(@RequestBody UserRegisterDTO userRegisterDTO) throws LabToolsException {
+        return logService.userLog(userRegisterDTO);
     }
 
     @GetMapping
-    public UserDTO emailFormtaVerification(@RequestBody String email) {
-        return null;
+    public boolean emailFormtaVerification(@RequestParam String email) throws LabToolsException {
+        return emailVerificationService.emailFormatVerification(email);
     }
 
 

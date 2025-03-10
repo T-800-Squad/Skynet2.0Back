@@ -1,12 +1,12 @@
 package edu.eci.cvds.Labtools.model;
 
-import lombok.Data;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Data
+
 @Document(collection = "bookings")
 public class Booking {
     @Id
@@ -14,4 +14,36 @@ public class Booking {
     private LocalDateTime date;
     private User user;
     private Lab lab;
+
+    public String getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(String bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Lab getLab() {
+        return lab;
+    }
+
+    public void setLab(Lab lab) {
+        this.lab = lab;
+    }
 }

@@ -14,7 +14,7 @@ public class QueryController {
     }
 
     @GetMapping
-    public BookingDTO[] findBookingsById(@RequestBody String userName) {
+    public BookingDTO[] findBookingsById(@RequestParam String userName) {
         return null;
     }
 }

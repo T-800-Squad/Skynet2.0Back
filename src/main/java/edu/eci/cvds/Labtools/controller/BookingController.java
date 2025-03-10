@@ -14,7 +14,7 @@ public class BookingController {
     }
 
     @GetMapping
-    public String[] checkAvailability(@RequestBody String date) {
+    public String[] checkAvailability(@RequestParam String date) {
         return null;
     }
 
@@ -24,7 +24,7 @@ public class BookingController {
     }
 
     @DeleteMapping
-    public boolean deleteBooking(@RequestBody String bookingId) {
+    public boolean deleteBooking(@RequestParam String bookingId) {
         return false;
     }
 
