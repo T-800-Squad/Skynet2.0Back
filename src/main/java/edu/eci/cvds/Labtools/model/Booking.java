@@ -12,7 +12,7 @@ public class Booking {
 
     @Id
     private String bookingId;
-    private LocalDateTime date;
+    private String date;
     private User user;
     private Lab lab;
 }

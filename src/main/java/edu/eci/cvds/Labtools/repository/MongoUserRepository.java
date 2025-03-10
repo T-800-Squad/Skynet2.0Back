@@ -5,6 +5,7 @@ import edu.eci.cvds.Labtools.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface MongoUserRepository extends MongoRepository<User, String> {
@@ -14,5 +15,6 @@ public interface MongoUserRepository extends MongoRepository<User, String> {
 
     List<Booking> findBookingsByUserId(String userId);
 
+    User findByName(String name);
 }
 
