@@ -3,10 +3,7 @@ package edu.eci.cvds.Labtools.dto;
 import lombok.*;
 
 
-@Getter
-@Setter
-@AllArgsConstructor
-@ToString
+@Data
 
 public class CreateBookingDTO {
     public String userName;
