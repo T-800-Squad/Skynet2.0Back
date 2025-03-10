@@ -9,10 +9,10 @@ import java.util.Optional;
 
 public interface MongoUserRepository extends MongoRepository<User, String> {
 
+
     Optional<User> findByEmail(String email, String password);
 
-    List<Booking> findBookingsById(String userId);
+    List<Booking> findBookingsByUserId(String userId);
 
-    Optional<User> findByUserId(String userId);
 }
 
