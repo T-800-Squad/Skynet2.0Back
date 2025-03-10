@@ -1,10 +1,32 @@
 package edu.eci.cvds.Labtools.dto;
 
-import lombok.Data;
 
-@Data
 public class CreateBookingDTO {
-    public String userName;
-    public String labName;
-    public String date;
+    private String userName;
+    private String labName;
+    private String date;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getLabName() {
+        return labName;
+    }
+
+    public void setLabName(String labName) {
+        this.labName = labName;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }
