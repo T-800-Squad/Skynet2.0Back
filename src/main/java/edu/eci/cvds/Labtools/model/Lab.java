@@ -11,14 +11,21 @@ import java.util.HashMap;
 public class Lab {
     @Id
     private String labId;
+    private String name;
     private HashMap<LocalDateTime, Boolean> isAvailable;
-
     public String getLabId() {
         return labId;
     }
-
     public void setLabId(String labId) {
         this.labId = labId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public HashMap<LocalDateTime, Boolean> getIsAvailable() {

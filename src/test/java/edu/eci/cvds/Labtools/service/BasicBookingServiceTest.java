@@ -50,13 +50,11 @@ public class BasicBookingServiceTest {
 
         User mockUser = new BasicUser();
         mockUser.setUserId("user123");
-        mockUser.setId("user_test");
         mockUser.setName("testUser");
         mockUser.setEmail("testUser@example.com");
         mockUser.setPassword("password123");
         mockUser.setLogged(true);
         mockUser.setRol(false);
-        mockUser.setAttempsTimes(0);
 
         Lab mockLab = new Lab();
         mockLab.setLabId("lab123");
@@ -73,7 +71,6 @@ public class BasicBookingServiceTest {
                 .andExpect(jsonPath("$.bookingId").exists()) // Verificar que se genera un ID de reserva
                 .andExpect(jsonPath("$.date").value("2025-03-10"))
                 .andExpect(jsonPath("$.user.userId").value("user123"))
-                .andExpect(jsonPath("$.user.id").value("user_test"))
                 .andExpect(jsonPath("$.user.name").value("testUser"))
                 .andExpect(jsonPath("$.user.email").value("testUser@example.com"))
                 .andExpect(jsonPath("$.lab.labId").value("lab123"))
