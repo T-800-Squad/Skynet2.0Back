@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="edu.eci.cvds.Labtools.controller.LoginControllerTest" time="4.457" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="edu.eci.cvds.Labtools.service.BasicBookingServiceTest" time="1.369" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -66,10 +66,8 @@
     <property name="java.class.version" value="65.0"/>
     <property name="LOGGED_APPLICATION_NAME" value="[labtools] "/>
   </properties>
-  <testcase name="testEmailVerificationWithAGoodEmail" classname="edu.eci.cvds.Labtools.controller.LoginControllerTest" time="0.963">
-    <system-out><![CDATA[19:59:23.401 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [edu.eci.cvds.Labtools.controller.LoginControllerTest]: LoginControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-19:59:23.593 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration edu.eci.cvds.Labtools.LabtoolsApplication for test class edu.eci.cvds.Labtools.controller.LoginControllerTest
-
+  <testcase name="testCreateBookingWithValidData" classname="edu.eci.cvds.Labtools.service.BasicBookingServiceTest" time="0.191">
+    <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
@@ -79,13 +77,9 @@
 
  :: Spring Boot ::                (v3.4.3)
 
+booking created
 ]]></system-out>
-    <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
-WARNING: A Java agent has been loaded dynamically (C:\Users\Yojhan\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
   </testcase>
-  <testcase name="testEmailVerificationWithBadEmail" classname="edu.eci.cvds.Labtools.controller.LoginControllerTest" time="0.011"/>
+  <testcase name="testCreateBookingWithInvalidUser" classname="edu.eci.cvds.Labtools.service.BasicBookingServiceTest" time="0.008"/>
+  <testcase name="testCreateBookingWithInvalidLab" classname="edu.eci.cvds.Labtools.service.BasicBookingServiceTest" time="0.007"/>
 </testsuite>

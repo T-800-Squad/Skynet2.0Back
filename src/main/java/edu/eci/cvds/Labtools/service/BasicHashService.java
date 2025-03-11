@@ -4,6 +4,7 @@ import com.lambdaworks.crypto.SCryptUtil;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
 public class BasicHashService implements HashService {
 

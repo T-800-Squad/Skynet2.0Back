@@ -5,3 +5,4 @@ public interface HashService {
     String passwordHashsing(String password);
     boolean checkPassword(String password,String hashedPassword);
 }
+

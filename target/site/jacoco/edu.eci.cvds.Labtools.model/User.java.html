@@ -4,20 +4,20 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
 import java.util.List;
 
-
+@Data
 @Document(collection = &quot;users&quot;)
-<span class="fc" id="L12">public abstract class User {</span>
+public class User {
 
     @Id
     protected String userId;
+    protected String id;
     protected String name;
     protected String email;
     protected String password;
     protected boolean logged;
-<span class="fc" id="L20">    protected List&lt;Booking&gt; bookings = new ArrayList&lt;&gt;();</span>
+    protected List&lt;Booking&gt; bookings;
     protected boolean rol;
     protected int attempsTimes;
 
@@ -30,12 +30,12 @@ import java.util.List;
 <span class="nc" id="L30">    }</span>
 
     public String getUserId() {
-<span class="nc" id="L33">        return userId;</span>
+<span class="fc" id="L33">        return userId;</span>
     }
 
     public void setUserId(String userId) {
-<span class="nc" id="L37">        this.userId = userId;</span>
-<span class="nc" id="L38">    }</span>
+<span class="fc" id="L37">        this.userId = userId;</span>
+<span class="fc" id="L38">    }</span>
 
     public String getName() {
 <span class="fc" id="L41">        return name;</span>
@@ -46,7 +46,7 @@ import java.util.List;
 <span class="fc" id="L46">    }</span>
 
     public String getEmail() {
-<span class="nc" id="L49">        return email;</span>
+<span class="fc" id="L49">        return email;</span>
     }
 
     public void setEmail(String email) {
@@ -62,15 +62,15 @@ import java.util.List;
 <span class="fc" id="L62">    }</span>
 
     public boolean getLogged() {
-<span class="nc" id="L65">        return logged;</span>
+<span class="fc" id="L65">        return logged;</span>
     }
 
     public void setLogged(boolean logged) {
-<span class="nc" id="L69">        this.logged = logged;</span>
-<span class="nc" id="L70">    }</span>
+<span class="fc" id="L69">        this.logged = logged;</span>
+<span class="fc" id="L70">    }</span>
 
     public List&lt;Booking&gt; getBookings() {
-<span class="nc" id="L73">        return bookings;</span>
+<span class="fc" id="L73">        return bookings;</span>
     }
 
     public void setBookings(List&lt;Booking&gt; bookings) {
@@ -86,12 +86,13 @@ import java.util.List;
 <span class="fc" id="L86">    }</span>
 
     public int getAttempsTimes() {
-<span class="nc" id="L89">        return attempsTimes;</span>
+<span class="fc" id="L89">        return attempsTimes;</span>
     }
 
     public void setAttempsTimes(int attempsTimes) {
-<span class="nc" id="L93">        this.attempsTimes = attempsTimes;</span>
-<span class="nc" id="L94">    }</span>
+<span class="fc" id="L93">        this.attempsTimes = attempsTimes;</span>
+<span class="fc" id="L94">    }</span>
+
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
