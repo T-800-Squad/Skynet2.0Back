@@ -22,30 +22,32 @@ import java.util.UUID;
     @Autowired
     private MongoLabRepository labRepository;
 
-<span class="nc" id="L25">    public String[] checkAvailability(String date) {return null;}</span>
 
     public Booking createBooking(CreateBookingDTO createBookingDTO) {
-<span class="fc" id="L28">        Booking booking = new Booking();</span>
-<span class="fc" id="L29">        booking.setUser(userRepository.findByName(createBookingDTO.userName));</span>
+<span class="fc" id="L27">        Booking booking = new Booking();</span>
+<span class="fc" id="L28">        booking.setUser(userRepository.findByName(createBookingDTO.userName));</span>
 
-<span class="fc" id="L31">        var lab = labRepository.findByName(createBookingDTO.labName);</span>
-<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (lab == null) {</span>
-<span class="fc" id="L33">            throw new IllegalArgumentException(&quot;Laboratorio no encontrado&quot;);</span>
+<span class="fc" id="L30">        var lab = labRepository.findByName(createBookingDTO.labName);</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        if (lab == null) {</span>
+<span class="fc" id="L32">            throw new IllegalArgumentException(&quot;Laboratorio no encontrado&quot;);</span>
         }
-<span class="fc" id="L35">        booking.setLab(lab);</span>
+<span class="fc" id="L34">        booking.setLab(lab);</span>
 
-<span class="fc" id="L37">        booking.setDate(createBookingDTO.date);</span>
-<span class="fc" id="L38">        booking.setBookingId(UUID.randomUUID().toString());</span>
+<span class="fc" id="L36">        booking.setDate(createBookingDTO.date);</span>
+<span class="fc" id="L37">        booking.setBookingId(UUID.randomUUID().toString());</span>
 
-<span class="fc" id="L40">        System.out.println(&quot;booking created&quot;);</span>
-<span class="fc" id="L41">        bookingRepository.save(booking);</span>
-<span class="fc" id="L42">        return booking;</span>
+<span class="fc" id="L39">        System.out.println(&quot;booking created&quot;);</span>
+<span class="fc" id="L40">        bookingRepository.save(booking);</span>
+
+
+
+<span class="fc" id="L44">        return booking;</span>
     }
 
 
 
     public boolean deleteBooking(String bookingId) {
-<span class="nc" id="L48">        return false;</span>
+<span class="nc" id="L50">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

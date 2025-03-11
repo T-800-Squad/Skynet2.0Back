@@ -22,7 +22,6 @@ public class BasicBookingService implements BookingService{
     @Autowired
     private MongoLabRepository labRepository;
 
-    public String[] checkAvailability(String date) {return null;}
 
     public Booking createBooking(CreateBookingDTO createBookingDTO) {
         Booking booking = new Booking();

@@ -4,6 +4,8 @@ import edu.eci.cvds.Labtools.dto.BookingDTO;
 import edu.eci.cvds.Labtools.service.QueryService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/query")
 public class QueryController {
@@ -14,7 +16,7 @@ public class QueryController {
     }
 
     @GetMapping
-    public BookingDTO[] findBookingsById(@RequestParam String userName) {
-        return null;
+    public List<BookingDTO> findBookingsById(@RequestParam String userName) {
+        return queryService.findBookingsByName(userName);
     }
 }

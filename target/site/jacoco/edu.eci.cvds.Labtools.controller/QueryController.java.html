@@ -4,18 +4,20 @@ import edu.eci.cvds.Labtools.dto.BookingDTO;
 import edu.eci.cvds.Labtools.service.QueryService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(&quot;/query&quot;)
 public class QueryController {
     private QueryService queryService;
 
-<span class="fc" id="L12">    public QueryController(QueryService queryService) {</span>
-<span class="fc" id="L13">        this.queryService = queryService;</span>
-<span class="fc" id="L14">    }</span>
+<span class="fc" id="L14">    public QueryController(QueryService queryService) {</span>
+<span class="fc" id="L15">        this.queryService = queryService;</span>
+<span class="fc" id="L16">    }</span>
 
     @GetMapping
-    public BookingDTO[] findBookingsById(@RequestBody String userName) {
-<span class="nc" id="L18">        return null;</span>
+    public List&lt;BookingDTO&gt; findBookingsById(@RequestParam String userName) {
+<span class="fc" id="L20">        return queryService.findBookingsByName(userName);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
