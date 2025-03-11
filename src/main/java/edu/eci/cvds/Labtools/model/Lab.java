@@ -13,5 +13,5 @@ public class Lab {
     @Id
     private String labId;
     private String name;
-    private HashMap<LocalDateTime, Boolean> isAvailable;
+    private HashMap<String, Boolean> isAvailable;
 }

@@ -1,4 +1,4 @@
-# Created at 2025-03-09T12:21:06.662
+# Created at 2025-03-10T19:59:21.855
 Boot Manifest-JAR contains absolute paths in classpath 'G:\DATOS\Escritorio\Skynet2.0Back\target\test-classes'
 Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
 'other' has different root

@@ -26,27 +26,25 @@ public class BasicBookingService implements BookingService{
 
     public Booking createBooking(CreateBookingDTO createBookingDTO) {
         Booking booking = new Booking();
+        booking.setUser(userRepository.findByName(createBookingDTO.userName));
 
         var lab = labRepository.findByName(createBookingDTO.labName);
         if (lab == null) {
-            throw new RuntimeException("Lab not found: " + createBookingDTO.labName);
+            throw new IllegalArgumentException("Laboratorio no encontrado");
         }
         booking.setLab(lab);
-
-        var user = userRepository.findByName(createBookingDTO.userName);
-        if (user == null) {
-            throw new RuntimeException("User not found: " + createBookingDTO.userName);
-        }
-        booking.setUser(user);
-
-
 
         booking.setDate(createBookingDTO.date);
         booking.setBookingId(UUID.randomUUID().toString());
 
-        System.out.println("Booking created: " + booking.getBookingId());
-        return bookingRepository.save(booking);
+        System.out.println("booking created");
+        bookingRepository.save(booking);
+
+
+
+        return booking;
     }
+
 
 
     public boolean deleteBooking(String bookingId) {
