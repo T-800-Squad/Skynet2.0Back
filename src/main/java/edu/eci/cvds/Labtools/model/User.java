@@ -4,6 +4,7 @@ package edu.eci.cvds.Labtools.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,11 +17,11 @@ public abstract class User {
     protected String email;
     protected String password;
     protected boolean logged;
-    protected List<Booking> bookings;
+    protected List<Booking> bookings = new ArrayList<>();
     protected boolean rol;
 
     public void addBooking(Booking booking) {
-
+        bookings.add(booking);
     }
 
     public void deleteBooking(String bookingId) {

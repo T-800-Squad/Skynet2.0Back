@@ -8,25 +8,32 @@ import java.util.HashMap;
 
 
 @Document(collection = &quot;laboratories&quot;)
-<span class="nc" id="L11">public class Lab {</span>
+<span class="fc" id="L11">public class Lab {</span>
     @Id
     private String labId;
+    private String name;
     private HashMap&lt;LocalDateTime, Boolean&gt; isAvailable;
-
     public String getLabId() {
-<span class="nc" id="L17">        return labId;</span>
+<span class="fc" id="L17">        return labId;</span>
+    }
+    public void setLabId(String labId) {
+<span class="fc" id="L20">        this.labId = labId;</span>
+<span class="fc" id="L21">    }</span>
+
+    public String getName() {
+<span class="fc" id="L24">        return name;</span>
     }
 
-    public void setLabId(String labId) {
-<span class="nc" id="L21">        this.labId = labId;</span>
-<span class="nc" id="L22">    }</span>
+    public void setName(String name) {
+<span class="fc" id="L28">        this.name = name;</span>
+<span class="fc" id="L29">    }</span>
 
     public HashMap&lt;LocalDateTime, Boolean&gt; getIsAvailable() {
-<span class="nc" id="L25">        return isAvailable;</span>
+<span class="fc" id="L32">        return isAvailable;</span>
     }
 
     public void setIsAvailable(HashMap&lt;LocalDateTime, Boolean&gt; isAvailable) {
-<span class="nc" id="L29">        this.isAvailable = isAvailable;</span>
-<span class="nc" id="L30">    }</span>
+<span class="fc" id="L36">        this.isAvailable = isAvailable;</span>
+<span class="fc" id="L37">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

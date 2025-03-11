@@ -5,7 +5,6 @@ public class BookingDTO {
     private String bookingId;
     private String labName;
     private String date;
-    private String hour;
 
     public String getBookingId() {
         return bookingId;
@@ -31,11 +30,4 @@ public class BookingDTO {
         this.date = date;
     }
 
-    public String getHour() {
-        return hour;
-    }
-
-    public void setHour(String hour) {
-        this.hour = hour;
-    }
 }
