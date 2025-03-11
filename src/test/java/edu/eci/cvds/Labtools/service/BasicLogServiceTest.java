@@ -7,6 +7,8 @@ import edu.eci.cvds.Labtools.model.Admin;
 import edu.eci.cvds.Labtools.model.BasicUser;
 import edu.eci.cvds.Labtools.model.User;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
+import edu.eci.cvds.Labtools.service.HashService;
+import edu.eci.cvds.Labtools.service.LogService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -45,7 +45,7 @@ public class LoginControllerTest {
     public void testEmailVerificationWithBadEmail() throws Exception {
         mockMvc.perform(get("/log")
                         .param("email", "test@gmail.com"))
-                        .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -61,12 +61,12 @@ public class LoginControllerTest {
         Mockito.when(basicLogService.userLog(Mockito.any(UserRegisterDTO.class))).thenReturn(mockUserDTO);
 
         mockMvc.perform(post("/log")
-                .contentType("application/json")
-                .content("{\"email\": \"test@mail.escuelaing.edu.co\"" +
-                        ",\"password\": \"123\" }"))
+                        .contentType("application/json")
+                        .content("{\"email\": \"test@mail.escuelaing.edu.co\"" +
+                                ",\"password\": \"123\" }"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"name\": \"test\"" +
-                       ",\"rol\": true }"));
+                        ",\"rol\": true }"));
     }
 
     @Test
@@ -81,6 +81,6 @@ public class LoginControllerTest {
         mockMvc.perform(post("/log")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"email\": \"test@mail.escuelaing.edu.co\", \"password\": \"123\" }"))
-                        .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest());
     }
 }

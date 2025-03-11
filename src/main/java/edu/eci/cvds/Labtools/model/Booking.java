@@ -9,9 +9,10 @@ import java.time.LocalDateTime;
 
 @Document(collection = "bookings")
 public class Booking {
+
     @Id
     private String bookingId;
-    private LocalDateTime date;
+    private String date;
     private User user;
     private Lab lab;
 
@@ -23,11 +24,11 @@ public class Booking {
         this.bookingId = bookingId;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

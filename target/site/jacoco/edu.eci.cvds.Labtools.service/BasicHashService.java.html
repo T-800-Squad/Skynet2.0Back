@@ -4,15 +4,16 @@ import com.lambdaworks.crypto.SCryptUtil;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
-<span class="fc" id="L8">public class BasicHashService implements HashService {</span>
+<span class="fc" id="L9">public class BasicHashService implements HashService {</span>
 
     public String passwordHashsing(String password) {
-<span class="fc" id="L11">        return SCryptUtil.scrypt(password,16384, 8, 1);</span>
+<span class="fc" id="L12">        return SCryptUtil.scrypt(password,16384, 8, 1);</span>
     }
 
     public boolean checkPassword(String password,String hashedPassword) {
-<span class="fc" id="L15">        return SCryptUtil.check(password, hashedPassword);</span>
+<span class="fc" id="L16">        return SCryptUtil.check(password, hashedPassword);</span>
     }
 
 
