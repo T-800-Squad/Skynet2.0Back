@@ -28,7 +28,6 @@ public class BasicQueryServiceTest {
         lab.setName("Lab 1");
         Booking booking = new Booking();
         booking.setBookingId("1");
-        booking.setUser(user);
         booking.setLab(lab);
         booking.setDate("11/02/25 7:00");
         user.addBooking(booking);

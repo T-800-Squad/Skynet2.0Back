@@ -21,6 +21,10 @@ public abstract class User {
     protected boolean rol;
 
     public void addBooking(Booking booking) {
+
+        if (bookings.size() == 3) {
+            throw new IllegalArgumentException("User already have three bookings");
+        }
         bookings.add(booking);
     }
 

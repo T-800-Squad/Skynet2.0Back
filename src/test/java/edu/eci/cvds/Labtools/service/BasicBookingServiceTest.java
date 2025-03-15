@@ -44,9 +44,9 @@ public class BasicBookingServiceTest {
     public void testCreateBookingWithValidData() throws Exception {
         // Crear datos de prueba
         CreateBookingDTO createBookingDTO = new CreateBookingDTO();
-        createBookingDTO.userName = "testUser";
-        createBookingDTO.labName = "testLab";
-        createBookingDTO.date = "2025-03-10";
+        createBookingDTO.setUserName ("testUser");
+        createBookingDTO.setLabName("testLab");
+        createBookingDTO.setDate("2030-03-10 07:00:00");
 
         User mockUser = new BasicUser();
         mockUser.setUserId("user123");
@@ -59,20 +59,16 @@ public class BasicBookingServiceTest {
         Lab mockLab = new Lab();
         mockLab.setLabId("lab123");
         mockLab.setName("testLab");
-        mockLab.setIsAvailable(new HashMap<>());
 
         Mockito.when(userRepository.findByName("testUser")).thenReturn(mockUser);
         Mockito.when(labRepository.findByName("testLab")).thenReturn(mockLab);
 
-        mockMvc.perform(post("/booking/add")
+        mockMvc.perform(post("/booking")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"userName\": \"testUser\", \"labName\": \"testLab\", \"date\": \"2025-03-10\"}"))
+                        .content("{\"userName\": \"testUser\", \"labName\": \"testLab\", \"date\": \"2030-03-10 07:00:00\"}"))
                 .andExpect(status().isCreated()) // Asegurar que la respuesta es 201 Created
                 .andExpect(jsonPath("$.bookingId").exists()) // Verificar que se genera un ID de reserva
-                .andExpect(jsonPath("$.date").value("2025-03-10"))
-                .andExpect(jsonPath("$.user.userId").value("user123"))
-                .andExpect(jsonPath("$.user.name").value("testUser"))
-                .andExpect(jsonPath("$.user.email").value("testUser@example.com"))
+                .andExpect(jsonPath("$.date").value("2030-03-10 07:00:00"))
                 .andExpect(jsonPath("$.lab.labId").value("lab123"))
                 .andExpect(jsonPath("$.lab.name").value("testLab"))
                 .andExpect(jsonPath("$.lab.isAvailable").exists()); // Verificar que el campo de disponibilidad está presente
@@ -81,13 +77,13 @@ public class BasicBookingServiceTest {
     @Test
     public void testCreateBookingWithInvalidUser() throws Exception {
         CreateBookingDTO createBookingDTO = new CreateBookingDTO();
-        createBookingDTO.userName = "invalidUser";
-        createBookingDTO.labName = "testLab";
-        createBookingDTO.date = "2025-03-10";
+        createBookingDTO.setUserName ("invalidUser");
+        createBookingDTO.setLabName ("testLab");
+        createBookingDTO.setDate("2025-03-10 7:00:00");
 
         Mockito.when(userRepository.findByName("invalidUser")).thenReturn(null);
 
-        mockMvc.perform(post("/booking/add")
+        mockMvc.perform(post("/booking")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"userName\": \"invalidUser\", \"labName\": \"testLab\", \"date\": \"2025-03-10\"}"))
                 .andExpect(status().isBadRequest());
@@ -96,9 +92,9 @@ public class BasicBookingServiceTest {
     @Test
     public void testCreateBookingWithInvalidLab() throws Exception {
         CreateBookingDTO createBookingDTO = new CreateBookingDTO();
-        createBookingDTO.userName = "testUser";
-        createBookingDTO.labName = "invalidLab";
-        createBookingDTO.date = "2025-03-10";
+        createBookingDTO.setUserName("testUser");
+        createBookingDTO.setLabName("invalidLab");
+        createBookingDTO.setDate("2025-03- 7:00:00");
 
         User mockUser = new BasicUser();
         mockUser.setName("testUser");
@@ -109,7 +105,7 @@ public class BasicBookingServiceTest {
         Mockito.when(labRepository.findByName("invalidLab")).thenReturn(null);
 
         // Realizar la petición al endpoint correcto
-        mockMvc.perform(post("/booking/add") // <-- Aquí se cambia a "/booking/add"
+        mockMvc.perform(post("/booking") // <-- Aquí se cambia a "/booking/add"
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"userName\": \"testUser\", \"labName\": \"invalidLab\", \"date\": \"2025-03-10\"}"))
                 .andExpect(status().isBadRequest()); // Asegurar que devuelve 400

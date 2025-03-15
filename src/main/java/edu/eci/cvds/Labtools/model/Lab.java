@@ -12,7 +12,7 @@ public class Lab {
     @Id
     private String labId;
     private String name;
-    private HashMap<LocalDateTime, Boolean> isAvailable;
+    private HashMap<LocalDateTime, Boolean> isAvailable = new HashMap<>();
 
     public String getLabId() {
         return labId;
@@ -33,7 +33,10 @@ public class Lab {
         return isAvailable;
     }
 
-    public void setIsAvailable(HashMap<LocalDateTime, Boolean> isAvailable) {
-        this.isAvailable = isAvailable;
+    public void setIsAvailable(LocalDateTime localDateTime) {
+        if(isAvailable.containsKey(localDateTime)) {
+            throw new IllegalArgumentException("this lab already has a booking on this date");
+        }
+        isAvailable.put(localDateTime, true);
     }
 }

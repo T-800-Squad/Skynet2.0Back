@@ -13,7 +13,6 @@ public class Booking {
     @Id
     private String bookingId;
     private String date;
-    private User user;
     private Lab lab;
 
     public String getBookingId() {
@@ -32,13 +31,6 @@ public class Booking {
         this.date = date;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public Lab getLab() {
         return lab;
