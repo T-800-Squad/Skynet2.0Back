@@ -13,6 +13,7 @@ public class Lab {
     private String labId;
     private String name;
     private HashMap<LocalDateTime, Boolean> isAvailable;
+
     public String getLabId() {
         return labId;
     }

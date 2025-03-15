@@ -2,6 +2,7 @@ package edu.eci.cvds.Labtools.service;
 
 import edu.eci.cvds.Labtools.dto.CreateBookingDTO;
 import edu.eci.cvds.Labtools.model.Booking;
+import edu.eci.cvds.Labtools.model.Lab;
 import edu.eci.cvds.Labtools.repository.MongoBookingRepository;
 import edu.eci.cvds.Labtools.repository.MongoLabRepository;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
@@ -39,9 +40,8 @@ public class BasicBookingService implements BookingService{
         System.out.println("booking created");
         bookingRepository.save(booking);
 
-
-
         return booking;
+
     }
 
 
