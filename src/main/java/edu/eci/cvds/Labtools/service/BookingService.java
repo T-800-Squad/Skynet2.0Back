@@ -9,5 +9,5 @@ public interface BookingService {
 
     Booking createBooking(CreateBookingDTO createBookingDTO);
 
-    boolean deleteBooking(String bookingId);
+    void deleteBooking(String bookingId, String userId);
 }

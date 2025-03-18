@@ -27,10 +27,15 @@ public class BookingController {
         return ResponseEntity.status(HttpStatus.CREATED).body(booking);
     }
 
-
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleIllegalArgumentException(IllegalArgumentException ex) {
         return ex.getMessage();
+    }
+
+    @PostMapping("/delete")
+    public ResponseEntity<String> deleteBooking(@RequestParam String bookingId, @RequestParam String userId) {
+        bookingService.deleteBooking(bookingId, userId);
+        return ResponseEntity.ok("Booking deleted successfully.");
     }
 }
