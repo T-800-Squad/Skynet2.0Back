@@ -2,16 +2,21 @@
 
 import edu.eci.cvds.Labtools.dto.CreateBookingDTO;
 import edu.eci.cvds.Labtools.model.Booking;
+import edu.eci.cvds.Labtools.model.Lab;
+import edu.eci.cvds.Labtools.model.User;
 import edu.eci.cvds.Labtools.repository.MongoBookingRepository;
 import edu.eci.cvds.Labtools.repository.MongoLabRepository;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
-<span class="fc" id="L14">public class BasicBookingService implements BookingService{</span>
+<span class="fc" id="L19">public class BasicBookingService implements BookingService{</span>
 
     @Autowired
     private MongoBookingRepository bookingRepository;
@@ -22,30 +27,42 @@ import java.util.UUID;
     @Autowired
     private MongoLabRepository labRepository;
 
-<span class="nc" id="L25">    public String[] checkAvailability(String date) {return null;}</span>
+<span class="fc" id="L30">    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+
 
     public Booking createBooking(CreateBookingDTO createBookingDTO) {
-<span class="fc" id="L28">        Booking booking = new Booking();</span>
-<span class="fc" id="L29">        booking.setUser(userRepository.findByName(createBookingDTO.userName));</span>
-
-<span class="fc" id="L31">        var lab = labRepository.findByName(createBookingDTO.labName);</span>
-<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (lab == null) {</span>
-<span class="fc" id="L33">            throw new IllegalArgumentException(&quot;Laboratorio no encontrado&quot;);</span>
+<span class="fc" id="L34">        Booking booking = new Booking();</span>
+<span class="fc" id="L35">        Lab lab = labRepository.findByName(createBookingDTO.getLabName());</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (lab == null) {</span>
+<span class="fc" id="L37">            throw new IllegalArgumentException(&quot;Lab not found&quot;);</span>
         }
-<span class="fc" id="L35">        booking.setLab(lab);</span>
+<span class="fc" id="L39">        booking.setLab(lab);</span>
 
-<span class="fc" id="L37">        booking.setDate(createBookingDTO.date);</span>
-<span class="fc" id="L38">        booking.setBookingId(UUID.randomUUID().toString());</span>
+<span class="fc" id="L41">        booking.setDate(createBookingDTO.getDate());</span>
+<span class="fc" id="L42">        booking.setBookingId(UUID.randomUUID().toString());</span>
 
-<span class="fc" id="L40">        System.out.println(&quot;booking created&quot;);</span>
-<span class="fc" id="L41">        bookingRepository.save(booking);</span>
-<span class="fc" id="L42">        return booking;</span>
+<span class="fc" id="L44">        System.out.println(&quot;booking created&quot;);</span>
+<span class="fc" id="L45">        bookingRepository.save(booking);</span>
+
+<span class="fc" id="L47">        updateListOfBookingsInUser(createBookingDTO.getUserName(), booking);</span>
+
+<span class="fc" id="L49">        return booking;</span>
     }
+
+    public void updateListOfBookingsInUser(String userName, Booking booking) {
+
+<span class="fc" id="L54">        User user = userRepository.findByName(userName);</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        if (user == null) {</span>
+<span class="nc" id="L56">            throw new IllegalArgumentException(&quot;User not found&quot;);</span>
+        }
+<span class="fc" id="L58">        user.addBooking(booking);</span>
+<span class="fc" id="L59">        userRepository.save(user);</span>
+<span class="fc" id="L60">    }</span>
 
 
 
     public boolean deleteBooking(String bookingId) {
-<span class="nc" id="L48">        return false;</span>
+<span class="nc" id="L65">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

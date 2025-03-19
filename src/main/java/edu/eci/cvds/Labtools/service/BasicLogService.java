@@ -29,6 +29,7 @@ public class BasicLogService implements LogService {
         UserDTO userDTO = new UserDTO();
         userDTO.setName(userDB.getName());
         userDTO.setRol(userDB.getRol());
+        mongoUserRepository.save(userDB);
         return userDTO;
     }
 

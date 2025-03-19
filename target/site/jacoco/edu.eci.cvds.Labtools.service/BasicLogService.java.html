@@ -29,7 +29,8 @@ import java.util.Optional;
 <span class="fc" id="L29">        UserDTO userDTO = new UserDTO();</span>
 <span class="fc" id="L30">        userDTO.setName(userDB.getName());</span>
 <span class="fc" id="L31">        userDTO.setRol(userDB.getRol());</span>
-<span class="fc" id="L32">        return userDTO;</span>
+<span class="fc" id="L32">        mongoUserRepository.save(userDB);</span>
+<span class="fc" id="L33">        return userDTO;</span>
     }
 
 }
