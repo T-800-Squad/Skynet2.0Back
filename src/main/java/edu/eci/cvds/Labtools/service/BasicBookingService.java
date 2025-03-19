@@ -31,7 +31,7 @@ public class BasicBookingService implements BookingService{
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 
-    @Override
+
     public String[] checkAvailability(String date) {
         return new String[0];
     }
