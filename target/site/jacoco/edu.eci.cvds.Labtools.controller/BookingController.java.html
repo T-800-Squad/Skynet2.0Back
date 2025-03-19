@@ -28,16 +28,11 @@ public class BookingController {
 <span class="fc" id="L28">        return ResponseEntity.status(HttpStatus.CREATED).body(booking);</span>
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleIllegalArgumentException(IllegalArgumentException ex) {
-<span class="fc" id="L34">        return ex.getMessage();</span>
-    }
 
     @DeleteMapping(&quot;/delete&quot;)
     public ResponseEntity&lt;String&gt; deleteBooking(@RequestBody DeleteBookingDTO deleteBookingDTO) {
-<span class="nc" id="L39">        bookingService.deleteBooking(deleteBookingDTO);</span>
-<span class="nc" id="L40">        return ResponseEntity.ok(&quot;Booking deleted successfully.&quot;);</span>
+<span class="nc" id="L34">        bookingService.deleteBooking(deleteBookingDTO);</span>
+<span class="nc" id="L35">        return ResponseEntity.ok(&quot;Booking deleted successfully.&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
