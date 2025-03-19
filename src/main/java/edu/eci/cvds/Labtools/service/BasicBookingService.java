@@ -82,7 +82,7 @@ public class BasicBookingService implements BookingService{
         } else {
             bookingRepository.deleteById(bookingId);
         }
-        updateListOfBookingsInUser(deleteBookingDTO.getUserName(), booking.get());
+        updateListOfBookingsBeforeDelete(deleteBookingDTO.getUserName(), booking.get());
     }
 
     private void updateListOfBookingsBeforeDelete(String userName, Booking booking) {

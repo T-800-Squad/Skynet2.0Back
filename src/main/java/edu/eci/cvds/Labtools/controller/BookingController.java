@@ -28,11 +28,6 @@ public class BookingController {
         return ResponseEntity.status(HttpStatus.CREATED).body(booking);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleIllegalArgumentException(IllegalArgumentException ex) {
-        return ex.getMessage();
-    }
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteBooking(@RequestBody DeleteBookingDTO deleteBookingDTO) {
