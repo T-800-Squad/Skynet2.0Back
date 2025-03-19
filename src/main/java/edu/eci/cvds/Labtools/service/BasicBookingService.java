@@ -1,6 +1,7 @@
 package edu.eci.cvds.Labtools.service;
 
 import edu.eci.cvds.Labtools.dto.CreateBookingDTO;
+import edu.eci.cvds.Labtools.dto.DeleteBookingDTO;
 import edu.eci.cvds.Labtools.model.Booking;
 import edu.eci.cvds.Labtools.model.Lab;
 import edu.eci.cvds.Labtools.model.User;
@@ -73,13 +74,15 @@ public class BasicBookingService implements BookingService{
     }
 
 
-    public void deleteBooking(String bookingId, String userId) {
+    public void deleteBooking(DeleteBookingDTO deleteBookingDTO) {
+        String bookingId = deleteBookingDTO.getBookingId();
         Optional<Booking> booking = bookingRepository.findById(bookingId);
         if (booking.isEmpty()) {
             throw new IllegalArgumentException("Booking not found with id: " + bookingId);
         } else {
             bookingRepository.deleteById(bookingId);
         }
+        updateListOfBookingsInUser(deleteBookingDTO.getUserName(), booking.get());
     }
 
     private void updateListOfBookingsBeforeDelete(String userName, Booking booking) {

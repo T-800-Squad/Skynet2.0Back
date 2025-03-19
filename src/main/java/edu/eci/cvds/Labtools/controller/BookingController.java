@@ -1,6 +1,7 @@
 package edu.eci.cvds.Labtools.controller;
 
 import edu.eci.cvds.Labtools.dto.CreateBookingDTO;
+import edu.eci.cvds.Labtools.dto.DeleteBookingDTO;
 import edu.eci.cvds.Labtools.model.Booking;
 import edu.eci.cvds.Labtools.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,9 @@ public class BookingController {
         return ex.getMessage();
     }
 
-    @PostMapping("/delete")
-    public ResponseEntity<String> deleteBooking(@RequestParam String bookingId, @RequestParam String userId) {
-        bookingService.deleteBooking(bookingId, userId);
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteBooking(@RequestBody DeleteBookingDTO deleteBookingDTO) {
+        bookingService.deleteBooking(deleteBookingDTO);
         return ResponseEntity.ok("Booking deleted successfully.");
     }
 }
