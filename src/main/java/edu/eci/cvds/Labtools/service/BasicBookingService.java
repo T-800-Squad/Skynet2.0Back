@@ -30,7 +30,7 @@ public class BasicBookingService implements BookingService{
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    
+
 
     public Booking createBooking(CreateBookingDTO createBookingDTO) {
         Booking booking = new Booking();
