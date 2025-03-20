@@ -29,7 +29,7 @@ public class BookingController {
     }
 
 
-    @DeleteMapping("/delete")
+    @DeleteMapping()
     public ResponseEntity<String> deleteBooking(@RequestBody DeleteBookingDTO deleteBookingDTO) {
         bookingService.deleteBooking(deleteBookingDTO);
         return ResponseEntity.ok("Booking deleted successfully.");

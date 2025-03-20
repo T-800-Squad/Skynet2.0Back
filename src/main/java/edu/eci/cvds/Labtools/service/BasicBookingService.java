@@ -67,6 +67,7 @@ public class BasicBookingService implements BookingService{
             throw new IllegalArgumentException("Date is after now");
         }
         lab.setIsAvailable(dateTime);
+        labRepository.save(lab);
     }
 
 
@@ -74,7 +75,7 @@ public class BasicBookingService implements BookingService{
         String bookingId = deleteBookingDTO.getBookingId();
         Optional<Booking> optionalBooking = bookingRepository.findById(bookingId);
         if (optionalBooking.isEmpty()) {
-            throw new IllegalArgumentException("Booking not found with id: " + bookingId);
+            throw new IllegalArgumentException("Booking not found");
         } else {
             bookingRepository.deleteById(bookingId);
         }
@@ -86,6 +87,7 @@ public class BasicBookingService implements BookingService{
     private void updateDateInLab(Lab lab, String date) {
         LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
         lab.deleteIsAvailable(dateTime);
+        labRepository.save(lab);
     }
 
     private void updateListOfBookingsBeforeDelete(String userName, Booking booking) {

@@ -39,4 +39,12 @@ public class Booking {
     public void setLab(Lab lab) {
         this.lab = lab;
     }
+
+    @Override
+    public boolean equals(Object booking) {
+        if(booking instanceof Booking book) {
+            return this.bookingId.equals(book.getBookingId());
+        }
+        return false;
+    }
 }

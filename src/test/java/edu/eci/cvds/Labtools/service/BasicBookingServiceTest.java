@@ -1,7 +1,9 @@
 package edu.eci.cvds.Labtools.service;
 
 import edu.eci.cvds.Labtools.dto.CreateBookingDTO;
+import edu.eci.cvds.Labtools.dto.DeleteBookingDTO;
 import edu.eci.cvds.Labtools.model.BasicUser;
+import edu.eci.cvds.Labtools.model.Booking;
 import edu.eci.cvds.Labtools.model.Lab;
 import edu.eci.cvds.Labtools.model.User;
 import edu.eci.cvds.Labtools.repository.MongoBookingRepository;
@@ -15,9 +17,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @SpringBootTest
@@ -26,6 +36,9 @@ public class BasicBookingServiceTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private BookingService bookingService;
 
     @MockitoBean
     private MongoBookingRepository bookingRepository;
@@ -105,6 +118,99 @@ public class BasicBookingServiceTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"userName\": \"testUser\", \"labName\": \"invalidLab\", \"date\": \"2025-03-10\"}"))
                 .andExpect(status().isBadRequest()); // Asegurar que devuelve 400
+    }
+    @Test
+    public void testDeletyeBooking() {
+        DeleteBookingDTO deleteBookingDTO = new DeleteBookingDTO();
+        deleteBookingDTO.setUserName("testUser");
+        deleteBookingDTO.setBookingId("123");
+
+        Lab mockLab = new Lab();
+        mockLab.setLabId("lab123");
+        mockLab.setName("testLab");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse("2029-03-10 07:00:00",formatter);
+        mockLab.setIsAvailable(dateTime);
+
+        Booking mockBooking = new Booking();
+        mockBooking.setLab(mockLab);
+        mockBooking.setBookingId(deleteBookingDTO.getBookingId());
+        mockBooking.setDate("2029-03-10 07:00:00");
+
+        User mockUser = new BasicUser();
+        mockUser.setUserId("user123");
+        mockUser.setName("testUser");
+        mockUser.addBooking(mockBooking);
+
+        Optional<Booking> bookingOptional = Optional.of(mockBooking);
+        Mockito.when(bookingRepository.findById("123")).thenReturn(bookingOptional);
+        Mockito.when(userRepository.findByName("testUser")).thenReturn(mockUser);
+
+        HashMap<LocalDateTime,Boolean> map = mockLab.getIsAvailable();
+        List<Booking> list = mockUser.getBookings();
+
+        bookingService.deleteBooking(deleteBookingDTO);
+
+        assertFalse(map.containsKey(dateTime));
+        assertFalse(list.contains(mockBooking));
+    }
+
+    @Test
+    public void testNotDeleteBookingWithInvalidUser() {
+        try{
+            DeleteBookingDTO deleteBookingDTO = new DeleteBookingDTO();
+            deleteBookingDTO.setUserName("testUser");
+            deleteBookingDTO.setBookingId("123");
+
+            Lab mockLab = new Lab();
+            mockLab.setLabId("lab123");
+            mockLab.setName("testLab");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime dateTime = LocalDateTime.parse("2029-03-10 07:00:00",formatter);
+            mockLab.setIsAvailable(dateTime);
+
+            Booking mockBooking = new Booking();
+            mockBooking.setLab(mockLab);
+            mockBooking.setBookingId(deleteBookingDTO.getBookingId());
+            mockBooking.setDate("2029-03-10 07:00:00");
+            Optional<Booking> bookingOptional = Optional.of(mockBooking);
+            Mockito.when(bookingRepository.findById("123")).thenReturn(bookingOptional);
+            Mockito.when(userRepository.findByName("testUser")).thenReturn(null);
+            bookingService.deleteBooking(deleteBookingDTO);
+        }catch (IllegalArgumentException e){
+            assertEquals(e.getMessage(),"User not found");
+        }
+    }
+
+    @Test
+    public void testNotDeleteBookingThatNotExist() {
+        try {
+            DeleteBookingDTO deleteBookingDTO = new DeleteBookingDTO();
+            deleteBookingDTO.setUserName("testUser");
+            deleteBookingDTO.setBookingId("123");
+
+            Lab mockLab = new Lab();
+            mockLab.setLabId("lab123");
+            mockLab.setName("testLab");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime dateTime = LocalDateTime.parse("2029-03-10 07:00:00",formatter);
+            mockLab.setIsAvailable(dateTime);
+
+
+            User mockUser = new BasicUser();
+            mockUser.setUserId("user123");
+            mockUser.setName("testUser");
+
+
+            Optional<Booking> bookingOptional = Optional.empty();
+            Mockito.when(bookingRepository.findById("123")).thenReturn(bookingOptional);
+            Mockito.when(userRepository.findByName("testUser")).thenReturn(mockUser);
+
+
+            bookingService.deleteBooking(deleteBookingDTO);
+        } catch (IllegalArgumentException e) {
+            assertEquals(e.getMessage(),"Booking not found");
+        }
     }
 
 }

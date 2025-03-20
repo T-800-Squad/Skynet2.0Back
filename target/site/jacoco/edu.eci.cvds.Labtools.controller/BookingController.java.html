@@ -29,7 +29,7 @@ public class BookingController {
     }
 
 
-    @DeleteMapping(&quot;/delete&quot;)
+    @DeleteMapping()
     public ResponseEntity&lt;String&gt; deleteBooking(@RequestBody DeleteBookingDTO deleteBookingDTO) {
 <span class="nc" id="L34">        bookingService.deleteBooking(deleteBookingDTO);</span>
 <span class="nc" id="L35">        return ResponseEntity.ok(&quot;Booking deleted successfully.&quot;);</span>
