@@ -39,4 +39,10 @@ public class Lab {
         }
         isAvailable.put(localDateTime, true);
     }
+    public void deleteIsAvailable(LocalDateTime localDateTime) {
+        if(!isAvailable.containsKey(localDateTime)) {
+            throw new IllegalArgumentException("this lab doesn't have a booking on this date");
+        }
+        isAvailable.remove(localDateTime);
+    }
 }

@@ -3,6 +3,7 @@ package edu.eci.cvds.Labtools.service;
 import edu.eci.cvds.Labtools.LabToolsException;
 import edu.eci.cvds.Labtools.dto.UserDTO;
 import edu.eci.cvds.Labtools.dto.UserRegisterDTO;
+import edu.eci.cvds.Labtools.model.BasicUser;
 import edu.eci.cvds.Labtools.model.User;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

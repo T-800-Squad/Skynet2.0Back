@@ -28,66 +28,67 @@ import java.util.List;
 <span class="fc" id="L28">        bookings.add(booking);</span>
 <span class="fc" id="L29">    }</span>
 
-    public void deleteBooking(String bookingId) {
-
-<span class="nc" id="L33">    }</span>
+    public void deleteBooking(Booking booking) {
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">        if (bookings.isEmpty()) {</span>
+<span class="nc" id="L33">            throw new IllegalArgumentException(&quot;User don't have bookings&quot;);</span>
+        }
+<span class="fc" id="L35">        bookings.remove(booking);</span>
+<span class="fc" id="L36">    }</span>
 
     public String getUserId() {
-<span class="nc" id="L36">        return userId;</span>
+<span class="nc" id="L39">        return userId;</span>
     }
 
     public void setUserId(String userId) {
-<span class="fc" id="L40">        this.userId = userId;</span>
-<span class="fc" id="L41">    }</span>
+<span class="fc" id="L43">        this.userId = userId;</span>
+<span class="fc" id="L44">    }</span>
 
     public String getName() {
-<span class="fc" id="L44">        return name;</span>
+<span class="fc" id="L47">        return name;</span>
     }
 
     public void setName(String name) {
-<span class="fc" id="L48">        this.name = name;</span>
-<span class="fc" id="L49">    }</span>
+<span class="fc" id="L51">        this.name = name;</span>
+<span class="fc" id="L52">    }</span>
 
     public String getEmail() {
-<span class="nc" id="L52">        return email;</span>
+<span class="nc" id="L55">        return email;</span>
     }
 
     public void setEmail(String email) {
-<span class="fc" id="L56">        this.email = email;</span>
-<span class="fc" id="L57">    }</span>
+<span class="fc" id="L59">        this.email = email;</span>
+<span class="fc" id="L60">    }</span>
 
     public String getPassword() {
-<span class="fc" id="L60">        return password;</span>
+<span class="fc" id="L63">        return password;</span>
     }
 
     public void setPassword(String password) {
-<span class="fc" id="L64">        this.password = password;</span>
-<span class="fc" id="L65">    }</span>
+<span class="fc" id="L67">        this.password = password;</span>
+<span class="fc" id="L68">    }</span>
 
     public boolean getLogged() {
-<span class="nc" id="L68">        return logged;</span>
+<span class="nc" id="L71">        return logged;</span>
     }
 
     public void setLogged(boolean logged) {
-<span class="fc" id="L72">        this.logged = logged;</span>
-<span class="fc" id="L73">    }</span>
+<span class="fc" id="L75">        this.logged = logged;</span>
+<span class="fc" id="L76">    }</span>
 
     public List&lt;Booking&gt; getBookings() {
-<span class="fc" id="L76">        return bookings;</span>
+<span class="fc" id="L79">        return bookings;</span>
     }
 
     public void setBookings(List&lt;Booking&gt; bookings) {
-<span class="nc" id="L80">        this.bookings = bookings;</span>
-<span class="nc" id="L81">    }</span>
+<span class="nc" id="L83">        this.bookings = bookings;</span>
+<span class="nc" id="L84">    }</span>
 
     public boolean getRol() {
-<span class="fc" id="L84">        return rol;</span>
+<span class="fc" id="L87">        return rol;</span>
     }
 
     public void setRol(boolean rol) {
-<span class="fc" id="L88">        this.rol = rol;</span>
-<span class="fc" id="L89">    }</span>
-
-
+<span class="fc" id="L91">        this.rol = rol;</span>
+<span class="fc" id="L92">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

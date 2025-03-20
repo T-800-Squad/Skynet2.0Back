@@ -28,8 +28,11 @@ public abstract class User {
         bookings.add(booking);
     }
 
-    public void deleteBooking(String bookingId) {
-
+    public void deleteBooking(Booking booking) {
+        if (bookings.isEmpty()) {
+            throw new IllegalArgumentException("User don't have bookings");
+        }
+        bookings.remove(booking);
     }
 
     public String getUserId() {
@@ -87,6 +90,4 @@ public abstract class User {
     public void setRol(boolean rol) {
         this.rol = rol;
     }
-
-
 }

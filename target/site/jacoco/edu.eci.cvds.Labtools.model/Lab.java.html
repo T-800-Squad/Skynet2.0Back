@@ -12,7 +12,7 @@ import java.util.HashMap;
     @Id
     private String labId;
     private String name;
-    private HashMap&lt;LocalDateTime, Boolean&gt; isAvailable;
+<span class="fc" id="L15">    private HashMap&lt;LocalDateTime, Boolean&gt; isAvailable = new HashMap&lt;&gt;();</span>
 
     public String getLabId() {
 <span class="fc" id="L18">        return labId;</span>
@@ -33,8 +33,17 @@ import java.util.HashMap;
 <span class="fc" id="L33">        return isAvailable;</span>
     }
 
-    public void setIsAvailable(HashMap&lt;LocalDateTime, Boolean&gt; isAvailable) {
-<span class="fc" id="L37">        this.isAvailable = isAvailable;</span>
-<span class="fc" id="L38">    }</span>
+    public void setIsAvailable(LocalDateTime localDateTime) {
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        if(isAvailable.containsKey(localDateTime)) {</span>
+<span class="nc" id="L38">            throw new IllegalArgumentException(&quot;this lab already has a booking on this date&quot;);</span>
+        }
+<span class="fc" id="L40">        isAvailable.put(localDateTime, true);</span>
+<span class="fc" id="L41">    }</span>
+    public void deleteIsAvailable(LocalDateTime localDateTime) {
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        if(!isAvailable.containsKey(localDateTime)) {</span>
+<span class="nc" id="L44">            throw new IllegalArgumentException(&quot;this lab doesn't have a booking on this date&quot;);</span>
+        }
+<span class="fc" id="L46">        isAvailable.remove(localDateTime);</span>
+<span class="fc" id="L47">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
