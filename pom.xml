@@ -105,7 +105,7 @@
 									<limits>
 										<limit>
 											<counter>CLASS</counter>
-											<value>COVERED RATIO</value>
+											<value>COVEREDRATIO</value>
 											<minimum>0.85</minimum><!--Porcentaje mínimo de cubrimiento para construir el proyecto-->
 										</limit>
 									</limits>

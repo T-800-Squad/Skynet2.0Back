@@ -62,4 +62,15 @@ public class QueryControllerTest {
                         .param("userName","user"))
                 .andExpect(status().isOk());
     }
+    @Test
+    void testQueryLabsInAnyDate() throws Exception {
+        List<String> labs = new ArrayList<>();
+        labs.add("1");
+        labs.add("2");
+        Mockito.when(queryService.checkAvailability(Mockito.anyString())).thenReturn(labs);
+        mockMvc.perform(get("/query/lab")
+                .param("date","2025-10-10 07:00:00"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[\"1\",\"2\"]"));
+    }
 }

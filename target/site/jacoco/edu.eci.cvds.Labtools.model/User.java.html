@@ -22,15 +22,15 @@ import java.util.List;
 
     public void addBooking(Booking booking) {
 
-<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        if (bookings.size() == 3) {</span>
-<span class="nc" id="L26">            throw new IllegalArgumentException(&quot;User already have three bookings&quot;);</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (bookings.size() == 3) {</span>
+<span class="fc" id="L26">            throw new IllegalArgumentException(&quot;User already have three bookings&quot;);</span>
         }
 <span class="fc" id="L28">        bookings.add(booking);</span>
 <span class="fc" id="L29">    }</span>
 
     public void deleteBooking(Booking booking) {
-<span class="pc bpc" id="L32" title="1 of 2 branches missed.">        if (bookings.isEmpty()) {</span>
-<span class="nc" id="L33">            throw new IllegalArgumentException(&quot;User don't have bookings&quot;);</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (bookings.isEmpty()) {</span>
+<span class="fc" id="L33">            throw new IllegalArgumentException(&quot;User don't have bookings&quot;);</span>
         }
 <span class="fc" id="L35">        bookings.remove(booking);</span>
 <span class="fc" id="L36">    }</span>
