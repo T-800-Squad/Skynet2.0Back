@@ -15,6 +15,11 @@ public class QueryController {
         this.queryService = queryService;
     }
 
+    @GetMapping("/lab")
+    public List<String> checkAvvailability(@RequestParam String date) {
+        return queryService.checkAvailability(date);
+    }
+
     @GetMapping
     public List<BookingDTO> findBookingsById(@RequestParam String userName) {
         return queryService.findBookingsByName(userName);
