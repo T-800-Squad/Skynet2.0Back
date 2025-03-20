@@ -2,7 +2,6 @@ package edu.eci.cvds.Labtools.service;
 
 import edu.eci.cvds.Labtools.dto.CreateBookingDTO;
 import edu.eci.cvds.Labtools.model.BasicUser;
-import edu.eci.cvds.Labtools.model.Booking;
 import edu.eci.cvds.Labtools.model.Lab;
 import edu.eci.cvds.Labtools.model.User;
 import edu.eci.cvds.Labtools.repository.MongoBookingRepository;
@@ -19,9 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-
-import java.util.HashMap;
-import java.util.UUID;
 
 
 @SpringBootTest

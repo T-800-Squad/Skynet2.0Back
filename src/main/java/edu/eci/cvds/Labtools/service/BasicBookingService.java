@@ -30,11 +30,7 @@ public class BasicBookingService implements BookingService{
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-
-
-    public String[] checkAvailability(String date) {
-        return new String[0];
-    }
+    
 
     public Booking createBooking(CreateBookingDTO createBookingDTO) {
         Booking booking = new Booking();
@@ -76,13 +72,20 @@ public class BasicBookingService implements BookingService{
 
     public void deleteBooking(DeleteBookingDTO deleteBookingDTO) {
         String bookingId = deleteBookingDTO.getBookingId();
-        Optional<Booking> booking = bookingRepository.findById(bookingId);
-        if (booking.isEmpty()) {
+        Optional<Booking> optionalBooking = bookingRepository.findById(bookingId);
+        if (optionalBooking.isEmpty()) {
             throw new IllegalArgumentException("Booking not found with id: " + bookingId);
         } else {
             bookingRepository.deleteById(bookingId);
         }
-        updateListOfBookingsBeforeDelete(deleteBookingDTO.getUserName(), booking.get());
+        Booking booking = optionalBooking.get();
+        updateDateInLab(booking.getLab(),booking.getDate());
+        updateListOfBookingsBeforeDelete(deleteBookingDTO.getUserName(), booking);
+    }
+
+    private void updateDateInLab(Lab lab, String date) {
+        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+        lab.deleteIsAvailable(dateTime);
     }
 
     private void updateListOfBookingsBeforeDelete(String userName, Booking booking) {
