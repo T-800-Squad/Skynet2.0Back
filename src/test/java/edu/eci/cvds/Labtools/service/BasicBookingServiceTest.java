@@ -2,10 +2,7 @@ package edu.eci.cvds.Labtools.service;
 
 import edu.eci.cvds.Labtools.dto.CreateBookingDTO;
 import edu.eci.cvds.Labtools.dto.DeleteBookingDTO;
-import edu.eci.cvds.Labtools.model.BasicUser;
-import edu.eci.cvds.Labtools.model.Booking;
-import edu.eci.cvds.Labtools.model.Lab;
-import edu.eci.cvds.Labtools.model.User;
+import edu.eci.cvds.Labtools.model.*;
 import edu.eci.cvds.Labtools.repository.MongoBookingRepository;
 import edu.eci.cvds.Labtools.repository.MongoLabRepository;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
@@ -63,7 +60,7 @@ public class BasicBookingServiceTest {
         mockUser.setEmail("testUser@example.com");
         mockUser.setPassword("password123");
         mockUser.setLogged(true);
-        mockUser.setRol(false);
+        mockUser.setRol(Role.ROLE_USER);
 
         Lab mockLab = new Lab();
         mockLab.setLabId("lab123");
@@ -120,7 +117,7 @@ public class BasicBookingServiceTest {
                 .andExpect(status().isBadRequest()); // Asegurar que devuelve 400
     }
     @Test
-    public void testDeletyeBooking() {
+    public void testDeleteBooking() {
         DeleteBookingDTO deleteBookingDTO = new DeleteBookingDTO();
         deleteBookingDTO.setUserName("testUser");
         deleteBookingDTO.setBookingId("123");

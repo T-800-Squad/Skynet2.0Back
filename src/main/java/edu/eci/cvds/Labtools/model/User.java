@@ -18,7 +18,7 @@ public abstract class User {
     protected String password;
     protected boolean logged;
     protected List<Booking> bookings = new ArrayList<>();
-    protected boolean rol;
+    protected Role rol;
 
     public void addBooking(Booking booking) {
 
@@ -83,11 +83,11 @@ public abstract class User {
         this.bookings = bookings;
     }
 
-    public boolean getRol() {
+    public Role getRol() {
         return rol;
     }
 
-    public void setRol(boolean rol) {
+    public void setRol(Role rol) {
         this.rol = rol;
     }
 }

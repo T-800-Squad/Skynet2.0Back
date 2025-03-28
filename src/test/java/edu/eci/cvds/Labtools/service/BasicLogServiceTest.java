@@ -5,6 +5,7 @@ import edu.eci.cvds.Labtools.dto.UserDTO;
 import edu.eci.cvds.Labtools.dto.UserRegisterDTO;
 import edu.eci.cvds.Labtools.model.Admin;
 import edu.eci.cvds.Labtools.model.BasicUser;
+import edu.eci.cvds.Labtools.model.Role;
 import edu.eci.cvds.Labtools.model.User;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
 import edu.eci.cvds.Labtools.service.HashService;
@@ -37,11 +38,11 @@ public class BasicLogServiceTest{
             userRegisterDTO.setEmail("test@mail.escuelaing.edu.co");
             userRegisterDTO.setPassword("123");
             UserDTO mockUserDTO = new UserDTO();
-            mockUserDTO.setRol(true);
+            mockUserDTO.setRol(Role.ROLE_ADMIN);
             mockUserDTO.setName("test");
             User user = new BasicUser();
             user.setName("test");
-            user.setRol(true);
+            user.setRol(Role.ROLE_ADMIN);
             user.setPassword(hashService.passwordHashsing("123"));
 
             Mockito.when(mongoUserRepository.findByEmail("test@mail.escuelaing.edu.co")).thenReturn(Optional.of(user));

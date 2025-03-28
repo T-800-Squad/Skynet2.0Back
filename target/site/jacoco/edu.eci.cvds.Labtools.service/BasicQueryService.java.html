@@ -3,6 +3,7 @@
 import edu.eci.cvds.Labtools.dto.BookingDTO;
 import edu.eci.cvds.Labtools.model.Booking;
 import edu.eci.cvds.Labtools.model.Lab;
+import edu.eci.cvds.Labtools.model.Role;
 import edu.eci.cvds.Labtools.model.User;
 import edu.eci.cvds.Labtools.repository.MongoLabRepository;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
@@ -16,7 +17,7 @@ import java.util.List;
 
 
 @Service
-<span class="fc" id="L19">public class BasicQueryService implements QueryService {</span>
+<span class="fc" id="L20">public class BasicQueryService implements QueryService {</span>
     @Autowired
     private MongoUserRepository userRepository;
 
@@ -24,42 +25,42 @@ import java.util.List;
     private MongoLabRepository labRepository;
 
     public List&lt;String&gt; checkAvailability(String date) {
-<span class="fc" id="L27">        List&lt;Lab&gt; labs = labRepository.findAll();</span>
-<span class="fc" id="L28">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
-<span class="fc" id="L29">        LocalDateTime dateTime = LocalDateTime.parse(date,formatter);</span>
-<span class="fc" id="L30">        List&lt;String&gt; labList = new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L31" title="All 2 branches covered.">        for (Lab lab : labs) {</span>
-<span class="fc bfc" id="L32" title="All 2 branches covered.">            if(!lab.getIsAvailable().containsKey(dateTime)) {</span>
-<span class="fc" id="L33">                labList.add(lab.getName());</span>
+<span class="fc" id="L28">        List&lt;Lab&gt; labs = labRepository.findAll();</span>
+<span class="fc" id="L29">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="fc" id="L30">        LocalDateTime dateTime = LocalDateTime.parse(date,formatter);</span>
+<span class="fc" id="L31">        List&lt;String&gt; labList = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        for (Lab lab : labs) {</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">            if(!lab.getIsAvailable().containsKey(dateTime)) {</span>
+<span class="fc" id="L34">                labList.add(lab.getName());</span>
             }
-<span class="fc" id="L35">        }</span>
-<span class="fc" id="L36">        return labList;</span>
+<span class="fc" id="L36">        }</span>
+<span class="fc" id="L37">        return labList;</span>
     }
 
     public List&lt;BookingDTO&gt; findBookingsByName(String name){
-<span class="fc" id="L40">        User user = userRepository.findByName(name);</span>
-<span class="fc" id="L41">        validateUser(user);</span>
-<span class="fc" id="L42">        List&lt;Booking&gt; bookings = user.getBookings();</span>
-<span class="fc" id="L43">        List&lt;BookingDTO&gt; bookingDTOs = new ArrayList&lt;BookingDTO&gt;();</span>
-<span class="fc bfc" id="L44" title="All 2 branches covered.">        for(Booking booking : bookings){</span>
-<span class="fc" id="L45">            BookingDTO bookingDTO = new BookingDTO();</span>
-<span class="fc" id="L46">            bookingDTO.setDate(booking.getDate());</span>
-<span class="fc" id="L47">            bookingDTO.setBookingId(booking.getBookingId());</span>
-<span class="fc" id="L48">            bookingDTO.setLabName(booking.getLab().getName());</span>
-<span class="fc" id="L49">            bookingDTOs.add(bookingDTO);</span>
-<span class="fc" id="L50">        }</span>
-<span class="fc" id="L51">        return bookingDTOs;</span>
+<span class="fc" id="L41">        User user = userRepository.findByName(name);</span>
+<span class="fc" id="L42">        validateUser(user);</span>
+<span class="fc" id="L43">        List&lt;Booking&gt; bookings = user.getBookings();</span>
+<span class="fc" id="L44">        List&lt;BookingDTO&gt; bookingDTOs = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        for(Booking booking : bookings){</span>
+<span class="fc" id="L46">            BookingDTO bookingDTO = new BookingDTO();</span>
+<span class="fc" id="L47">            bookingDTO.setDate(booking.getDate());</span>
+<span class="fc" id="L48">            bookingDTO.setBookingId(booking.getBookingId());</span>
+<span class="fc" id="L49">            bookingDTO.setLabName(booking.getLab().getName());</span>
+<span class="fc" id="L50">            bookingDTOs.add(bookingDTO);</span>
+<span class="fc" id="L51">        }</span>
+<span class="fc" id="L52">        return bookingDTOs;</span>
     }
 
     private void validateUser(User user) {
 
-<span class="fc bfc" id="L56" title="All 2 branches covered.">        if(user==null){</span>
-<span class="fc" id="L57">            throw new IllegalArgumentException(&quot;No user found&quot;);</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if(user==null){</span>
+<span class="fc" id="L58">            throw new IllegalArgumentException(&quot;No user found&quot;);</span>
         }
-<span class="fc bfc" id="L59" title="All 4 branches covered.">        if(!user.getRol() || user.getBookings().isEmpty()){</span>
-<span class="fc" id="L60">            throw new IllegalArgumentException(&quot;User don't have bookings&quot;);</span>
+<span class="fc bfc" id="L60" title="All 4 branches covered.">        if(user.getRol().equals(Role.ROLE_ADMIN) || user.getBookings().isEmpty()){</span>
+<span class="fc" id="L61">            throw new IllegalArgumentException(&quot;User don't have bookings&quot;);</span>
         }
 
-<span class="fc" id="L63">    }</span>
+<span class="fc" id="L64">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

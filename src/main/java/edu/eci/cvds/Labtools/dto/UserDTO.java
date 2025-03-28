@@ -1,9 +1,12 @@
 package edu.eci.cvds.Labtools.dto;
 
 
+import edu.eci.cvds.Labtools.model.Role;
+
 public class UserDTO {
     private String name;
-    private boolean rol;
+    private Role rol;
+    private String token;
 
     public String getName() {
         return name;
@@ -13,13 +16,14 @@ public class UserDTO {
         this.name = name;
     }
 
-    public boolean getRol() {
+    public Role getRol() {
         return rol;
     }
 
-    public void setRol(boolean rol) {
+    public void setRol(Role rol) {
         this.rol = rol;
     }
+
 
     @Override
     public boolean equals(Object obj) {
