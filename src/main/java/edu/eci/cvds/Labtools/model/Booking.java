@@ -14,6 +14,7 @@ public class Booking {
     private String bookingId;
     private String date;
     private Lab lab;
+    private int priority;
 
     public String getBookingId() {
         return bookingId;
@@ -39,6 +40,10 @@ public class Booking {
     public void setLab(Lab lab) {
         this.lab = lab;
     }
+
+    public int getPriority() { return  priority;}
+
+    public void setPriority(int priority) { this.priority = priority;}
 
     @Override
     public boolean equals(Object booking) {

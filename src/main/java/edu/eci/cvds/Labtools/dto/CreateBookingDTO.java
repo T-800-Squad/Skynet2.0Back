@@ -7,6 +7,7 @@ public class CreateBookingDTO {
     private String userName;
     private String labName;
     private String date;
+    private int priority;
 
     public String getUserName(){
         return userName;
@@ -26,4 +27,6 @@ public class CreateBookingDTO {
     public void setDate(String date){
         this.date = date;
     }
+    public int getPriority(){ return priority;}
+    public void setPriority(int priority){ this.priority = priority;}
 }

@@ -14,7 +14,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
+import java.util.List;
+import java.util.stream.IntStream;
 
 @Service
 public class BasicBookingService implements BookingService{
@@ -30,8 +33,6 @@ public class BasicBookingService implements BookingService{
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-
-
     public Booking createBooking(CreateBookingDTO createBookingDTO) {
         Booking booking = new Booking();
         Lab lab = labRepository.findByName(createBookingDTO.getLabName());
@@ -40,6 +41,7 @@ public class BasicBookingService implements BookingService{
         booking.setLab(lab);
         booking.setDate(createBookingDTO.getDate());
         booking.setBookingId(UUID.randomUUID().toString());
+        booking.setPriority(createBookingDTO.getPriority());
 
         System.out.println("booking created");
         bookingRepository.save(booking);
@@ -97,5 +99,39 @@ public class BasicBookingService implements BookingService{
         }
         user.deleteBooking(booking);
         userRepository.save(user);
+    }
+
+    public void generateRandomBookings() {
+        Random random = new Random();
+        int numBookings = random.nextInt(901) + 100;
+
+        List<User> users = userRepository.findAll();
+        List<Lab> labs = labRepository.findAll();
+
+        if (users.isEmpty() || labs.isEmpty()) {
+            throw new IllegalStateException("No users or labs available for bookings.");
+        }
+
+        IntStream.range(0, numBookings).forEach(i -> {
+            User user = users.get(random.nextInt(users.size()));
+            Lab lab = labs.get(random.nextInt(labs.size()));
+
+            Booking booking = new Booking();
+            booking.setLab(lab);
+            booking.setDate(generateRandomDate());
+            booking.setBookingId(UUID.randomUUID().toString());
+            booking.setPriority(random.nextInt(5) + 1);
+
+            bookingRepository.save(booking);
+            updateListOfBookingsInUser(user.getName(), booking);
+        });
+
+        System.out.println(numBookings + " bookings generated successfully.");
+    }
+
+    private String generateRandomDate() {
+        LocalDateTime randomDate = LocalDateTime.now()
+                .plusDays(new Random().nextInt(30));
+        return randomDate.format(formatter);
     }
 }

@@ -5,6 +5,7 @@ public class BookingDTO {
     private String bookingId;
     private String labName;
     private String date;
+    private int priority;
 
     public String getBookingId() {
         return bookingId;
@@ -30,4 +31,7 @@ public class BookingDTO {
         this.date = date;
     }
 
+    public int getPriority() { return priority;}
+
+    public void setPriority(int priority) { this.priority = priority;}
 }

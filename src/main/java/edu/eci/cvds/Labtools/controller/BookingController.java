@@ -20,8 +20,6 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-
-
     @PostMapping()
     public ResponseEntity<Booking> createBooking(@RequestBody CreateBookingDTO createBookingDTO) {
         Booking booking = bookingService.createBooking(createBookingDTO);
@@ -33,5 +31,11 @@ public class BookingController {
     public ResponseEntity<String> deleteBooking(@RequestBody DeleteBookingDTO deleteBookingDTO) {
         bookingService.deleteBooking(deleteBookingDTO);
         return ResponseEntity.ok("Booking deleted successfully.");
+    }
+
+    @PostMapping("/generate")
+    public ResponseEntity<String> generateRandomBookings() {
+        bookingService.generateRandomBookings();
+        return ResponseEntity.ok("Random bookings generated successfully.");
     }
 }

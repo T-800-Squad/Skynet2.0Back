@@ -7,8 +7,9 @@ import edu.eci.cvds.Labtools.model.Booking;
 
 public interface BookingService {
 
-
     Booking createBooking(CreateBookingDTO createBookingDTO);
 
     void deleteBooking(DeleteBookingDTO deleteBookingDTO);
+
+    void generateRandomBookings();
 }
