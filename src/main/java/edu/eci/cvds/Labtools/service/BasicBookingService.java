@@ -129,7 +129,7 @@ public class BasicBookingService implements BookingService{
         System.out.println(numBookings + " bookings generated successfully.");
     }
 
-    private String generateRandomDate() {
+    public String generateRandomDate() {
         LocalDateTime randomDate = LocalDateTime.now()
                 .plusDays(new Random().nextInt(30));
         return randomDate.format(formatter);

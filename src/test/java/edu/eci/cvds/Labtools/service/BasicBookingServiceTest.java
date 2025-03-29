@@ -6,6 +6,7 @@ import edu.eci.cvds.Labtools.model.*;
 import edu.eci.cvds.Labtools.repository.MongoBookingRepository;
 import edu.eci.cvds.Labtools.repository.MongoLabRepository;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,16 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.text.DateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -46,9 +49,29 @@ public class BasicBookingServiceTest {
     @MockitoBean
     private MongoLabRepository labRepository;
 
+    private List<User> users;
+    private List<Lab> labs;
+
+    @BeforeEach
+    void setUp() {
+        users = Arrays.asList(
+                new User() {{ setName("Alice"); }},
+                new User() {{ setName("Bob"); }},
+                new User() {{ setName("Charlie"); }}
+        );
+
+        labs = Arrays.asList(
+                new Lab() {{ setName("Lab 1"); }},
+                new Lab() {{ setName("Lab 2"); }},
+                new Lab() {{ setName("Lab 3"); }}
+        );
+
+        when(userRepository.findAll()).thenReturn(users);
+        when(labRepository.findAll()).thenReturn(labs);
+    }
+
     @Test
     public void testCreateBookingWithValidData() throws Exception {
-        // Crear datos de prueba
         CreateBookingDTO createBookingDTO = new CreateBookingDTO();
         createBookingDTO.setUserName ("testUser");
         createBookingDTO.setLabName("testLab");
@@ -105,12 +128,11 @@ public class BasicBookingServiceTest {
         User mockUser = new BasicUser();
         mockUser.setName("testUser");
 
-        // Simular que el usuario sí existe
+
         Mockito.when(userRepository.findByName("testUser")).thenReturn(mockUser);
-        // Simular que el laboratorio no existe
+
         Mockito.when(labRepository.findByName("invalidLab")).thenReturn(null);
 
-        // Realizar la petición al endpoint correcto
         mockMvc.perform(post("/booking") // <-- Aquí se cambia a "/booking/add"
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"userName\": \"testUser\", \"labName\": \"invalidLab\", \"date\": \"2025-03-10\"}"))
@@ -210,5 +232,20 @@ public class BasicBookingServiceTest {
         }
     }
 
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    @Test
+    void testGenerateRandomDate() {
+        BasicBookingService bookingService = new BasicBookingService();
+
+        String randomDateStr = bookingService.generateRandomDate();
+
+        LocalDateTime randomDate = LocalDateTime.parse(randomDateStr, formatter);
+
+        LocalDateTime now = LocalDateTime.now();
+
+        assertFalse(randomDate.isBefore(now), "La fecha generada no puede ser antes de ahora.");
+        assertFalse(randomDate.isAfter(now.plusDays(30)), "La fecha generada no puede ser después de 30 días.");
+    }
 }
 
