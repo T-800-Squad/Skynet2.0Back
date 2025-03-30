@@ -157,7 +157,7 @@ public class BasicBookingServiceTest {
         Optional<Booking> bookingOptional = Optional.of(mockBooking);
         Mockito.when(bookingRepository.findById("123")).thenReturn(bookingOptional);
         Mockito.when(userRepository.findByName("testUser")).thenReturn(mockUser);
-
+        Mockito.when(labRepository.findByName("testLab")).thenReturn(mockLab);
         HashMap<LocalDateTime,Boolean> map = mockLab.getIsAvailable();
         List<Booking> list = mockUser.getBookings();
 
@@ -188,6 +188,7 @@ public class BasicBookingServiceTest {
             Optional<Booking> bookingOptional = Optional.of(mockBooking);
             Mockito.when(bookingRepository.findById("123")).thenReturn(bookingOptional);
             Mockito.when(userRepository.findByName("testUser")).thenReturn(null);
+            Mockito.when(labRepository.findByName("testLab")).thenReturn(mockLab);
             bookingService.deleteBooking(deleteBookingDTO);
         }catch (IllegalArgumentException e){
             assertEquals(e.getMessage(),"User not found");
