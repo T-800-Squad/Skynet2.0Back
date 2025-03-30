@@ -4,12 +4,11 @@ package edu.eci.cvds.Labtools.controller;
 
 import edu.eci.cvds.Labtools.dto.BookingDTO;
 import edu.eci.cvds.Labtools.model.BasicUser;
-import edu.eci.cvds.Labtools.model.Booking;
-import edu.eci.cvds.Labtools.model.Lab;
 import edu.eci.cvds.Labtools.model.User;
-import edu.eci.cvds.Labtools.repository.MongoUserRepository;
 
+import edu.eci.cvds.Labtools.service.JwtService;
 import edu.eci.cvds.Labtools.service.QueryService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
+
 
 
 import java.util.ArrayList;
@@ -33,8 +32,16 @@ public class QueryControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+    @Autowired
+    private JwtService jwtService;
     @MockitoBean
     private QueryService queryService;
+    private String token;
+
+    @BeforeEach
+    void setUp() {
+        token = jwtService.generateToken("user","User");
+    }
 
     @Test
     void testQueryAllTheBookingsIfTheUserHaveBookings() throws Exception {
@@ -46,6 +53,7 @@ public class QueryControllerTest {
         bookingDTOS.add(bookingDTO);
         Mockito.when(queryService.findBookingsByName(Mockito.anyString())).thenReturn(bookingDTOS);
         mockMvc.perform(get("/query")
+                        .header("Authorization", "Bearer " + token)
                 .param("userName","user"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[{\"bookingId\": \"1\"" +
@@ -59,6 +67,7 @@ public class QueryControllerTest {
         user.setName("user");
         Mockito.when(queryService.findBookingsByName(Mockito.anyString())).thenReturn(null);
         mockMvc.perform(get("/query")
+                        .header("Authorization", "Bearer " + token)
                         .param("userName","user"))
                 .andExpect(status().isOk());
     }
@@ -69,6 +78,7 @@ public class QueryControllerTest {
         labs.add("2");
         Mockito.when(queryService.checkAvailability(Mockito.anyString())).thenReturn(labs);
         mockMvc.perform(get("/query/lab")
+                        .header("Authorization", "Bearer " + token)
                 .param("date","2025-10-10 07:00:00"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[\"1\",\"2\"]"));

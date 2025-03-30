@@ -6,6 +6,7 @@ import edu.eci.cvds.Labtools.model.*;
 import edu.eci.cvds.Labtools.repository.MongoBookingRepository;
 import edu.eci.cvds.Labtools.repository.MongoLabRepository;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class BasicBookingServiceTest {
     @Autowired
     private BookingService bookingService;
 
+    @Autowired
+    private JwtService jwtService;
+
     @MockitoBean
     private MongoBookingRepository bookingRepository;
 
@@ -45,6 +49,14 @@ public class BasicBookingServiceTest {
 
     @MockitoBean
     private MongoLabRepository labRepository;
+
+    private String token;
+
+    @BeforeEach
+    void setUp() {
+        token = jwtService.generateToken("testUser","User");
+    }
+
 
     @Test
     public void testCreateBookingWithValidData() throws Exception {
@@ -60,7 +72,7 @@ public class BasicBookingServiceTest {
         mockUser.setEmail("testUser@example.com");
         mockUser.setPassword("password123");
         mockUser.setLogged(true);
-        mockUser.setRol(Role.ROLE_USER);
+        mockUser.setRol("user");
 
         Lab mockLab = new Lab();
         mockLab.setLabId("lab123");
@@ -70,14 +82,15 @@ public class BasicBookingServiceTest {
         Mockito.when(labRepository.findByName("testLab")).thenReturn(mockLab);
 
         mockMvc.perform(post("/booking")
+                        .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"userName\": \"testUser\", \"labName\": \"testLab\", \"date\": \"2030-03-10 07:00:00\"}"))
-                .andExpect(status().isCreated()) // Asegurar que la respuesta es 201 Created
-                .andExpect(jsonPath("$.bookingId").exists()) // Verificar que se genera un ID de reserva
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.bookingId").exists())
                 .andExpect(jsonPath("$.date").value("2030-03-10 07:00:00"))
                 .andExpect(jsonPath("$.lab.labId").value("lab123"))
                 .andExpect(jsonPath("$.lab.name").value("testLab"))
-                .andExpect(jsonPath("$.lab.isAvailable").exists()); // Verificar que el campo de disponibilidad está presente
+                .andExpect(jsonPath("$.lab.isAvailable").exists());
     }
 
     @Test
@@ -87,11 +100,12 @@ public class BasicBookingServiceTest {
         createBookingDTO.setLabName ("testLab");
         createBookingDTO.setDate("2025-03-10 7:00:00");
 
-        Mockito.when(userRepository.findByName("invalidUser")).thenReturn(null);
+        Mockito.when(userRepository.findByName("testUser")).thenReturn(null);
 
         mockMvc.perform(post("/booking")
+                        .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"userName\": \"invalidUser\", \"labName\": \"testLab\", \"date\": \"2025-03-10\"}"))
+                        .content("{\"userName\": \"testUser\", \"labName\": \"testLab\", \"date\": \"2025-03-10\"}"))
                 .andExpect(status().isBadRequest());
     }
 
@@ -112,6 +126,7 @@ public class BasicBookingServiceTest {
 
         // Realizar la petición al endpoint correcto
         mockMvc.perform(post("/booking") // <-- Aquí se cambia a "/booking/add"
+                        .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"userName\": \"testUser\", \"labName\": \"invalidLab\", \"date\": \"2025-03-10\"}"))
                 .andExpect(status().isBadRequest()); // Asegurar que devuelve 400

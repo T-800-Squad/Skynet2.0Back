@@ -4,19 +4,20 @@ package edu.eci.cvds.Labtools.controller;
 import edu.eci.cvds.Labtools.LabToolsException;
 import edu.eci.cvds.Labtools.dto.UserDTO;
 import edu.eci.cvds.Labtools.dto.UserRegisterDTO;
-import edu.eci.cvds.Labtools.model.Role;
 import edu.eci.cvds.Labtools.service.BasicLogService;
 import edu.eci.cvds.Labtools.service.HashService;
+import edu.eci.cvds.Labtools.service.JwtService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static edu.eci.cvds.Labtools.model.Role.ROLE_USER;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,6 +35,8 @@ public class LoginControllerTest {
 
     @MockitoBean
     private BasicLogService basicLogService;
+    @MockitoBean
+    private JwtService jwtService;
 
 
     @Test
@@ -57,19 +60,16 @@ public class LoginControllerTest {
         UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
         userRegisterDTO.setEmail("test@mail.escuelaing.edu.co");
         userRegisterDTO.setPassword(password);
-        UserDTO mockUserDTO = new UserDTO();
-        mockUserDTO.setRol(ROLE_USER);
-        mockUserDTO.setName("test");
+        String token = "clave superSecreta";
 
-        Mockito.when(basicLogService.userLog(Mockito.any(UserRegisterDTO.class))).thenReturn(mockUserDTO);
+        Mockito.when(basicLogService.userLog(Mockito.any(UserRegisterDTO.class))).thenReturn(token);
 
         mockMvc.perform(post("/login")
                         .contentType("application/json")
                         .content("{\"email\": \"test@mail.escuelaing.edu.co\"" +
                                 ",\"password\": \"123\" }"))
-                .andExpect(status().isOk())
-                .andExpect(content().json("{\"name\": \"test\"" +
-                        ",\"rol\": \"ROLE_USER\" }"));
+                .andExpect(status().isOk());
+
     }
 
     @Test

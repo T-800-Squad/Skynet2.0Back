@@ -1,11 +1,9 @@
 package edu.eci.cvds.Labtools.dto;
 
 
-import edu.eci.cvds.Labtools.model.Role;
-
 public class UserDTO {
     private String name;
-    private Role rol;
+    private String rol;
     private String token;
 
     public String getName() {
@@ -16,11 +14,11 @@ public class UserDTO {
         this.name = name;
     }
 
-    public Role getRol() {
+    public String getRol() {
         return rol;
     }
 
-    public void setRol(Role rol) {
+    public void setRol(String rol) {
         this.rol = rol;
     }
 
