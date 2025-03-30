@@ -24,15 +24,13 @@ public class LoginController {
 <span class="fc" id="L24">    }</span>
 
     @PostMapping
-    public UserDTO userLog(@RequestBody UserRegisterDTO userRegisterDTO, HttpServletResponse response) throws LabToolsException {
-<span class="fc" id="L28">        UserDTO userDTO = logService.userLog(userRegisterDTO);</span>
-
-<span class="fc" id="L30">        return userDTO;</span>
+    public String userLog(@RequestBody UserRegisterDTO userRegisterDTO, HttpServletResponse response) throws LabToolsException {
+<span class="fc" id="L28">        return logService.userLog(userRegisterDTO);</span>
     }
 
     @GetMapping
     public boolean emailFormtaVerification(@RequestParam String email) throws LabToolsException {
-<span class="fc" id="L35">        return emailVerificationService.emailFormatVerification(email);</span>
+<span class="fc" id="L33">        return emailVerificationService.emailFormatVerification(email);</span>
     }
 
 

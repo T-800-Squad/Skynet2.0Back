@@ -1,9 +1,7 @@
 package edu.eci.cvds.Labtools.service;
 
 import edu.eci.cvds.Labtools.LabToolsException;
-import edu.eci.cvds.Labtools.dto.UserDTO;
 import edu.eci.cvds.Labtools.dto.UserRegisterDTO;
-import edu.eci.cvds.Labtools.model.BasicUser;
 import edu.eci.cvds.Labtools.model.User;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +14,11 @@ public class BasicLogService implements LogService {
     @Autowired
     private HashService hashService;
     @Autowired
+    private JwtService jwtService;
+    @Autowired
     private MongoUserRepository mongoUserRepository;
 
-    public UserDTO userLog(UserRegisterDTO userRegisterDTO) throws LabToolsException {
+    public String userLog(UserRegisterDTO userRegisterDTO) throws LabToolsException {
         Optional<User> user = mongoUserRepository.findByEmail(userRegisterDTO.getEmail());
         if (user.isEmpty()) {
             throw new LabToolsException(LabToolsException.User_Not_Exist);
@@ -27,11 +27,9 @@ public class BasicLogService implements LogService {
         if(!hashService.checkPassword(userRegisterDTO.getPassword(), userDB.getPassword())){
             throw new LabToolsException(LabToolsException.Incorrect_Password);
         }
-        UserDTO userDTO = new UserDTO();
-        userDTO.setName(userDB.getName());
-        userDTO.setRol(userDB.getRol());
+        String token = jwtService.generateToken(userDB.getName(),userDB.getRol().toString());
         mongoUserRepository.save(userDB);
-        return userDTO;
+        return token;
     }
 
 }
