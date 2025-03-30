@@ -82,7 +82,7 @@ public class BasicBookingService implements BookingService{
             bookingRepository.deleteById(bookingId);
         }
         Booking booking = optionalBooking.get();
-        updateDateInLab(booking.getLab(),booking.getDate());
+        updateDateInLab(labRepository.findByName(booking.getLab().getName()),booking.getDate());
         updateListOfBookingsBeforeDelete(deleteBookingDTO.getUserName(), booking);
     }
 
