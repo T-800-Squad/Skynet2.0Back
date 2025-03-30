@@ -20,19 +20,23 @@ public class BookingController {
 <span class="fc" id="L20">        this.bookingService = bookingService;</span>
 <span class="fc" id="L21">    }</span>
 
-
-
     @PostMapping()
     public ResponseEntity&lt;Booking&gt; createBooking(@RequestBody CreateBookingDTO createBookingDTO) {
-<span class="fc" id="L27">        Booking booking = bookingService.createBooking(createBookingDTO);</span>
-<span class="fc" id="L28">        return ResponseEntity.status(HttpStatus.CREATED).body(booking);</span>
+<span class="fc" id="L25">        Booking booking = bookingService.createBooking(createBookingDTO);</span>
+<span class="fc" id="L26">        return ResponseEntity.status(HttpStatus.CREATED).body(booking);</span>
     }
 
 
     @DeleteMapping()
     public ResponseEntity&lt;String&gt; deleteBooking(@RequestBody DeleteBookingDTO deleteBookingDTO) {
-<span class="nc" id="L34">        bookingService.deleteBooking(deleteBookingDTO);</span>
-<span class="nc" id="L35">        return ResponseEntity.ok(&quot;Booking deleted successfully.&quot;);</span>
+<span class="nc" id="L32">        bookingService.deleteBooking(deleteBookingDTO);</span>
+<span class="nc" id="L33">        return ResponseEntity.ok(&quot;Booking deleted successfully.&quot;);</span>
+    }
+
+    @PostMapping(&quot;/generate&quot;)
+    public ResponseEntity&lt;String&gt; generateRandomBookings() {
+<span class="nc" id="L38">        bookingService.generateRandomBookings();</span>
+<span class="nc" id="L39">        return ResponseEntity.ok(&quot;Random bookings generated successfully.&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
