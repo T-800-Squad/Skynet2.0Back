@@ -24,7 +24,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public String userLog(@RequestBody UserRegisterDTO userRegisterDTO, HttpServletResponse response) throws LabToolsException {
+    public UserDTO userLog(@RequestBody UserRegisterDTO userRegisterDTO, HttpServletResponse response) throws LabToolsException {
         return logService.userLog(userRegisterDTO);
     }
 
