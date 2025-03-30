@@ -1,7 +1,9 @@
+C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\config\CorsConfig.java
+C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\config\JwtFilter.java
+C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\config\SecurityConfig.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\controller\BookingController.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\controller\LoginController.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\controller\QueryController.java
-C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\CorsConfig.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\dto\BookingDTO.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\dto\CreateBookingDTO.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\dto\DeleteBookingDTO.java
@@ -14,7 +16,6 @@ C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\model\BasicUser.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\model\Booking.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\model\Lab.java
-C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\model\Role.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\model\User.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\repository\MongoBookingRepository.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\repository\MongoLabRepository.java
@@ -27,5 +28,6 @@ C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\service\BookingService.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\service\EmailVerificationService.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\service\HashService.java
+C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\service\JwtService.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\service\LogService.java
 C:\Users\migue\Desktop\Sexto Semestre\CVDS\proyectoCVDSPrimerCorte\Skynet2.0Back\src\main\java\edu\eci\cvds\Labtools\service\QueryService.java

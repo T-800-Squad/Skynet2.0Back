@@ -3,7 +3,6 @@ package edu.eci.cvds.Labtools.service;
 import edu.eci.cvds.Labtools.dto.BookingDTO;
 import edu.eci.cvds.Labtools.model.Booking;
 import edu.eci.cvds.Labtools.model.Lab;
-import edu.eci.cvds.Labtools.model.Role;
 import edu.eci.cvds.Labtools.model.User;
 import edu.eci.cvds.Labtools.repository.MongoLabRepository;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
@@ -57,7 +56,7 @@ public class BasicQueryService implements QueryService {
         if(user==null){
             throw new IllegalArgumentException("No user found");
         }
-        if(user.getRol().equals(Role.ROLE_ADMIN) || user.getBookings().isEmpty()){
+        if(user.getRol().equals("Admin") || user.getBookings().isEmpty()){
             throw new IllegalArgumentException("User don't have bookings");
         }
 

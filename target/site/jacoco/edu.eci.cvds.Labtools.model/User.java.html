@@ -18,7 +18,7 @@ import java.util.List;
     protected String password;
     protected boolean logged;
 <span class="fc" id="L20">    protected List&lt;Booking&gt; bookings = new ArrayList&lt;&gt;();</span>
-    protected Role rol;
+    protected String rol;
 
     public void addBooking(Booking booking) {
 
@@ -83,11 +83,11 @@ import java.util.List;
 <span class="nc" id="L83">        this.bookings = bookings;</span>
 <span class="nc" id="L84">    }</span>
 
-    public Role getRol() {
+    public String getRol() {
 <span class="fc" id="L87">        return rol;</span>
     }
 
-    public void setRol(Role rol) {
+    public void setRol(String rol) {
 <span class="fc" id="L91">        this.rol = rol;</span>
 <span class="fc" id="L92">    }</span>
 }
