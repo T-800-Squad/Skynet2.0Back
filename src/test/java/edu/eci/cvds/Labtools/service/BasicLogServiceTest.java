@@ -46,11 +46,9 @@ public class BasicLogServiceTest{
             user.setPassword(hashService.passwordHashsing("123"));
 
             Mockito.when(mongoUserRepository.findByEmail("test@mail.escuelaing.edu.co")).thenReturn(Optional.of(user));
-            String token = logService.userLog(userRegisterDTO);
-            String role = jwtService.getRoleFromToken(token);
-            String namme = jwtService.getUserNameFromToken(token);
-            assertEquals("test", namme);
-            assertEquals("Admin", role);
+            UserDTO token = logService.userLog(userRegisterDTO);
+            assertEquals("test", user.getName());
+            assertEquals("Admin", user.getRol());
 
         } catch (LabToolsException e) {
             fail();

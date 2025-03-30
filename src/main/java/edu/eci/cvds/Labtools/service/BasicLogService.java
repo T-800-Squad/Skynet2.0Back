@@ -1,6 +1,7 @@
 package edu.eci.cvds.Labtools.service;
 
 import edu.eci.cvds.Labtools.LabToolsException;
+import edu.eci.cvds.Labtools.dto.UserDTO;
 import edu.eci.cvds.Labtools.dto.UserRegisterDTO;
 import edu.eci.cvds.Labtools.model.User;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
@@ -18,7 +19,7 @@ public class BasicLogService implements LogService {
     @Autowired
     private MongoUserRepository mongoUserRepository;
 
-    public String userLog(UserRegisterDTO userRegisterDTO) throws LabToolsException {
+    public UserDTO userLog(UserRegisterDTO userRegisterDTO) throws LabToolsException {
         Optional<User> user = mongoUserRepository.findByEmail(userRegisterDTO.getEmail());
         if (user.isEmpty()) {
             throw new LabToolsException(LabToolsException.User_Not_Exist);
@@ -29,7 +30,11 @@ public class BasicLogService implements LogService {
         }
         String token = jwtService.generateToken(userDB.getName(),userDB.getRol().toString());
         mongoUserRepository.save(userDB);
-        return token;
+        UserDTO userDTO = new UserDTO();
+        userDTO.setName(userDB.getName());
+        userDTO.setRol(userDB.getRol());
+        userDTO.setToken(token);
+        return userDTO;
     }
 
 }

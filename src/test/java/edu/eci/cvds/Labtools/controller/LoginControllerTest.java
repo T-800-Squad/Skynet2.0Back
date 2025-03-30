@@ -61,8 +61,10 @@ public class LoginControllerTest {
         userRegisterDTO.setEmail("test@mail.escuelaing.edu.co");
         userRegisterDTO.setPassword(password);
         String token = "clave superSecreta";
+        UserDTO userDTO = new UserDTO();
+        userDTO.setToken(token);
 
-        Mockito.when(basicLogService.userLog(Mockito.any(UserRegisterDTO.class))).thenReturn(token);
+        Mockito.when(basicLogService.userLog(Mockito.any(UserRegisterDTO.class))).thenReturn(userDTO);
 
         mockMvc.perform(post("/login")
                         .contentType("application/json")

@@ -22,6 +22,13 @@ public class UserDTO {
         this.rol = rol;
     }
 
+    public String getToken() {
+        return token;
+    }
+    public void setToken(String token) {
+        this.token = token;
+    }
+
 
     @Override
     public boolean equals(Object obj) {

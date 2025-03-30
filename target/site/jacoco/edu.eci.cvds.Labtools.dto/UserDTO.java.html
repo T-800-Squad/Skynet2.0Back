@@ -7,7 +7,7 @@
     private String token;
 
     public String getName() {
-<span class="nc" id="L10">        return name;</span>
+<span class="fc" id="L10">        return name;</span>
     }
 
     public void setName(String name) {
@@ -15,20 +15,27 @@
 <span class="fc" id="L15">    }</span>
 
     public String getRol() {
-<span class="nc" id="L18">        return rol;</span>
+<span class="fc" id="L18">        return rol;</span>
     }
 
     public void setRol(String rol) {
 <span class="fc" id="L22">        this.rol = rol;</span>
 <span class="fc" id="L23">    }</span>
 
+    public String getToken() {
+<span class="fc" id="L26">        return token;</span>
+    }
+    public void setToken(String token) {
+<span class="fc" id="L29">        this.token = token;</span>
+<span class="fc" id="L30">    }</span>
+
 
     @Override
     public boolean equals(Object obj) {
-<span class="nc bnc" id="L28" title="All 2 branches missed.">        if (obj instanceof UserDTO userDTO) {</span>
-<span class="nc bnc" id="L29" title="All 4 branches missed.">            return name.equals(userDTO.name) &amp;&amp; rol == userDTO.rol;</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (obj instanceof UserDTO userDTO) {</span>
+<span class="nc bnc" id="L36" title="All 4 branches missed.">            return name.equals(userDTO.name) &amp;&amp; rol == userDTO.rol;</span>
         }
-<span class="nc" id="L31">        return false;</span>
+<span class="nc" id="L38">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

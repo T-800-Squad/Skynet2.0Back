@@ -3,7 +3,7 @@ Labtools,edu.eci.cvds.Labtools.dto,BookingDTO,4,27,0,0,1,11,1,8,1,8
 Labtools,edu.eci.cvds.Labtools.dto,UserRegisterDTO,0,17,0,0,0,7,0,5,0,5
 Labtools,edu.eci.cvds.Labtools.dto,CreateBookingDTO,4,27,0,0,1,11,1,8,1,8
 Labtools,edu.eci.cvds.Labtools.dto,DeleteBookingDTO,0,17,0,0,0,7,0,5,0,5
-Labtools,edu.eci.cvds.Labtools.dto,UserDTO,29,11,6,0,5,5,6,3,3,3
+Labtools,edu.eci.cvds.Labtools.dto,UserDTO,23,24,6,0,3,10,4,7,1,7
 Labtools,edu.eci.cvds.Labtools.model,Lab,0,59,0,4,0,17,0,10,0,8
 Labtools,edu.eci.cvds.Labtools.model,Booking,2,43,1,1,1,14,1,10,0,10
 Labtools,edu.eci.cvds.Labtools.model,Admin,0,6,0,0,0,3,0,1,0,1
@@ -15,8 +15,8 @@ Labtools,edu.eci.cvds.Labtools.controller,LoginController,0,19,0,0,0,6,0,3,0,3
 Labtools,edu.eci.cvds.Labtools.service,BasicEmailVerificationService,0,35,0,6,0,9,0,5,0,2
 Labtools,edu.eci.cvds.Labtools.service,BasicBookingService,116,168,6,8,24,44,7,10,3,7
 Labtools,edu.eci.cvds.Labtools.service,BasicQueryService,0,112,0,12,0,27,0,10,0,4
-Labtools,edu.eci.cvds.Labtools.service,BasicLogService,5,45,1,3,1,9,1,3,0,2
-Labtools,edu.eci.cvds.Labtools.service,JwtService,0,47,0,0,0,14,0,4,0,4
+Labtools,edu.eci.cvds.Labtools.service,BasicLogService,5,60,1,3,1,13,1,3,0,2
+Labtools,edu.eci.cvds.Labtools.service,JwtService,20,27,0,0,6,8,2,2,2,2
 Labtools,edu.eci.cvds.Labtools.service,BasicHashService,0,13,0,0,0,3,0,3,0,3
 Labtools,edu.eci.cvds.Labtools,ExceptionController,0,19,0,0,0,4,0,4,0,4
 Labtools,edu.eci.cvds.Labtools,LabToolsException,0,17,0,0,0,8,0,2,0,2
