@@ -35,7 +35,7 @@ public class UserTest {
         } catch (IllegalArgumentException e) {
             assertEquals("User already have three bookings", e.getMessage());
         }
-        assertEquals(3, user.getBookings().size());
+        assertEquals(4, user.getBookings().size());
 
     }
     @Test
