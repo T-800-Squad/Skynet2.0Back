@@ -3,13 +3,11 @@ package edu.eci.cvds.Labtools.config;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import edu.eci.cvds.Labtools.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -27,7 +25,9 @@ public class JwtFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
 
         String header = request.getHeader("Authorization");
-        if (path.equals("/login")) {
+
+
+        if (path.equals("/login") || path.equals("/query/lab")) {
             chain.doFilter(request, response);
             return;
         }

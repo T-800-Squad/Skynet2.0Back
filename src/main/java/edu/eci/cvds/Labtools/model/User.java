@@ -22,8 +22,11 @@ public abstract class User {
 
     public void addBooking(Booking booking) {
 
-        if (bookings.size() == 3) {
-            throw new IllegalArgumentException("User already have three bookings");
+        if (bookings.size() == 20) {
+            throw new IllegalArgumentException("User already have twenty bookings");
+        }
+        if(rol.equals("Admin")) {
+            throw new IllegalArgumentException("Admin can't have bookings");
         }
         bookings.add(booking);
     }
