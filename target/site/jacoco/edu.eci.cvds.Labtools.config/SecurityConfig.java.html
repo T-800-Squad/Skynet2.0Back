@@ -20,9 +20,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 <span class="fc" id="L20">                        .requestMatchers(&quot;/**&quot;).permitAll()</span>
                 )
 <span class="fc" id="L22">                .addFilterBefore(new JwtFilter(), UsernamePasswordAuthenticationFilter.class);</span>
-
-
-<span class="fc" id="L25">        return http.build();</span>
+<span class="fc" id="L23">        return http.build();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

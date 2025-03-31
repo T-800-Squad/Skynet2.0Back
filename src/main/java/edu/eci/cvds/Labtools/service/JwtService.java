@@ -24,15 +24,22 @@ public class JwtService {
                 .sign(Algorithm.HMAC256(SECRET_KEY));
     }
 
-    public String getUserNameFromToken(String token) throws LabToolsException {
+    public String getUserNameFromToken(String token) {
         String userName = null;
         userName = JWT.decode(token).getClaim("userName").asString();
         return userName;
     }
 
-    public String getRoleFromToken(String token) throws LabToolsException {
+    public String getRoleFromToken(String token)  {
         String role = null;
         role = JWT.decode(token).getClaim("role").asString();
         return role;
+    }
+    public boolean validateUserIsAdmin(String header)  {
+        String token = header.substring(7);
+        if(getRoleFromToken(token).equals("Admin")){
+            return true;
+        }
+        return false;
     }
 }

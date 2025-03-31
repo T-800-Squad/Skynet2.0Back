@@ -3,43 +3,49 @@
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import edu.eci.cvds.Labtools.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
 
-<span class="fc" id="L16">public class JwtFilter extends OncePerRequestFilter {</span>
-<span class="fc" id="L17">    private final String SECRET_KEY = &quot;ContraseñaSuperSecreta123&quot;;</span>
+<span class="fc" id="L18">public class JwtFilter extends OncePerRequestFilter {</span>
+
+
+<span class="fc" id="L21">    private final String SECRET_KEY = &quot;ContraseñaSuperSecreta123&quot;;</span>
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
-<span class="fc" id="L22">        String path = request.getRequestURI();</span>
+<span class="fc" id="L27">        String path = request.getRequestURI();</span>
 
-<span class="fc" id="L24">        String header = request.getHeader(&quot;Authorization&quot;);</span>
-<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (path.equals(&quot;/login&quot;)) {</span>
-<span class="fc" id="L26">            chain.doFilter(request, response);</span>
-<span class="fc" id="L27">            return;</span>
+<span class="fc" id="L29">        String header = request.getHeader(&quot;Authorization&quot;);</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        if (path.equals(&quot;/login&quot;)) {</span>
+<span class="fc" id="L31">            chain.doFilter(request, response);</span>
+<span class="fc" id="L32">            return;</span>
         }
 
         // Si no hay token o no empieza con &quot;Bearer &quot;, rechazar la petición
-<span class="pc bpc" id="L31" title="1 of 2 branches missed.">        if (header == null) {</span>
-<span class="nc" id="L32">            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, &quot;Sesion error, no token&quot;);</span>
-<span class="nc" id="L33">            return;</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        if (header == null) {</span>
+<span class="nc" id="L37">            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, &quot;Session error, no token&quot;);</span>
+<span class="nc" id="L38">            return;</span>
         }
 
-<span class="fc" id="L36">        String token = header.substring(7); // Eliminar &quot;Bearer &quot;</span>
+<span class="fc" id="L41">        String token = header.substring(7); // Eliminar &quot;Bearer &quot;</span>
         try {
-<span class="fc" id="L38">            JWT.require(Algorithm.HMAC256(SECRET_KEY)).build().verify(token);</span>
-<span class="nc" id="L39">        } catch (JWTVerificationException e) {</span>
-<span class="nc" id="L40">            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, &quot;Sesion eror, invalid token&quot;);</span>
-<span class="fc" id="L41">        }</span>
-<span class="fc" id="L42">        chain.doFilter(request, response);</span>
-<span class="fc" id="L43">    }</span>
+<span class="fc" id="L43">            JWT.require(Algorithm.HMAC256(SECRET_KEY)).build().verify(token);</span>
+<span class="nc" id="L44">        } catch (JWTVerificationException e) {</span>
+<span class="nc" id="L45">            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, &quot;Session eror, invalid token&quot;);</span>
+<span class="fc" id="L46">        }</span>
+
+<span class="fc" id="L48">        chain.doFilter(request, response);</span>
+<span class="fc" id="L49">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
