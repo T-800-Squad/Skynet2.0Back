@@ -30,4 +30,11 @@ public class UserDTO {
     }
 
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof UserDTO userDTO) {
+            return name.equals(userDTO.name) && rol == userDTO.rol;
+        }
+        return false;
+    }
 }

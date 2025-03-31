@@ -6,6 +6,6 @@ import edu.eci.cvds.Labtools.dto.UserRegisterDTO;
 
 public interface LogService {
 
-    String userLog(UserRegisterDTO userRegisterDTO) throws LabToolsException;
+    UserDTO userLog(UserRegisterDTO userRegisterDTO) throws LabToolsException;
 
 }

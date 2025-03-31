@@ -1,6 +1,7 @@
 package edu.eci.cvds.Labtools.controller;
 
 import edu.eci.cvds.Labtools.LabToolsException;
+import edu.eci.cvds.Labtools.dto.UserDTO;
 import edu.eci.cvds.Labtools.dto.UserRegisterDTO;
 import edu.eci.cvds.Labtools.service.EmailVerificationService;
 import edu.eci.cvds.Labtools.service.LogService;
@@ -23,7 +24,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public String userLog(@RequestBody UserRegisterDTO userRegisterDTO, HttpServletResponse response) throws LabToolsException {
+    public UserDTO userLog(@RequestBody UserRegisterDTO userRegisterDTO, HttpServletResponse response) throws LabToolsException {
         return logService.userLog(userRegisterDTO);
     }
 

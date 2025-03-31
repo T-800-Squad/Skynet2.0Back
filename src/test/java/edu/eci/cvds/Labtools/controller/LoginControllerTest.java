@@ -2,6 +2,7 @@ package edu.eci.cvds.Labtools.controller;
 
 
 import edu.eci.cvds.Labtools.LabToolsException;
+import edu.eci.cvds.Labtools.dto.UserDTO;
 import edu.eci.cvds.Labtools.dto.UserRegisterDTO;
 import edu.eci.cvds.Labtools.service.BasicLogService;
 import edu.eci.cvds.Labtools.service.HashService;
@@ -59,8 +60,10 @@ public class LoginControllerTest {
         userRegisterDTO.setEmail("test@mail.escuelaing.edu.co");
         userRegisterDTO.setPassword(password);
         String token = "clave superSecreta";
+        UserDTO userDTO = new UserDTO();
+        userDTO.setToken(token);
 
-        Mockito.when(basicLogService.userLog(Mockito.any(UserRegisterDTO.class))).thenReturn(token);
+        Mockito.when(basicLogService.userLog(Mockito.any(UserRegisterDTO.class))).thenReturn(userDTO);
 
         mockMvc.perform(post("/login")
                         .contentType("application/json")
