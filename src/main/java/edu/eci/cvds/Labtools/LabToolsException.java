@@ -7,6 +7,7 @@ public class LabToolsException extends Exception {
     public static String Void_Email = "Enter a email.";
     public static String User_Not_Exist = "User with that email does not exist.";
     public static String Incorrect_Password = "The password is incorrect.";
+    public static String Section_finished = "The section has finished";
 
     public LabToolsException(String message) {
         super(message);

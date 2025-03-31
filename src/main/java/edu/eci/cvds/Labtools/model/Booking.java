@@ -1,18 +1,55 @@
 package edu.eci.cvds.Labtools.model;
 
-import lombok.Data;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Data
+
 @Document(collection = "bookings")
 public class Booking {
 
     @Id
     private String bookingId;
     private String date;
-    private User user;
     private Lab lab;
+    private int priority;
+
+    public String getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(String bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+
+    public Lab getLab() {
+        return lab;
+    }
+
+    public void setLab(Lab lab) {
+        this.lab = lab;
+    }
+
+    public int getPriority() { return  priority;}
+
+    public void setPriority(int priority) { this.priority = priority;}
+
+    @Override
+    public boolean equals(Object booking) {
+        if(booking instanceof Booking book) {
+            return this.bookingId.equals(book.getBookingId());
+        }
+        return false;
+    }
 }

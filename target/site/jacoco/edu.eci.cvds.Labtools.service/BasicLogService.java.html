@@ -15,21 +15,26 @@ import java.util.Optional;
     @Autowired
     private HashService hashService;
     @Autowired
+    private JwtService jwtService;
+    @Autowired
     private MongoUserRepository mongoUserRepository;
 
     public UserDTO userLog(UserRegisterDTO userRegisterDTO) throws LabToolsException {
-<span class="fc" id="L21">        Optional&lt;User&gt; user = mongoUserRepository.findByEmail(userRegisterDTO.getEmail());</span>
-<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (user.isEmpty()) {</span>
-<span class="fc" id="L23">            throw new LabToolsException(LabToolsException.User_Not_Exist);</span>
+<span class="fc" id="L23">        Optional&lt;User&gt; user = mongoUserRepository.findByEmail(userRegisterDTO.getEmail());</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (user.isEmpty()) {</span>
+<span class="fc" id="L25">            throw new LabToolsException(LabToolsException.User_Not_Exist);</span>
         }
-<span class="fc" id="L25">        User userDB = user.get();</span>
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if(!hashService.checkPassword(userRegisterDTO.getPassword(), userDB.getPassword())){</span>
-<span class="nc" id="L27">            throw new LabToolsException(LabToolsException.Incorrect_Password);</span>
+<span class="fc" id="L27">        User userDB = user.get();</span>
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        if(!hashService.checkPassword(userRegisterDTO.getPassword(), userDB.getPassword())){</span>
+<span class="nc" id="L29">            throw new LabToolsException(LabToolsException.Incorrect_Password);</span>
         }
-<span class="fc" id="L29">        UserDTO userDTO = new UserDTO();</span>
-<span class="fc" id="L30">        userDTO.setName(userDB.getName());</span>
-<span class="fc" id="L31">        userDTO.setRol(userDB.getRol());</span>
-<span class="fc" id="L32">        return userDTO;</span>
+<span class="fc" id="L31">        String token = jwtService.generateToken(userDB.getName(),userDB.getRol().toString());</span>
+<span class="fc" id="L32">        mongoUserRepository.save(userDB);</span>
+<span class="fc" id="L33">        UserDTO userDTO = new UserDTO();</span>
+<span class="fc" id="L34">        userDTO.setName(userDB.getName());</span>
+<span class="fc" id="L35">        userDTO.setRol(userDB.getRol());</span>
+<span class="fc" id="L36">        userDTO.setToken(token);</span>
+<span class="fc" id="L37">        return userDTO;</span>
     }
 
 }

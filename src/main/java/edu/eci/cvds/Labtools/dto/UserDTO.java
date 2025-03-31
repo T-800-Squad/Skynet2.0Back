@@ -3,7 +3,8 @@ package edu.eci.cvds.Labtools.dto;
 
 public class UserDTO {
     private String name;
-    private boolean rol;
+    private String rol;
+    private String token;
 
     public String getName() {
         return name;
@@ -13,19 +14,20 @@ public class UserDTO {
         this.name = name;
     }
 
-    public boolean getRol() {
+    public String getRol() {
         return rol;
     }
 
-    public void setRol(boolean rol) {
+    public void setRol(String rol) {
         this.rol = rol;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof UserDTO userDTO) {
-            return name.equals(userDTO.name) && rol == userDTO.rol;
-        }
-        return false;
+    public String getToken() {
+        return token;
     }
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+
 }

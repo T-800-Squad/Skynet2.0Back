@@ -4,6 +4,8 @@ import edu.eci.cvds.Labtools.dto.BookingDTO;
 import edu.eci.cvds.Labtools.service.QueryService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/query")
 public class QueryController {
@@ -13,8 +15,13 @@ public class QueryController {
         this.queryService = queryService;
     }
 
+    @GetMapping("/lab")
+    public List<String> checkAvvailability(@RequestParam String date) {
+        return queryService.checkAvailability(date);
+    }
+
     @GetMapping
-    public BookingDTO[] findBookingsById(@RequestBody String userName) {
-        return null;
+    public List<BookingDTO> findBookingsById(@RequestParam String userName) {
+        return queryService.findBookingsByName(userName);
     }
 }

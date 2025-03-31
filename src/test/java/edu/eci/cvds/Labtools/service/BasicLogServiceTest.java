@@ -7,8 +7,6 @@ import edu.eci.cvds.Labtools.model.Admin;
 import edu.eci.cvds.Labtools.model.BasicUser;
 import edu.eci.cvds.Labtools.model.User;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
-import edu.eci.cvds.Labtools.service.HashService;
-import edu.eci.cvds.Labtools.service.LogService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,9 @@ public class BasicLogServiceTest{
     @Autowired
     private LogService logService;
 
+    @Autowired
+    private JwtService jwtService;
+
     @Test
     public void testLogUserThatExistInDataBase () {
         try {
@@ -37,16 +38,18 @@ public class BasicLogServiceTest{
             userRegisterDTO.setEmail("test@mail.escuelaing.edu.co");
             userRegisterDTO.setPassword("123");
             UserDTO mockUserDTO = new UserDTO();
-            mockUserDTO.setRol(true);
+            mockUserDTO.setRol("Admin");
             mockUserDTO.setName("test");
             User user = new BasicUser();
             user.setName("test");
-            user.setRol(true);
+            user.setRol("Admin");
             user.setPassword(hashService.passwordHashsing("123"));
 
             Mockito.when(mongoUserRepository.findByEmail("test@mail.escuelaing.edu.co")).thenReturn(Optional.of(user));
-            UserDTO userDTO = logService.userLog(userRegisterDTO);
-            assertEquals(userDTO, mockUserDTO);
+            UserDTO token = logService.userLog(userRegisterDTO);
+            assertEquals("test", user.getName());
+            assertEquals("Admin", user.getRol());
+
         } catch (LabToolsException e) {
             fail();
         }
@@ -59,7 +62,7 @@ public class BasicLogServiceTest{
             UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
             userRegisterDTO.setEmail("test@mail.escuelaing.edu.co");
             userRegisterDTO.setPassword("123");
-            UserDTO userDTO = logService.userLog(userRegisterDTO);
+            logService.userLog(userRegisterDTO);
         } catch (LabToolsException e) {
             assertEquals("User with that email does not exist.", e.getMessage());
         }
@@ -79,7 +82,7 @@ public class BasicLogServiceTest{
             user.setEmail("test@mail.escuelaing.edu.co");
 
             Mockito.when(mongoUserRepository.findByEmail("test@mail.escuelaing.edu.co")).thenReturn(Optional.of(user));
-            UserDTO userDTO = logService.userLog(userRegisterDTO);
+            logService.userLog(userRegisterDTO);
         } catch (LabToolsException e) {
             assertEquals("User with that email does not exist.", e.getMessage());
         }

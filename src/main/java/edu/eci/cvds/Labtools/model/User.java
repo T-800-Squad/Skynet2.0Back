@@ -1,32 +1,41 @@
 package edu.eci.cvds.Labtools.model;
 
-import lombok.Data;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Data
+
 @Document(collection = "users")
 public abstract class User {
 
     @Id
     protected String userId;
-    protected String id;
     protected String name;
     protected String email;
     protected String password;
     protected boolean logged;
-    protected List<Booking> bookings;
-    protected boolean rol;
-    protected int attempsTimes;
+    protected List<Booking> bookings = new ArrayList<>();
+    protected String rol;
 
     public void addBooking(Booking booking) {
 
+        if (bookings.size() == 20) {
+            throw new IllegalArgumentException("User already have twenty bookings");
+        }
+        if(rol.equals("Admin")) {
+            throw new IllegalArgumentException("Admin can't have bookings");
+        }
+        bookings.add(booking);
     }
 
-    public void deleteBooking(String bookingId) {
-
+    public void deleteBooking(Booking booking) {
+        if (bookings.isEmpty()) {
+            throw new IllegalArgumentException("User don't have bookings");
+        }
+        bookings.remove(booking);
     }
 
     public String getUserId() {
@@ -77,21 +86,11 @@ public abstract class User {
         this.bookings = bookings;
     }
 
-    public boolean getRol() {
+    public String getRol() {
         return rol;
     }
 
-    public void setRol(boolean rol) {
+    public void setRol(String rol) {
         this.rol = rol;
     }
-
-    public int getAttempsTimes() {
-        return attempsTimes;
-    }
-
-    public void setAttempsTimes(int attempsTimes) {
-        this.attempsTimes = attempsTimes;
-    }
-
-
 }

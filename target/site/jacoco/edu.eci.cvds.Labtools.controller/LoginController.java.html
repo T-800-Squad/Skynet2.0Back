@@ -5,29 +5,32 @@ import edu.eci.cvds.Labtools.dto.UserDTO;
 import edu.eci.cvds.Labtools.dto.UserRegisterDTO;
 import edu.eci.cvds.Labtools.service.EmailVerificationService;
 import edu.eci.cvds.Labtools.service.LogService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
-@RequestMapping(&quot;/log&quot;)
+@RequestMapping(&quot;/login&quot;)
+
 public class LoginController {
 
     private LogService logService;
     private EmailVerificationService emailVerificationService;
 
 
-<span class="fc" id="L18">    public LoginController(LogService logService, EmailVerificationService emailVerificationService) {</span>
-<span class="fc" id="L19">        this.logService = logService;</span>
-<span class="fc" id="L20">        this.emailVerificationService = emailVerificationService;</span>
-<span class="fc" id="L21">    }</span>
+<span class="fc" id="L21">    public LoginController(LogService logService, EmailVerificationService emailVerificationService) {</span>
+<span class="fc" id="L22">        this.logService = logService;</span>
+<span class="fc" id="L23">        this.emailVerificationService = emailVerificationService;</span>
+<span class="fc" id="L24">    }</span>
 
     @PostMapping
-    public UserDTO userLog(@RequestBody UserRegisterDTO userRegisterDTO) throws LabToolsException {
-<span class="nc" id="L25">        return logService.userLog(userRegisterDTO);</span>
+    public UserDTO userLog(@RequestBody UserRegisterDTO userRegisterDTO, HttpServletResponse response) throws LabToolsException {
+<span class="fc" id="L28">        return logService.userLog(userRegisterDTO);</span>
     }
 
     @GetMapping
     public boolean emailFormtaVerification(@RequestParam String email) throws LabToolsException {
-<span class="fc" id="L30">        return emailVerificationService.emailFormatVerification(email);</span>
+<span class="fc" id="L33">        return emailVerificationService.emailFormatVerification(email);</span>
     }
 
 

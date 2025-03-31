@@ -15,6 +15,8 @@ public class BasicLogService implements LogService {
     @Autowired
     private HashService hashService;
     @Autowired
+    private JwtService jwtService;
+    @Autowired
     private MongoUserRepository mongoUserRepository;
 
     public UserDTO userLog(UserRegisterDTO userRegisterDTO) throws LabToolsException {
@@ -26,9 +28,12 @@ public class BasicLogService implements LogService {
         if(!hashService.checkPassword(userRegisterDTO.getPassword(), userDB.getPassword())){
             throw new LabToolsException(LabToolsException.Incorrect_Password);
         }
+        String token = jwtService.generateToken(userDB.getName(),userDB.getRol().toString());
+        mongoUserRepository.save(userDB);
         UserDTO userDTO = new UserDTO();
         userDTO.setName(userDB.getName());
         userDTO.setRol(userDB.getRol());
+        userDTO.setToken(token);
         return userDTO;
     }
 
