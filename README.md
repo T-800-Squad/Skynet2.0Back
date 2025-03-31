@@ -85,4 +85,7 @@ y los servicios estan conectados con los repositorios correspondientes.
 se uso en busca de extensibilidad y calidad del codigo, aparte de cumplir con los princiopios SOLID.
 - La base del diese;o es que los controladores reciben la peticion, en el servicio se encuentra la logica
 del negocio y los repositorios se usa para consultar datos y guardarlos.
-## Modelo de componentes
+## Sonar cloud
+![alt text](Images/sonar.png)
+## Jacoco
+![alt text](Images/jacoco.png)
