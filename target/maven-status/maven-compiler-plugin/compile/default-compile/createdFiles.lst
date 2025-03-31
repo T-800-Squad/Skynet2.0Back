@@ -1,12 +1,17 @@
 edu\eci\cvds\Labtools\controller\QueryController.class
 edu\eci\cvds\Labtools\service\BasicBookingService.class
 edu\eci\cvds\Labtools\controller\LoginController.class
+edu\eci\cvds\Labtools\service\BasicLabService.class
 edu\eci\cvds\Labtools\config\JwtFilter.class
+edu\eci\cvds\Labtools\service\UserService.class
 edu\eci\cvds\Labtools\service\JwtService.class
 edu\eci\cvds\Labtools\service\BasicQueryService.class
 edu\eci\cvds\Labtools\ExceptionController.class
 edu\eci\cvds\Labtools\model\Booking.class
+edu\eci\cvds\Labtools\controller\AdminController.class
 edu\eci\cvds\Labtools\dto\UserDTO.class
+edu\eci\cvds\Labtools\dto\CreateUserDTO.class
+edu\eci\cvds\Labtools\service\BasicUserService.class
 edu\eci\cvds\Labtools\model\Lab.class
 edu\eci\cvds\Labtools\service\BasicLogService.class
 edu\eci\cvds\Labtools\repository\MongoLabRepository.class
@@ -30,5 +35,6 @@ edu\eci\cvds\Labtools\model\User.class
 edu\eci\cvds\Labtools\model\BasicUser.class
 edu\eci\cvds\Labtools\service\LogService.class
 edu\eci\cvds\Labtools\dto\BookingDTO.class
+edu\eci\cvds\Labtools\service\LabService.class
 edu\eci\cvds\Labtools\dto\DeleteBookingDTO.class
 edu\eci\cvds\Labtools\service\BasicEmailVerificationService.class

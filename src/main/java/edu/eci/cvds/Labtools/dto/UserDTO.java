@@ -22,12 +22,12 @@ public class UserDTO {
         this.rol = rol;
     }
 
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof UserDTO userDTO) {
-            return name.equals(userDTO.name) && rol == userDTO.rol;
-        }
-        return false;
+    public String getToken() {
+        return token;
     }
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+
 }

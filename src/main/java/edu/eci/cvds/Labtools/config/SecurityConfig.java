@@ -20,8 +20,6 @@ public class SecurityConfig {
                         .requestMatchers("/**").permitAll()
                 )
                 .addFilterBefore(new JwtFilter(), UsernamePasswordAuthenticationFilter.class);
-
-
         return http.build();
     }
 }

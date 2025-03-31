@@ -2,7 +2,6 @@ package edu.eci.cvds.Labtools.controller;
 
 
 import edu.eci.cvds.Labtools.LabToolsException;
-import edu.eci.cvds.Labtools.dto.UserDTO;
 import edu.eci.cvds.Labtools.dto.UserRegisterDTO;
 import edu.eci.cvds.Labtools.service.BasicLogService;
 import edu.eci.cvds.Labtools.service.HashService;
@@ -12,11 +11,10 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
