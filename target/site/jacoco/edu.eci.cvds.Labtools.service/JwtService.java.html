@@ -25,9 +25,9 @@ import java.util.Date;
     }
 
     public String getUserNameFromToken(String token) {
-<span class="fc" id="L28">        String userName = null;</span>
-<span class="fc" id="L29">        userName = JWT.decode(token).getClaim(&quot;userName&quot;).asString();</span>
-<span class="fc" id="L30">        return userName;</span>
+<span class="nc" id="L28">        String userName = null;</span>
+<span class="nc" id="L29">        userName = JWT.decode(token).getClaim(&quot;userName&quot;).asString();</span>
+<span class="nc" id="L30">        return userName;</span>
     }
 
     public String getRoleFromToken(String token)  {
