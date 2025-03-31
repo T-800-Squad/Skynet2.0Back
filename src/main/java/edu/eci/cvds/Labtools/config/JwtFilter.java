@@ -3,18 +3,23 @@ package edu.eci.cvds.Labtools.config;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import edu.eci.cvds.Labtools.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
 
 public class JwtFilter extends OncePerRequestFilter {
+
+
     private final String SECRET_KEY = "ContraseñaSuperSecreta123";
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -29,7 +34,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         // Si no hay token o no empieza con "Bearer ", rechazar la petición
         if (header == null) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Sesion error, no token");
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Session error, no token");
             return;
         }
 
@@ -37,8 +42,9 @@ public class JwtFilter extends OncePerRequestFilter {
         try {
             JWT.require(Algorithm.HMAC256(SECRET_KEY)).build().verify(token);
         } catch (JWTVerificationException e) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Sesion eror, invalid token");
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Session eror, invalid token");
         }
+
         chain.doFilter(request, response);
     }
 }
