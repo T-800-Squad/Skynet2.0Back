@@ -11,5 +11,5 @@ public interface BookingService {
 
     void deleteBooking(DeleteBookingDTO deleteBookingDTO);
 
-    void generateRandomBookings();
+    String  generateRandomBookings();
 }

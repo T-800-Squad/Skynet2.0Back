@@ -35,7 +35,6 @@ public class BookingController {
 
     @PostMapping("/generate")
     public ResponseEntity<String> generateRandomBookings() {
-        bookingService.generateRandomBookings();
-        return ResponseEntity.ok("Random bookings generated successfully.");
+        return ResponseEntity.ok(bookingService.generateRandomBookings());
     }
 }

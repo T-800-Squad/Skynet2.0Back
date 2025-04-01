@@ -44,95 +44,96 @@ import java.util.stream.IntStream;
 <span class="fc" id="L44">        booking.setPriority(createBookingDTO.getPriority());</span>
 
 <span class="fc" id="L46">        System.out.println(&quot;booking created&quot;);</span>
-<span class="fc" id="L47">        bookingRepository.save(booking);</span>
+
 
 <span class="fc" id="L49">        updateListOfBookingsInUser(createBookingDTO.getUserName(), booking);</span>
+<span class="fc" id="L50">        bookingRepository.save(booking);</span>
 
-<span class="fc" id="L51">        return booking;</span>
+<span class="fc" id="L52">        return booking;</span>
     }
 
     private void updateListOfBookingsInUser(String userName, Booking booking) {
-<span class="fc" id="L55">        User user = userRepository.findByName(userName);</span>
-<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        if (user == null) {</span>
-<span class="nc" id="L57">            throw new IllegalArgumentException(&quot;User not found&quot;);</span>
+<span class="fc" id="L56">        User user = userRepository.findByName(userName);</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">        if (user == null) {</span>
+<span class="nc" id="L58">            throw new IllegalArgumentException(&quot;User not found&quot;);</span>
         }
-<span class="fc" id="L59">        user.addBooking(booking);</span>
-<span class="fc" id="L60">        userRepository.save(user);</span>
-<span class="fc" id="L61">    }</span>
+<span class="fc" id="L60">        user.addBooking(booking);</span>
+<span class="fc" id="L61">        userRepository.save(user);</span>
+<span class="fc" id="L62">    }</span>
 
     private void validateDateAndLab(String date, Lab lab) {
-<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (lab == null) {</span>
-<span class="fc" id="L65">            throw new IllegalArgumentException(&quot;Lab not found&quot;);</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        if (lab == null) {</span>
+<span class="fc" id="L66">            throw new IllegalArgumentException(&quot;Lab not found&quot;);</span>
         }
-<span class="fc" id="L67">        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);</span>
-<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if(dateTime.isBefore(LocalDateTime.now())) {</span>
-<span class="nc" id="L69">            throw new IllegalArgumentException(&quot;Date is after now&quot;);</span>
+<span class="fc" id="L68">        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);</span>
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">        if(dateTime.isBefore(LocalDateTime.now())) {</span>
+<span class="nc" id="L70">            throw new IllegalArgumentException(&quot;Date is after now&quot;);</span>
         }
-<span class="fc" id="L71">        lab.setIsAvailable(dateTime);</span>
-<span class="fc" id="L72">        labRepository.save(lab);</span>
-<span class="fc" id="L73">    }</span>
+<span class="fc" id="L72">        lab.setIsAvailable(dateTime);</span>
+<span class="fc" id="L73">        labRepository.save(lab);</span>
+<span class="fc" id="L74">    }</span>
 
 
     public void deleteBooking(DeleteBookingDTO deleteBookingDTO) {
-<span class="fc" id="L77">        String bookingId = deleteBookingDTO.getBookingId();</span>
-<span class="fc" id="L78">        Optional&lt;Booking&gt; optionalBooking = bookingRepository.findById(bookingId);</span>
-<span class="fc bfc" id="L79" title="All 2 branches covered.">        if (optionalBooking.isEmpty()) {</span>
-<span class="fc" id="L80">            throw new IllegalArgumentException(&quot;Booking not found&quot;);</span>
+<span class="fc" id="L78">        String bookingId = deleteBookingDTO.getBookingId();</span>
+<span class="fc" id="L79">        Optional&lt;Booking&gt; optionalBooking = bookingRepository.findById(bookingId);</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (optionalBooking.isEmpty()) {</span>
+<span class="fc" id="L81">            throw new IllegalArgumentException(&quot;Booking not found&quot;);</span>
         } else {
-<span class="fc" id="L82">            bookingRepository.deleteById(bookingId);</span>
+<span class="fc" id="L83">            bookingRepository.deleteById(bookingId);</span>
         }
-<span class="fc" id="L84">        Booking booking = optionalBooking.get();</span>
-<span class="fc" id="L85">        updateDateInLab(labRepository.findByName(booking.getLab().getName()),booking.getDate());</span>
-<span class="fc" id="L86">        updateListOfBookingsBeforeDelete(deleteBookingDTO.getUserName(), booking);</span>
-<span class="fc" id="L87">    }</span>
+<span class="fc" id="L85">        Booking booking = optionalBooking.get();</span>
+<span class="fc" id="L86">        updateDateInLab(labRepository.findByName(booking.getLab().getName()),booking.getDate());</span>
+<span class="fc" id="L87">        updateListOfBookingsBeforeDelete(deleteBookingDTO.getUserName(), booking);</span>
+<span class="fc" id="L88">    }</span>
 
     private void updateDateInLab(Lab lab, String date) {
-<span class="fc" id="L90">        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);</span>
-<span class="fc" id="L91">        lab.deleteIsAvailable(dateTime);</span>
-<span class="fc" id="L92">        labRepository.save(lab);</span>
-<span class="fc" id="L93">    }</span>
+<span class="fc" id="L91">        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);</span>
+<span class="fc" id="L92">        lab.deleteIsAvailable(dateTime);</span>
+<span class="fc" id="L93">        labRepository.save(lab);</span>
+<span class="fc" id="L94">    }</span>
 
     private void updateListOfBookingsBeforeDelete(String userName, Booking booking) {
-<span class="fc" id="L96">        User user = userRepository.findByName(userName);</span>
-<span class="fc bfc" id="L97" title="All 2 branches covered.">        if (user == null) {</span>
-<span class="fc" id="L98">            throw new IllegalArgumentException(&quot;User not found&quot;);</span>
+<span class="fc" id="L97">        User user = userRepository.findByName(userName);</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">        if (user == null) {</span>
+<span class="fc" id="L99">            throw new IllegalArgumentException(&quot;User not found&quot;);</span>
         }
-<span class="fc" id="L100">        user.deleteBooking(booking);</span>
-<span class="fc" id="L101">        userRepository.save(user);</span>
-<span class="fc" id="L102">    }</span>
+<span class="fc" id="L101">        user.deleteBooking(booking);</span>
+<span class="fc" id="L102">        userRepository.save(user);</span>
+<span class="fc" id="L103">    }</span>
 
-    public void generateRandomBookings() {
-<span class="nc" id="L105">        Random random = new Random();</span>
-<span class="nc" id="L106">        int numBookings = random.nextInt(901) + 100;</span>
+    public String generateRandomBookings() {
+<span class="fc" id="L106">        Random random = new Random();</span>
+<span class="fc" id="L107">        int numBookings = random.nextInt(901) + 100;</span>
 
-<span class="nc" id="L108">        List&lt;User&gt; users = userRepository.findAll();</span>
-<span class="nc" id="L109">        List&lt;Lab&gt; labs = labRepository.findAll();</span>
+<span class="fc" id="L109">        List&lt;User&gt; users = userRepository.findAll();</span>
+<span class="fc" id="L110">        List&lt;Lab&gt; labs = labRepository.findAll();</span>
 
-<span class="nc bnc" id="L111" title="All 4 branches missed.">        if (users.isEmpty() || labs.isEmpty()) {</span>
-<span class="nc" id="L112">            throw new IllegalStateException(&quot;No users or labs available for bookings.&quot;);</span>
+<span class="pc bpc" id="L112" title="3 of 4 branches missed.">        if (users.isEmpty() || labs.isEmpty()) {</span>
+<span class="fc" id="L113">            throw new IllegalStateException(&quot;No users or labs available for bookings.&quot;);</span>
         }
 
-<span class="nc" id="L115">        IntStream.range(0, numBookings).forEach(i -&gt; {</span>
-<span class="nc" id="L116">            User user = users.get(random.nextInt(users.size()));</span>
-<span class="nc" id="L117">            Lab lab = labs.get(random.nextInt(labs.size()));</span>
+<span class="nc" id="L116">        IntStream.range(0, numBookings).forEach(i -&gt; {</span>
+<span class="nc" id="L117">            User user = users.get(random.nextInt(users.size()));</span>
+<span class="nc" id="L118">            Lab lab = labs.get(random.nextInt(labs.size()));</span>
 
-<span class="nc" id="L119">            Booking booking = new Booking();</span>
-<span class="nc" id="L120">            booking.setLab(lab);</span>
-<span class="nc" id="L121">            booking.setDate(generateRandomDate());</span>
-<span class="nc" id="L122">            booking.setBookingId(UUID.randomUUID().toString());</span>
-<span class="nc" id="L123">            booking.setPriority(random.nextInt(5) + 1);</span>
+<span class="nc" id="L120">            Booking booking = new Booking();</span>
+<span class="nc" id="L121">            booking.setLab(lab);</span>
+<span class="nc" id="L122">            booking.setDate(generateRandomDate());</span>
+<span class="nc" id="L123">            booking.setBookingId(UUID.randomUUID().toString());</span>
+<span class="nc" id="L124">            booking.setPriority(random.nextInt(5) + 1);</span>
 
-<span class="nc" id="L125">            bookingRepository.save(booking);</span>
-<span class="nc" id="L126">            updateListOfBookingsInUser(user.getName(), booking);</span>
-<span class="nc" id="L127">        });</span>
+<span class="nc" id="L126">            bookingRepository.save(booking);</span>
+<span class="nc" id="L127">            updateListOfBookingsInUser(user.getName(), booking);</span>
+<span class="nc" id="L128">        });</span>
 
-<span class="nc" id="L129">        System.out.println(numBookings + &quot; bookings generated successfully.&quot;);</span>
-<span class="nc" id="L130">    }</span>
+<span class="nc" id="L130">        return (&quot;bookings generated successfully.&quot;);</span>
+    }
 
     private String generateRandomDate() {
-<span class="nc" id="L133">        LocalDateTime randomDate = LocalDateTime.now()</span>
-<span class="nc" id="L134">                .plusDays(new Random().nextInt(30));</span>
-<span class="nc" id="L135">        return randomDate.format(formatter);</span>
+<span class="nc" id="L134">        LocalDateTime randomDate = LocalDateTime.now()</span>
+<span class="nc" id="L135">                .plusDays(new Random().nextInt(30));</span>
+<span class="nc" id="L136">        return randomDate.format(formatter);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

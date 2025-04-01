@@ -13,39 +13,45 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 
-<span class="nc" id="L16">public class JwtFilter extends OncePerRequestFilter {</span>
+<span class="fc" id="L16">public class JwtFilter extends OncePerRequestFilter {</span>
 
 
-<span class="nc" id="L19">    private final String SECRET_KEY = &quot;ContraseñaSuperSecreta123&quot;;</span>
+<span class="fc" id="L19">    private final String SECRET_KEY = &quot;ContraseñaSuperSecreta123&quot;;</span>
 
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
-<span class="nc" id="L25">        String path = request.getRequestURI();</span>
+<span class="fc" id="L25">        String path = request.getRequestURI();</span>
+<span class="fc" id="L26">        String header = request.getHeader(&quot;Authorization&quot;);</span>
+<span class="fc" id="L27">        response.setHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;http://localhost:3000&quot;);</span>
+<span class="fc" id="L28">        response.setHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;GET, POST, OPTIONS,DELETE&quot;);</span>
+<span class="fc" id="L29">        response.setHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;Authorization, Content-Type&quot;);</span>
 
-<span class="nc" id="L27">        String header = request.getHeader(&quot;Authorization&quot;);</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">        if (&quot;OPTIONS&quot;.equalsIgnoreCase(request.getMethod())) {</span>
+<span class="nc" id="L32">            response.setStatus(HttpServletResponse.SC_OK);</span>
+<span class="nc" id="L33">            return;</span>
+        }
 
-
-<span class="nc bnc" id="L30" title="All 4 branches missed.">        if (path.equals(&quot;/login&quot;) || path.equals(&quot;/query/lab&quot;)) {</span>
-<span class="nc" id="L31">            chain.doFilter(request, response);</span>
-<span class="nc" id="L32">            return;</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (path.equals(&quot;/login&quot;)) {</span>
+<span class="fc" id="L37">            chain.doFilter(request, response);</span>
+<span class="fc" id="L38">            return;</span>
         }
 
         // Si no hay token o no empieza con &quot;Bearer &quot;, rechazar la petición
-<span class="nc bnc" id="L36" title="All 2 branches missed.">        if (header == null) {</span>
-<span class="nc" id="L37">            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, &quot;Session error, no token&quot;);</span>
-<span class="nc" id="L38">            return;</span>
+<span class="pc bpc" id="L42" title="2 of 4 branches missed.">        if (header == null || !header.startsWith(&quot;Bearer &quot;)) {</span>
+<span class="nc" id="L43">            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, &quot;Session error, no token&quot;);</span>
+<span class="nc" id="L44">            return;</span>
         }
 
-<span class="nc" id="L41">        String token = header.substring(7); // Eliminar &quot;Bearer &quot;</span>
+<span class="fc" id="L47">        String token = header.substring(7); // Eliminar &quot;Bearer &quot;</span>
         try {
-<span class="nc" id="L43">            JWT.require(Algorithm.HMAC256(SECRET_KEY)).build().verify(token);</span>
-<span class="nc" id="L44">        } catch (JWTVerificationException e) {</span>
-<span class="nc" id="L45">            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, &quot;Session eror, invalid token&quot;);</span>
-<span class="nc" id="L46">        }</span>
+<span class="fc" id="L49">            JWT.require(Algorithm.HMAC256(SECRET_KEY)).build().verify(token);</span>
+<span class="nc" id="L50">        } catch (JWTVerificationException e) {</span>
+<span class="nc" id="L51">            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, &quot;Session eror, invalid token&quot;);</span>
+<span class="fc" id="L52">        }</span>
 
-<span class="nc" id="L48">        chain.doFilter(request, response);</span>
-<span class="nc" id="L49">    }</span>
+<span class="fc" id="L54">        chain.doFilter(request, response);</span>
+<span class="fc" id="L55">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

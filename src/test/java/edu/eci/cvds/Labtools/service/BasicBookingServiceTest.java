@@ -16,14 +16,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.text.DateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -78,8 +76,8 @@ public class BasicBookingServiceTest {
         mockLab.setLabId("lab123");
         mockLab.setName("testLab");
 
-        Mockito.when(userRepository.findByName("testUser")).thenReturn(mockUser);
-        Mockito.when(labRepository.findByName("testLab")).thenReturn(mockLab);
+        when(userRepository.findByName("testUser")).thenReturn(mockUser);
+        when(labRepository.findByName("testLab")).thenReturn(mockLab);
 
         mockMvc.perform(post("/booking")
                         .header("Authorization", "Bearer " + token)
@@ -100,7 +98,7 @@ public class BasicBookingServiceTest {
         createBookingDTO.setLabName ("testLab");
         createBookingDTO.setDate("2025-03-10 7:00:00");
 
-        Mockito.when(userRepository.findByName("testUser")).thenReturn(null);
+        when(userRepository.findByName("testUser")).thenReturn(null);
 
         mockMvc.perform(post("/booking")
                         .header("Authorization", "Bearer " + token)
@@ -120,9 +118,9 @@ public class BasicBookingServiceTest {
         mockUser.setName("testUser");
 
         // Simular que el usuario sí existe
-        Mockito.when(userRepository.findByName("testUser")).thenReturn(mockUser);
+        when(userRepository.findByName("testUser")).thenReturn(mockUser);
         // Simular que el laboratorio no existe
-        Mockito.when(labRepository.findByName("invalidLab")).thenReturn(null);
+        when(labRepository.findByName("invalidLab")).thenReturn(null);
 
         // Realizar la petición al endpoint correcto
         mockMvc.perform(post("/booking") // <-- Aquí se cambia a "/booking/add"
@@ -155,9 +153,9 @@ public class BasicBookingServiceTest {
         mockUser.addBooking(mockBooking);
 
         Optional<Booking> bookingOptional = Optional.of(mockBooking);
-        Mockito.when(bookingRepository.findById("123")).thenReturn(bookingOptional);
-        Mockito.when(userRepository.findByName("testUser")).thenReturn(mockUser);
-        Mockito.when(labRepository.findByName("testLab")).thenReturn(mockLab);
+        when(bookingRepository.findById("123")).thenReturn(bookingOptional);
+        when(userRepository.findByName("testUser")).thenReturn(mockUser);
+        when(labRepository.findByName("testLab")).thenReturn(mockLab);
         HashMap<LocalDateTime,Boolean> map = mockLab.getIsAvailable();
         List<Booking> list = mockUser.getBookings();
 
@@ -186,9 +184,9 @@ public class BasicBookingServiceTest {
             mockBooking.setBookingId(deleteBookingDTO.getBookingId());
             mockBooking.setDate("2029-03-10 07:00:00");
             Optional<Booking> bookingOptional = Optional.of(mockBooking);
-            Mockito.when(bookingRepository.findById("123")).thenReturn(bookingOptional);
-            Mockito.when(userRepository.findByName("testUser")).thenReturn(null);
-            Mockito.when(labRepository.findByName("testLab")).thenReturn(mockLab);
+            when(bookingRepository.findById("123")).thenReturn(bookingOptional);
+            when(userRepository.findByName("testUser")).thenReturn(null);
+            when(labRepository.findByName("testLab")).thenReturn(mockLab);
             bookingService.deleteBooking(deleteBookingDTO);
         }catch (IllegalArgumentException e){
             assertEquals(e.getMessage(),"User not found");
@@ -216,14 +214,56 @@ public class BasicBookingServiceTest {
 
 
             Optional<Booking> bookingOptional = Optional.empty();
-            Mockito.when(bookingRepository.findById("123")).thenReturn(bookingOptional);
-            Mockito.when(userRepository.findByName("testUser")).thenReturn(mockUser);
+            when(bookingRepository.findById("123")).thenReturn(bookingOptional);
+            when(userRepository.findByName("testUser")).thenReturn(mockUser);
 
 
             bookingService.deleteBooking(deleteBookingDTO);
         } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(),"Booking not found");
         }
+    }
+
+    @Test
+    public void testGenerateRandomBooking() {
+        try {
+            User mockUser = new BasicUser();
+            mockUser.setUserId("user123");
+            User mockUser2 = new BasicUser();
+            mockUser2.setUserId("user12");
+            Lab mockLab = new Lab();
+            mockLab.setLabId("lab123");
+            Lab mockLab2 = new Lab();
+            mockLab2.setLabId("lab12");
+            List<User> users = new ArrayList<>();
+            users.add(mockUser);
+            users.add(mockUser2);
+            List<Lab> labs = new ArrayList<>();
+            labs.add(mockLab);
+            labs.add(mockLab2);
+            when(labRepository.findAll()).thenReturn(labs);
+            when(userRepository.findAll()).thenReturn(users);
+            when(userRepository.findByName(anyString())).thenReturn(mockUser);
+            when(labRepository.save(any(Lab.class))).thenReturn(null);
+            when(userRepository.save(any(BasicUser.class))).thenReturn(null);
+            when(bookingRepository.save(any(Booking.class))).thenReturn(null);
+        } catch (IllegalArgumentException e) {
+            assertEquals(e.getMessage(),"User not found");
+        }
+
+    }
+    @Test
+    public void testGenerateRandomBookingsNoUsersOrLabs() {
+        // Configurar el comportamiento de los mocks para devolver listas vacías
+        when(userRepository.findAll()).thenReturn(Arrays.asList());
+        when(labRepository.findAll()).thenReturn(Arrays.asList());
+
+        // Verificar que se lanza la excepción
+        Exception exception = assertThrows(IllegalStateException.class, () -> {
+            bookingService.generateRandomBookings();
+        });
+
+        assertEquals("No users or labs available for bookings.", exception.getMessage());
     }
 
 }

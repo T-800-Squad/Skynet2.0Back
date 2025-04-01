@@ -23,17 +23,23 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
         String path = request.getRequestURI();
-
         String header = request.getHeader("Authorization");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS,DELETE");
+        response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
 
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            return;
+        }
 
-        if (path.equals("/login") || path.equals("/query/lab")) {
+        if (path.equals("/login")) {
             chain.doFilter(request, response);
             return;
         }
 
         // Si no hay token o no empieza con "Bearer ", rechazar la petición
-        if (header == null) {
+        if (header == null || !header.startsWith("Bearer ")) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Session error, no token");
             return;
         }

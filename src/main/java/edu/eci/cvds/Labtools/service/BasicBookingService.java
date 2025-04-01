@@ -44,9 +44,10 @@ public class BasicBookingService implements BookingService{
         booking.setPriority(createBookingDTO.getPriority());
 
         System.out.println("booking created");
-        bookingRepository.save(booking);
+
 
         updateListOfBookingsInUser(createBookingDTO.getUserName(), booking);
+        bookingRepository.save(booking);
 
         return booking;
     }
@@ -101,7 +102,7 @@ public class BasicBookingService implements BookingService{
         userRepository.save(user);
     }
 
-    public void generateRandomBookings() {
+    public String generateRandomBookings() {
         Random random = new Random();
         int numBookings = random.nextInt(901) + 100;
 
@@ -126,7 +127,7 @@ public class BasicBookingService implements BookingService{
             updateListOfBookingsInUser(user.getName(), booking);
         });
 
-        System.out.println(numBookings + " bookings generated successfully.");
+        return ("bookings generated successfully.");
     }
 
     private String generateRandomDate() {

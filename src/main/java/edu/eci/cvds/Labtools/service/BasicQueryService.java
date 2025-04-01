@@ -56,7 +56,7 @@ public class BasicQueryService implements QueryService {
         if(user==null){
             throw new IllegalArgumentException("No user found");
         }
-        if(user.getRol().equals("Admin") || user.getBookings().isEmpty()){
+        if(user.getBookings().isEmpty()){
             throw new IllegalArgumentException("User don't have bookings");
         }
 

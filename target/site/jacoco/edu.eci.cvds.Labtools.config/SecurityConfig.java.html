@@ -23,8 +23,8 @@ import java.util.List;
 <span class="fc" id="L23">                .sessionManagement(session -&gt; session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))</span>
 <span class="fc" id="L24">                .authorizeHttpRequests(auth -&gt; auth</span>
 <span class="fc" id="L25">                        .requestMatchers(&quot;/**&quot;).permitAll()</span>
-                );
-                //.addFilterBefore(new JwtFilter(), UsernamePasswordAuthenticationFilter.class);
+                )
+<span class="fc" id="L27">                .addFilterBefore(new JwtFilter(), UsernamePasswordAuthenticationFilter.class);</span>
 <span class="fc" id="L28">        return http.build();</span>
     }
 
