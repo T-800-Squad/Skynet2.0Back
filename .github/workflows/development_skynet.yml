@@ -5,11 +5,9 @@ name: Build and deploy JAR app to Azure Web App - SkyNet
 
 on:
   push:
-    branches:
-      - development
+    branches: [ "development" ]
   pull_request:
-      branches:
-        - development
+    branches: [ "development" ]
   workflow_dispatch:
 
 jobs:
@@ -28,7 +26,7 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn compile
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
