@@ -9,33 +9,60 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controlador REST para la gestión de reservas en la aplicación.
+ * Este controlador proporciona endpoints para crear, eliminar y generar reservas.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
+
 @RestController
 @RequestMapping(&quot;/booking&quot;)
 public class BookingController {
 
-    @Autowired
+
     private BookingService bookingService;
 
-<span class="fc" id="L19">    public BookingController(BookingService bookingService) {</span>
-<span class="fc" id="L20">        this.bookingService = bookingService;</span>
-<span class="fc" id="L21">    }</span>
+    /**
+     * Constructor para inyectar el servicio de reservas.
+     *
+     * @param bookingService Servicio de reservas a inyectar.
+     */
+<span class="fc" id="L30">    public BookingController(BookingService bookingService) {</span>
+<span class="fc" id="L31">        this.bookingService = bookingService;</span>
+<span class="fc" id="L32">    }</span>
 
+    /**
+     * Endpoint para crear una nueva reserva.
+     *
+     * @param createBookingDTO DTO que contiene la información de la nueva reserva a crear.
+     * @return ResponseEntity con la reserva creada y un código de estado 201 (CREATED) si la reserva es creada exitosamente.
+     */
     @PostMapping()
     public ResponseEntity&lt;Booking&gt; createBooking(@RequestBody CreateBookingDTO createBookingDTO) {
-<span class="fc" id="L25">        Booking booking = bookingService.createBooking(createBookingDTO);</span>
-<span class="fc" id="L26">        return ResponseEntity.status(HttpStatus.CREATED).body(booking);</span>
+<span class="fc" id="L42">        Booking booking = bookingService.createBooking(createBookingDTO);</span>
+<span class="fc" id="L43">        return ResponseEntity.status(HttpStatus.CREATED).body(booking);</span>
     }
 
-
+    /**
+     * Endpoint para eliminar una reserva existente.
+     *
+     * @param deleteBookingDTO DTO que contiene la información de la reserva a eliminar.
+     * @return ResponseEntity con un mensaje de éxito y un código de estado 200 (OK) si la reserva es eliminada exitosamente.
+     */
     @DeleteMapping()
     public ResponseEntity&lt;String&gt; deleteBooking(@RequestBody DeleteBookingDTO deleteBookingDTO) {
-<span class="nc" id="L32">        bookingService.deleteBooking(deleteBookingDTO);</span>
-<span class="nc" id="L33">        return ResponseEntity.ok(&quot;Booking deleted successfully.&quot;);</span>
+<span class="nc" id="L54">        bookingService.deleteBooking(deleteBookingDTO);</span>
+<span class="nc" id="L55">        return ResponseEntity.ok(&quot;Booking deleted successfully.&quot;);</span>
     }
 
+    /**
+     * Endpoint para generar reservas aleatorias.
+     *
+     * @return ResponseEntity con un mensaje de éxito y un código de estado 200 (OK) si las reservas son generadas exitosamente.
+     */
     @PostMapping(&quot;/generate&quot;)
     public ResponseEntity&lt;String&gt; generateRandomBookings() {
-<span class="nc" id="L38">        return ResponseEntity.ok(bookingService.generateRandomBookings());</span>
+<span class="nc" id="L65">        return ResponseEntity.ok(bookingService.generateRandomBookings());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

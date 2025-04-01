@@ -14,7 +14,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Clase BasicQueryService que implementa la interfaz QueryService.
+ * Esta clase se encarga de gestionar consultas relacionadas con la disponibilidad de laboratorios
+ * y las reservas de los usuarios.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 @Service
 public class BasicQueryService implements QueryService {
     @Autowired
@@ -23,6 +28,12 @@ public class BasicQueryService implements QueryService {
     @Autowired
     private MongoLabRepository labRepository;
 
+    /**
+     * Verifica la disponibilidad de laboratorios en una fecha específica.
+     *
+     * @param date La fecha para verificar la disponibilidad de los laboratorios.
+     * @return Una lista de nombres de laboratorios que están disponibles en la fecha especificada.
+     */
     public List<String> checkAvailability(String date) {
         List<Lab> labs = labRepository.findAll();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -36,6 +47,12 @@ public class BasicQueryService implements QueryService {
         return labList;
     }
 
+    /**
+     * Encuentra las reservas de un usuario por su nombre.
+     *
+     * @param name El nombre del usuario cuyas reservas se desean encontrar.
+     * @return Una lista de objetos BookingDTO que representan las reservas del usuario.
+     */
     public List<BookingDTO> findBookingsByName(String name){
         User user = userRepository.findByName(name);
         validateUser(user);
@@ -51,6 +68,12 @@ public class BasicQueryService implements QueryService {
         return bookingDTOs;
     }
 
+    /**
+     * Validar que un usuario exista y tenga reservas.
+     *
+     * @param user El usuario a validar.
+     * @throws IllegalArgumentException Si el usuario no existe o no tiene reservas.
+     */
     private void validateUser(User user) {
 
         if(user==null){

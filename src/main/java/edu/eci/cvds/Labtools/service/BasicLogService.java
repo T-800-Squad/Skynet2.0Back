@@ -10,6 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Clase BasicLogService que implementa la interfaz LogService.
+ * Esta clase se encarga de gestionar el inicio de sesión de los usuarios.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 @Service
 public class BasicLogService implements LogService {
     @Autowired
@@ -19,6 +24,13 @@ public class BasicLogService implements LogService {
     @Autowired
     private MongoUserRepository mongoUserRepository;
 
+    /**
+     * Inicia sesión de un usuario utilizando la información proporcionada en UserRegisterDTO.
+     *
+     * @param userRegisterDTO Objeto que contiene la información del usuario para iniciar sesión.
+     * @return Un objeto UserDTO que contiene la información del usuario y el token de sesión.
+     * @throws LabToolsException Si el usuario no existe o la contraseña es incorrecta.
+     */
     public UserDTO userLog(UserRegisterDTO userRegisterDTO) throws LabToolsException {
         Optional<User> user = mongoUserRepository.findByEmail(userRegisterDTO.getEmail());
         if (user.isEmpty()) {

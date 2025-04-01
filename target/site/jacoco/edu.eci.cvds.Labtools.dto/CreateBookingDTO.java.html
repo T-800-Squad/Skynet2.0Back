@@ -2,32 +2,38 @@
 
 
 
+/**
+ * Clase CreateBookingDTO (Data Transfer Object) que representa la información necesaria
+ * para crear una nueva reserva. Esta clase se utiliza para transferir datos desde la capa
+ * de presentación a la capa de servicio.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 
-<span class="fc" id="L6">public class CreateBookingDTO {</span>
+<span class="fc" id="L12">public class CreateBookingDTO {</span>
     private String userName;
     private String labName;
     private String date;
     private int priority;
 
     public String getUserName(){
-<span class="fc" id="L13">        return userName;</span>
+<span class="fc" id="L19">        return userName;</span>
     }
     public void setUserName(String userName){
-<span class="fc" id="L16">        this.userName = userName;</span>
-<span class="fc" id="L17">    }</span>
+<span class="fc" id="L22">        this.userName = userName;</span>
+<span class="fc" id="L23">    }</span>
     public String getLabName(){
-<span class="fc" id="L19">        return labName;</span>
+<span class="fc" id="L25">        return labName;</span>
     }
     public void setLabName(String labName){
-<span class="fc" id="L22">        this.labName = labName;</span>
-<span class="fc" id="L23">    }</span>
+<span class="fc" id="L28">        this.labName = labName;</span>
+<span class="fc" id="L29">    }</span>
     public String getDate(){
-<span class="fc" id="L25">        return date;</span>
+<span class="fc" id="L31">        return date;</span>
     }
     public void setDate(String date){
-<span class="fc" id="L28">        this.date = date;</span>
-<span class="fc" id="L29">    }</span>
-<span class="fc" id="L30">    public int getPriority(){ return priority;}</span>
-<span class="nc" id="L31">    public void setPriority(int priority){ this.priority = priority;}</span>
+<span class="fc" id="L34">        this.date = date;</span>
+<span class="fc" id="L35">    }</span>
+<span class="fc" id="L36">    public int getPriority(){ return priority;}</span>
+<span class="nc" id="L37">    public void setPriority(int priority){ this.priority = priority;}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

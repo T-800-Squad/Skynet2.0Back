@@ -3,6 +3,7 @@
 import edu.eci.cvds.Labtools.dto.CreateUserDTO;
 import edu.eci.cvds.Labtools.model.Lab;
 import edu.eci.cvds.Labtools.model.User;
+import edu.eci.cvds.Labtools.service.BookingService;
 import edu.eci.cvds.Labtools.service.JwtService;
 import edu.eci.cvds.Labtools.service.LabService;
 import edu.eci.cvds.Labtools.service.UserService;
@@ -11,9 +12,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+/**
+ * Controlador REST para la gestión de usuarios y laboratorios en la aplicación.
+ * Este controlador proporciona endpoints para crear y eliminar usuarios y laboratorios,
+ * así como para obtener prioridades de reservas, asegurando que solo los administradores
+ * puedan acceder a estas funcionalidades.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
+
 @RestController
 @RequestMapping(&quot;/admin&quot;)
-<span class="fc" id="L16">public class AdminController {</span>
+<span class="fc" id="L27">public class AdminController {</span>
 
     @Autowired
     private UserService userService;
@@ -24,41 +35,91 @@ import org.springframework.web.bind.annotation.*;
     @Autowired
     private JwtService jwtService;
 
+    @Autowired
+    private BookingService bookingService;
 
+    /**
+     * Endpoint para crear un nuevo usuario.
+     *
+     * @param createUserDTO DTO que contiene la información del nuevo usuario a crear.
+     * @param token Token de autorización del usuario que realiza la solicitud.
+     * @return ResponseEntity con el usuario creado y un código de estado 201 (CREATED) si el usuario es creado exitosamente,
+     *         o un código de estado 401 (UNAUTHORIZED) si el token no es válido.
+     */
     @PostMapping(&quot;/user&quot;)
     public ResponseEntity&lt;User&gt; createUser(@RequestBody CreateUserDTO createUserDTO, @RequestHeader(&quot;Authorization&quot;) String token) {
-<span class="fc bfc" id="L30" title="All 2 branches covered.">        if(jwtService.validateUserIsAdmin(token)) {</span>
-<span class="fc" id="L31">            User user = userService.createUser(createUserDTO);</span>
-<span class="fc" id="L32">            return ResponseEntity.status(HttpStatus.CREATED).body(user);</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if(jwtService.validateUserIsAdmin(token)) {</span>
+<span class="fc" id="L52">            User user = userService.createUser(createUserDTO);</span>
+<span class="fc" id="L53">            return ResponseEntity.status(HttpStatus.CREATED).body(user);</span>
         }
-<span class="fc" id="L34">        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);</span>
+<span class="fc" id="L55">        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);</span>
     }
 
+    /**
+     * Endpoint para eliminar un usuario existente.
+     *
+     * @param userName Nombre del usuario a eliminar.
+     * @param token Token de autorización del usuario que realiza la solicitud.
+     * @return ResponseEntity con un mensaje de éxito y un código de estado 200 (OK) si el usuario es eliminado exitosamente,
+     *         o un código de estado 401 (UNAUTHORIZED) si el token no es válido.
+     */
     @DeleteMapping(&quot;/user&quot;)
     public ResponseEntity&lt;String&gt; deleteUser(@RequestParam String userName, @RequestHeader(&quot;Authorization&quot;) String token) {
-<span class="fc bfc" id="L39" title="All 2 branches covered.">        if(jwtService.validateUserIsAdmin(token)) {</span>
-<span class="fc" id="L40">            userService.deleteUser(userName);</span>
-<span class="fc" id="L41">            return ResponseEntity.ok(&quot;User deleted successfully.&quot;);</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if(jwtService.validateUserIsAdmin(token)) {</span>
+<span class="fc" id="L69">            userService.deleteUser(userName);</span>
+<span class="fc" id="L70">            return ResponseEntity.ok(&quot;User deleted successfully.&quot;);</span>
         }
-<span class="fc" id="L43">        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);</span>
+<span class="fc" id="L72">        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);</span>
     }
 
+    /**
+     * Endpoint para crear un nuevo laboratorio.
+     *
+     * @param labName Nombre del laboratorio a crear.
+     * @param token Token de autorización del usuario que realiza la solicitud.
+     * @return ResponseEntity con el laboratorio creado y un código de estado 201 (CREATED) si el laboratorio es creado exitosamente,
+     *         o un código de estado 401 (UNAUTHORIZED) si el token no es válido.
+     */
     @PostMapping(&quot;/lab&quot;)
     public ResponseEntity&lt;Lab&gt; createLab(@RequestParam String labName, @RequestHeader(&quot;Authorization&quot;) String token) {
-<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        if(jwtService.validateUserIsAdmin(token)) {</span>
-<span class="nc" id="L49">            Lab lab = labService.createLab(labName);</span>
-<span class="nc" id="L50">            return ResponseEntity.status(HttpStatus.CREATED).body(lab);</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        if(jwtService.validateUserIsAdmin(token)) {</span>
+<span class="nc" id="L86">            Lab lab = labService.createLab(labName);</span>
+<span class="nc" id="L87">            return ResponseEntity.status(HttpStatus.CREATED).body(lab);</span>
         }
-<span class="fc" id="L52">        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);</span>
+<span class="fc" id="L89">        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);</span>
     }
 
+    /**
+     * Endpoint para eliminar un laboratorio existente.
+     *
+     * @param labName Nombre del laboratorio a eliminar.
+     * @param token Token de autorización del usuario que realiza la solicitud.
+     * @return ResponseEntity con un mensaje de éxito y un código de estado 200 (OK) si el laboratorio es eliminado exitosamente,
+     *         o un código de estado 401 (UNAUTHORIZED) si el token no es válido.
+     */
     @DeleteMapping(&quot;/lab&quot;)
     public ResponseEntity&lt;String&gt; deleteLab(@RequestParam String labName, @RequestHeader(&quot;Authorization&quot;) String token) {
-<span class="pc bpc" id="L57" title="1 of 2 branches missed.">        if(jwtService.validateUserIsAdmin(token)) {</span>
-<span class="nc" id="L58">            labService.deleteLab(labName);</span>
-<span class="nc" id="L59">            return ResponseEntity.ok(&quot;Lab deleted successfully.&quot;);</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        if(jwtService.validateUserIsAdmin(token)) {</span>
+<span class="nc" id="L103">            labService.deleteLab(labName);</span>
+<span class="nc" id="L104">            return ResponseEntity.ok(&quot;Lab deleted successfully.&quot;);</span>
         }
-<span class="fc" id="L61">        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);</span>
+<span class="fc" id="L106">        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);</span>
+    }
+
+    /**
+     * Endpoint para obtener las prioridades de las reservas.
+     *
+     * @param token Token de autorización del usuario que realiza la solicitud.
+     * @return ResponseEntity con una lista de prioridades y un código de estado 200 (OK) si la solicitud es exitosa,
+     *         o un código de estado 401 (UNAUTHORIZED) si el token no es válido.
+     */
+    @GetMapping()
+    public ResponseEntity&lt;List&lt;Integer&gt;&gt; getPriorities(@RequestHeader(&quot;Authorization&quot;) String token) {
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if(jwtService.validateUserIsAdmin(token)) {</span>
+<span class="nc" id="L119">            List&lt;Integer&gt; priorities = bookingService.getPriorities();</span>
+<span class="nc" id="L120">            return ResponseEntity.status(HttpStatus.OK).body(priorities);</span>
+        }
+<span class="nc" id="L122">        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);</span>
     }
 
 }

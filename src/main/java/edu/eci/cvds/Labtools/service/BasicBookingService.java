@@ -13,12 +13,14 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
-import java.util.Random;
-import java.util.UUID;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
+/**
+ * Clase BasicBookingService que implementa la interfaz BookingService.
+ * Esta clase se encarga de gestionar las reservas en el sistema.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 @Service
 public class BasicBookingService implements BookingService{
 
@@ -33,6 +35,12 @@ public class BasicBookingService implements BookingService{
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+    /**
+     * Crea una nueva reserva a partir de un objeto CreateBookingDTO.
+     *
+     * @param createBookingDTO Objeto que contiene la información de la reserva a crear.
+     * @return La reserva creada.
+     */
     public Booking createBooking(CreateBookingDTO createBookingDTO) {
         Booking booking = new Booking();
         Lab lab = labRepository.findByName(createBookingDTO.getLabName());
@@ -52,6 +60,12 @@ public class BasicBookingService implements BookingService{
         return booking;
     }
 
+    /**
+     * Actualiza la lista de reservas de un usuario después de crear una nueva reserva.
+     *
+     * @param userName Nombre del usuario.
+     * @param booking Reserva a agregar a la lista del usuario.
+     */
     private void updateListOfBookingsInUser(String userName, Booking booking) {
         User user = userRepository.findByName(userName);
         if (user == null) {
@@ -61,6 +75,12 @@ public class BasicBookingService implements BookingService{
         userRepository.save(user);
     }
 
+    /**
+     * Valida la fecha y el laboratorio para la reserva.
+     *
+     * @param date Fecha de la reserva.
+     * @param lab Laboratorio asociado a la reserva.
+     */
     private void validateDateAndLab(String date, Lab lab) {
         if (lab == null) {
             throw new IllegalArgumentException("Lab not found");
@@ -73,7 +93,11 @@ public class BasicBookingService implements BookingService{
         labRepository.save(lab);
     }
 
-
+    /**
+     * Elimina una reserva a partir de un objeto DeleteBookingDTO.
+     *
+     * @param deleteBookingDTO Objeto que contiene la información de la reserva a eliminar.
+     */
     public void deleteBooking(DeleteBookingDTO deleteBookingDTO) {
         String bookingId = deleteBookingDTO.getBookingId();
         Optional<Booking> optionalBooking = bookingRepository.findById(bookingId);
@@ -87,12 +111,24 @@ public class BasicBookingService implements BookingService{
         updateListOfBookingsBeforeDelete(deleteBookingDTO.getUserName(), booking);
     }
 
+    /**
+     * Actualiza la disponibilidad del laboratorio después de eliminar una reserva.
+     *
+     * @param lab Laboratorio asociado a la reserva.
+     * @param date Fecha de la reserva.
+     */
     private void updateDateInLab(Lab lab, String date) {
         LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
         lab.deleteIsAvailable(dateTime);
         labRepository.save(lab);
     }
 
+    /**
+     * Actualiza la lista de reservas de un usuario antes de eliminar una reserva.
+     *
+     * @param userName Nombre del usuario.
+     * @param booking Reserva a eliminar de la lista del usuario.
+     */
     private void updateListOfBookingsBeforeDelete(String userName, Booking booking) {
         User user = userRepository.findByName(userName);
         if (user == null) {
@@ -102,6 +138,10 @@ public class BasicBookingService implements BookingService{
         userRepository.save(user);
     }
 
+    /**
+     * Genera entre 100 y 1000 reservas nuevas.
+     * @return mensaje de generación de reservas correcto.
+     */
     public String generateRandomBookings() {
         Random random = new Random();
         int numBookings = random.nextInt(901) + 100;
@@ -130,9 +170,32 @@ public class BasicBookingService implements BookingService{
         return ("bookings generated successfully.");
     }
 
+    /**
+     * Genera una fecha aleatoria que es un número de días en el futuro desde la fecha actual.
+     *
+     * @return Una cadena que representa la fecha aleatoria en el formato "yyyy-MM-dd HH:mm:ss".
+     */
     private String generateRandomDate() {
         LocalDateTime randomDate = LocalDateTime.now()
                 .plusDays(new Random().nextInt(30));
         return randomDate.format(formatter);
+    }
+
+    /**
+     * Obtiene una lista de prioridades de todas las reservas en el sistema.
+     *
+     * @return Una lista de enteros que representan las prioridades de las reservas.
+     * @throws IllegalStateException Si no hay reservas disponibles.
+     */
+    public List<Integer> getPriorities() {
+        List<Integer> priorities = new ArrayList<>();
+        List<Booking> bookings = bookingRepository.findAll();
+        if (bookings.isEmpty()) {
+            throw new IllegalStateException("No bookings available");
+        }
+        for (Booking booking : bookings) {
+            priorities.add(booking.getPriority());
+        }
+        return priorities;
     }
 }

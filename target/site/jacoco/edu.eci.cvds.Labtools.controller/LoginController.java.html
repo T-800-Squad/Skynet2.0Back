@@ -9,31 +9,53 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 
 
+/**
+ * Controlador REST para la gestión de inicio de sesión y verificación de correos electrónicos.
+ * Este controlador proporciona endpoints para iniciar sesión y verificar el formato de un correo electrónico.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
+
 @RestController
 @RequestMapping(&quot;/login&quot;)
-
 public class LoginController {
 
     private LogService logService;
     private EmailVerificationService emailVerificationService;
 
+    /**
+     * Constructor para inyectar los servicios necesarios.
+     *
+     * @param logService Servicio de inicio de sesión a inyectar.
+     * @param emailVerificationService Servicio de verificación de correos electrónicos a inyectar.
+     */
+<span class="fc" id="L31">    public LoginController(LogService logService, EmailVerificationService emailVerificationService) {</span>
+<span class="fc" id="L32">        this.logService = logService;</span>
+<span class="fc" id="L33">        this.emailVerificationService = emailVerificationService;</span>
+<span class="fc" id="L34">    }</span>
 
-<span class="fc" id="L21">    public LoginController(LogService logService, EmailVerificationService emailVerificationService) {</span>
-<span class="fc" id="L22">        this.logService = logService;</span>
-<span class="fc" id="L23">        this.emailVerificationService = emailVerificationService;</span>
-<span class="fc" id="L24">    }</span>
-
+    /**
+     * Endpoint para iniciar sesión de un usuario.
+     *
+     * @param userRegisterDTO DTO que contiene la información del usuario que intenta iniciar sesión.
+     * @return UserDTO que representa al usuario que ha iniciado sesión.
+     * @throws LabToolsException Si ocurre un error durante el proceso de inicio de sesión.
+     */
     @PostMapping
-    public UserDTO userLog(@RequestBody UserRegisterDTO userRegisterDTO, HttpServletResponse response) throws LabToolsException {
-<span class="fc" id="L28">        return logService.userLog(userRegisterDTO);</span>
+    public UserDTO userLog(@RequestBody UserRegisterDTO userRegisterDTO) throws LabToolsException {
+<span class="fc" id="L45">        return logService.userLog(userRegisterDTO);</span>
     }
 
+    /**
+     * Endpoint para verificar el formato de un correo electrónico.
+     *
+     * @param email El correo electrónico a verificar.
+     * @return boolean que indica si el formato del correo electrónico es válido.
+     * @throws LabToolsException Si ocurre un error durante la verificación del formato del correo electrónico.
+     */
     @GetMapping
     public boolean emailFormtaVerification(@RequestParam String email) throws LabToolsException {
-<span class="fc" id="L33">        return emailVerificationService.emailFormatVerification(email);</span>
+<span class="fc" id="L57">        return emailVerificationService.emailFormatVerification(email);</span>
     }
-
-
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

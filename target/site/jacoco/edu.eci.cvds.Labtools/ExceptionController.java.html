@@ -7,18 +7,35 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * Clase ExceptionController que maneja excepciones lanzadas en la aplicación.
+ * Utiliza @ControllerAdvice para interceptar excepciones y devolver respuestas adecuadas.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 @ControllerAdvice
-<span class="fc" id="L11">public class ExceptionController {</span>
-<span class="fc" id="L12">    private static final Logger logger = LoggerFactory.getLogger(ExceptionController.class);</span>
+<span class="fc" id="L16">public class ExceptionController {</span>
+<span class="fc" id="L17">    private static final Logger logger = LoggerFactory.getLogger(ExceptionController.class);</span>
 
+    /**
+     * Maneja excepciones de tipo LabToolsException.
+     *
+     * @param e La excepción que se ha lanzado.
+     * @return Una respuesta con el estado HTTP 400 (BAD REQUEST) y el mensaje de la excepción.
+     */
     @ExceptionHandler(LabToolsException.class)
     public ResponseEntity&lt;String&gt; handleLabToolsException(LabToolsException e) {
-<span class="fc" id="L16">        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());</span>
+<span class="fc" id="L27">        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());</span>
     }
 
+    /**
+     * Maneja excepciones de tipo IllegalArgumentException.
+     *
+     * @param e La excepción que se ha lanzado.
+     * @return Una respuesta con el estado HTTP 400 (BAD REQUEST) y el mensaje de la excepción.
+     */
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity&lt;String&gt; handleIllegalArgumentExceptionException(IllegalArgumentException e) {
-<span class="fc" id="L21">        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());</span>
+<span class="fc" id="L38">        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

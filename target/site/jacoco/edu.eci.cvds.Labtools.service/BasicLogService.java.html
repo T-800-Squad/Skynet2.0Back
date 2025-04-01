@@ -10,8 +10,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Clase BasicLogService que implementa la interfaz LogService.
+ * Esta clase se encarga de gestionar el inicio de sesión de los usuarios.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 @Service
-<span class="fc" id="L14">public class BasicLogService implements LogService {</span>
+<span class="fc" id="L19">public class BasicLogService implements LogService {</span>
     @Autowired
     private HashService hashService;
     @Autowired
@@ -19,22 +24,29 @@ import java.util.Optional;
     @Autowired
     private MongoUserRepository mongoUserRepository;
 
+    /**
+     * Inicia sesión de un usuario utilizando la información proporcionada en UserRegisterDTO.
+     *
+     * @param userRegisterDTO Objeto que contiene la información del usuario para iniciar sesión.
+     * @return Un objeto UserDTO que contiene la información del usuario y el token de sesión.
+     * @throws LabToolsException Si el usuario no existe o la contraseña es incorrecta.
+     */
     public UserDTO userLog(UserRegisterDTO userRegisterDTO) throws LabToolsException {
-<span class="fc" id="L23">        Optional&lt;User&gt; user = mongoUserRepository.findByEmail(userRegisterDTO.getEmail());</span>
-<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (user.isEmpty()) {</span>
-<span class="fc" id="L25">            throw new LabToolsException(LabToolsException.User_Not_Exist);</span>
+<span class="fc" id="L35">        Optional&lt;User&gt; user = mongoUserRepository.findByEmail(userRegisterDTO.getEmail());</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (user.isEmpty()) {</span>
+<span class="fc" id="L37">            throw new LabToolsException(LabToolsException.User_Not_Exist);</span>
         }
-<span class="fc" id="L27">        User userDB = user.get();</span>
-<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        if(!hashService.checkPassword(userRegisterDTO.getPassword(), userDB.getPassword())){</span>
-<span class="nc" id="L29">            throw new LabToolsException(LabToolsException.Incorrect_Password);</span>
+<span class="fc" id="L39">        User userDB = user.get();</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if(!hashService.checkPassword(userRegisterDTO.getPassword(), userDB.getPassword())){</span>
+<span class="nc" id="L41">            throw new LabToolsException(LabToolsException.Incorrect_Password);</span>
         }
-<span class="fc" id="L31">        String token = jwtService.generateToken(userDB.getName(),userDB.getRol().toString());</span>
-<span class="fc" id="L32">        mongoUserRepository.save(userDB);</span>
-<span class="fc" id="L33">        UserDTO userDTO = new UserDTO();</span>
-<span class="fc" id="L34">        userDTO.setName(userDB.getName());</span>
-<span class="fc" id="L35">        userDTO.setRol(userDB.getRol());</span>
-<span class="fc" id="L36">        userDTO.setToken(token);</span>
-<span class="fc" id="L37">        return userDTO;</span>
+<span class="fc" id="L43">        String token = jwtService.generateToken(userDB.getName(),userDB.getRol().toString());</span>
+<span class="fc" id="L44">        mongoUserRepository.save(userDB);</span>
+<span class="fc" id="L45">        UserDTO userDTO = new UserDTO();</span>
+<span class="fc" id="L46">        userDTO.setName(userDB.getName());</span>
+<span class="fc" id="L47">        userDTO.setRol(userDB.getRol());</span>
+<span class="fc" id="L48">        userDTO.setToken(token);</span>
+<span class="fc" id="L49">        return userDTO;</span>
     }
 
 }

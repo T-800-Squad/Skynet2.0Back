@@ -7,7 +7,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Clase abstracta User que representa un usuario en el sistema de reservas.
+ * Esta clase está mapeada a la colección "users" en MongoDB.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 @Document(collection = "users")
 public abstract class User {
 
@@ -20,6 +24,13 @@ public abstract class User {
     protected List<Booking> bookings = new ArrayList<>();
     protected String rol;
 
+    /**
+     * Agrega una reserva a la lista de reservas del usuario.
+     * Si el usuario ya tiene 200 reservas, se lanza una excepción.
+     *
+     * @param booking Reserva a agregar.
+     * @throws IllegalArgumentException Si el usuario ya tiene 200 reservas.
+     */
     public void addBooking(Booking booking) {
 
         if (bookings.size() == 200) {
@@ -28,6 +39,13 @@ public abstract class User {
         bookings.add(booking);
     }
 
+    /**
+     * Elimina una reserva de la lista de reservas del usuario.
+     * Si el usuario no tiene reservas, se lanza una excepción.
+     *
+     * @param booking Reserva a eliminar.
+     * @throws IllegalArgumentException Si el usuario no tiene reservas.
+     */
     public void deleteBooking(Booking booking) {
         if (bookings.isEmpty()) {
             throw new IllegalArgumentException("User don't have bookings");

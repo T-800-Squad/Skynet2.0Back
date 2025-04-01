@@ -7,9 +7,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Clase abstracta User que representa un usuario en el sistema de reservas.
+ * Esta clase está mapeada a la colección &quot;users&quot; en MongoDB.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 @Document(collection = &quot;users&quot;)
-<span class="fc" id="L12">public abstract class User {</span>
+<span class="fc" id="L16">public abstract class User {</span>
 
     @Id
     protected String userId;
@@ -17,78 +21,92 @@ import java.util.List;
     protected String email;
     protected String password;
     protected boolean logged;
-<span class="fc" id="L20">    protected List&lt;Booking&gt; bookings = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L24">    protected List&lt;Booking&gt; bookings = new ArrayList&lt;&gt;();</span>
     protected String rol;
 
+    /**
+     * Agrega una reserva a la lista de reservas del usuario.
+     * Si el usuario ya tiene 200 reservas, se lanza una excepción.
+     *
+     * @param booking Reserva a agregar.
+     * @throws IllegalArgumentException Si el usuario ya tiene 200 reservas.
+     */
     public void addBooking(Booking booking) {
 
-<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        if (bookings.size() == 200) {</span>
-<span class="nc" id="L26">            throw new IllegalArgumentException(&quot;User already have twenty bookings&quot;);</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        if (bookings.size() == 200) {</span>
+<span class="nc" id="L37">            throw new IllegalArgumentException(&quot;User already have twenty bookings&quot;);</span>
         }
-<span class="fc" id="L28">        bookings.add(booking);</span>
-<span class="fc" id="L29">    }</span>
+<span class="fc" id="L39">        bookings.add(booking);</span>
+<span class="fc" id="L40">    }</span>
 
+    /**
+     * Elimina una reserva de la lista de reservas del usuario.
+     * Si el usuario no tiene reservas, se lanza una excepción.
+     *
+     * @param booking Reserva a eliminar.
+     * @throws IllegalArgumentException Si el usuario no tiene reservas.
+     */
     public void deleteBooking(Booking booking) {
-<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (bookings.isEmpty()) {</span>
-<span class="fc" id="L33">            throw new IllegalArgumentException(&quot;User don't have bookings&quot;);</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (bookings.isEmpty()) {</span>
+<span class="fc" id="L51">            throw new IllegalArgumentException(&quot;User don't have bookings&quot;);</span>
         }
-<span class="fc" id="L35">        bookings.remove(booking);</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L53">        bookings.remove(booking);</span>
+<span class="fc" id="L54">    }</span>
 
     public String getUserId() {
-<span class="fc" id="L39">        return userId;</span>
+<span class="fc" id="L57">        return userId;</span>
     }
 
     public void setUserId(String userId) {
-<span class="fc" id="L43">        this.userId = userId;</span>
-<span class="fc" id="L44">    }</span>
+<span class="fc" id="L61">        this.userId = userId;</span>
+<span class="fc" id="L62">    }</span>
 
     public String getName() {
-<span class="fc" id="L47">        return name;</span>
+<span class="fc" id="L65">        return name;</span>
     }
 
     public void setName(String name) {
-<span class="fc" id="L51">        this.name = name;</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L69">        this.name = name;</span>
+<span class="fc" id="L70">    }</span>
 
     public String getEmail() {
-<span class="fc" id="L55">        return email;</span>
+<span class="fc" id="L73">        return email;</span>
     }
 
     public void setEmail(String email) {
-<span class="fc" id="L59">        this.email = email;</span>
-<span class="fc" id="L60">    }</span>
+<span class="fc" id="L77">        this.email = email;</span>
+<span class="fc" id="L78">    }</span>
 
     public String getPassword() {
-<span class="fc" id="L63">        return password;</span>
+<span class="fc" id="L81">        return password;</span>
     }
 
     public void setPassword(String password) {
-<span class="fc" id="L67">        this.password = password;</span>
-<span class="fc" id="L68">    }</span>
+<span class="fc" id="L85">        this.password = password;</span>
+<span class="fc" id="L86">    }</span>
 
     public boolean getLogged() {
-<span class="fc" id="L71">        return logged;</span>
+<span class="fc" id="L89">        return logged;</span>
     }
 
     public void setLogged(boolean logged) {
-<span class="fc" id="L75">        this.logged = logged;</span>
-<span class="fc" id="L76">    }</span>
+<span class="fc" id="L93">        this.logged = logged;</span>
+<span class="fc" id="L94">    }</span>
 
     public List&lt;Booking&gt; getBookings() {
-<span class="fc" id="L79">        return bookings;</span>
+<span class="fc" id="L97">        return bookings;</span>
     }
 
     public void setBookings(List&lt;Booking&gt; bookings) {
-<span class="nc" id="L83">        this.bookings = bookings;</span>
-<span class="nc" id="L84">    }</span>
+<span class="nc" id="L101">        this.bookings = bookings;</span>
+<span class="nc" id="L102">    }</span>
 
     public String getRol() {
-<span class="fc" id="L87">        return rol;</span>
+<span class="fc" id="L105">        return rol;</span>
     }
 
     public void setRol(String rol) {
-<span class="fc" id="L91">        this.rol = rol;</span>
-<span class="fc" id="L92">    }</span>
+<span class="fc" id="L109">        this.rol = rol;</span>
+<span class="fc" id="L110">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

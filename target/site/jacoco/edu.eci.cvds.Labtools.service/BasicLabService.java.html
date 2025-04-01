@@ -5,28 +5,45 @@ import edu.eci.cvds.Labtools.repository.MongoLabRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Clase BasicLabService que implementa la interfaz LabService.
+ * Esta clase se encarga de gestionar las operaciones relacionadas con los laboratorios.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 @Service
-<span class="fc" id="L9">public class BasicLabService implements LabService{</span>
+<span class="fc" id="L14">public class BasicLabService implements LabService{</span>
 
     @Autowired
     private MongoLabRepository labRepository;
-    @Override
+
+    /**
+     * Crea un nuevo laboratorio con el nombre especificado.
+     *
+     * @param labName El nombre del laboratorio a crear.
+     * @return El laboratorio creado.
+     * @throws IllegalArgumentException Si el laboratorio ya existe.
+     */
     public Lab createLab(String labName) {
-<span class="fc" id="L15">        Lab lab = new Lab();</span>
-<span class="fc" id="L16">        lab.setName(labName);</span>
-<span class="fc bfc" id="L17" title="All 2 branches covered.">        if(labRepository.findByName(labName) != null){</span>
-<span class="fc" id="L18">            throw new IllegalArgumentException(&quot;Lab already exists&quot;);</span>
+<span class="fc" id="L27">        Lab lab = new Lab();</span>
+<span class="fc" id="L28">        lab.setName(labName);</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if(labRepository.findByName(labName) != null){</span>
+<span class="fc" id="L30">            throw new IllegalArgumentException(&quot;Lab already exists&quot;);</span>
         }
-<span class="fc" id="L20">        labRepository.save(lab);</span>
-<span class="fc" id="L21">        return lab;</span>
+<span class="fc" id="L32">        labRepository.save(lab);</span>
+<span class="fc" id="L33">        return lab;</span>
     }
 
-    @Override
+    /**
+     * Elimina un laboratorio con el nombre especificado.
+     *
+     * @param labName El nombre del laboratorio a eliminar.
+     * @throws IllegalArgumentException Si el laboratorio no existe.
+     */
     public void deleteLab(String labName) {
-<span class="fc bfc" id="L26" title="All 2 branches covered.">        if(labRepository.findByName(labName) == null){</span>
-<span class="fc" id="L27">            throw new IllegalArgumentException(&quot;Lab no exists&quot;);</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if(labRepository.findByName(labName) == null){</span>
+<span class="fc" id="L44">            throw new IllegalArgumentException(&quot;Lab no exists&quot;);</span>
         }
-<span class="fc" id="L29">        labRepository.deleteByName(labName);</span>
-<span class="fc" id="L30">    }</span>
+<span class="fc" id="L46">        labRepository.deleteByName(labName);</span>
+<span class="fc" id="L47">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

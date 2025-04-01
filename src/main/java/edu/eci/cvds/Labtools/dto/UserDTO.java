@@ -1,6 +1,11 @@
 package edu.eci.cvds.Labtools.dto;
 
-
+/**
+ * Clase UserDTO (Data Transfer Object) que representa la información de un usuario.
+ * Esta clase se utiliza para transferir datos desde la capa de servicio a la capa de presentación,
+ * especialmente en el contexto de autenticación y autorización.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 public class UserDTO {
     private String name;
     private String rol;
