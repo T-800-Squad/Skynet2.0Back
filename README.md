@@ -85,6 +85,10 @@ y los servicios están conectados con los repositorios correspondientes.
 se usó en busca de extensibilidad y calidad del codigo, aparte de cumplir con los princiopios SOLID.
 - La base del dieseño es que los controladores reciben la peticion, en el servicio se encuentra la logica
 del negocio y los repositorios se usa para consultar datos y guardarlos.
+### Diagrama de componentes
+![alt text](Images/componentes.png)
+- En el diagrama se muestra el funcionamiento de la aplicacion, el proyecto sigue una arquitectura MVC (Modelo-Vista-Controlador). 
+El cliente manda peticiones al backend, el cual las filtra y responde las que pasen de forma correcta el filtro. 
 ## Calidad de codigo
 ### Sonar cloud
 ![alt text](Images/sonar.png)
