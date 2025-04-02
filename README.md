@@ -99,3 +99,4 @@ resto del codigo.
 ### Jacoco
 - Se hizo uso de jacoco para comprobar el cubrimiento del codigo con dichas pruebas, el resultado es el siguiente.
 ![alt text](Images/jacoco.png)
+## [Presentacion](https://www.canva.com/design/DAGjWVCzrtI/bZ0JTORRwdW6vLL1ZjagZQ/edit?utm_content=DAGjWVCzrtI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
