@@ -24,8 +24,7 @@ public class JwtFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String path = request.getRequestURI();
         String header = request.getHeader("Authorization");
-        response.setHeader("Access-Control-Allow-Origin", "\n" +
-                "skywebnet-bfehbsd7eedzd6fq.eastus-01.azurewebsites.net");
+        response.setHeader("Access-Control-Allow-Origin", "skywebnet-bfehbsd7eedzd6fq.eastus-01.azurewebsites.net");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS,DELETE");
         response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
 

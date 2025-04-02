@@ -14,8 +14,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000","\n" +
-                                "skywebnet-bfehbsd7eedzd6fq.eastus-01.azurewebsites.net")
+                        .allowedOrigins("http://localhost:3000","skywebnet-bfehbsd7eedzd6fq.eastus-01.azurewebsites.net")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
