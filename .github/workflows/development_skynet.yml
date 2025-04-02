@@ -5,9 +5,9 @@ name: Build and deploy JAR app to Azure Web App - SkyNet
 
 on:
   push:
-    branches:
-      - development
-  workflow_dispatch:
+    branches: [ "development" ]
+  pull_request:
+    branches: [ "development" ]
 
 jobs:
   build:
