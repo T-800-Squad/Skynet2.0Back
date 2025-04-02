@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: edu.eci.cvds.Labtools.service.BasicUserServiceTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.070 s -- in edu.eci.cvds.Labtools.service.BasicUserServiceTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.073 s -- in edu.eci.cvds.Labtools.service.BasicUserServiceTest

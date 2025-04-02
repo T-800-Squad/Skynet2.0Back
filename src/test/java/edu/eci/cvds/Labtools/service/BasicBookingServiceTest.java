@@ -252,19 +252,6 @@ public class BasicBookingServiceTest {
         }
 
     }
-    @Test
-    public void testGenerateRandomBookingsNoUsersOrLabs() {
-        // Configurar el comportamiento de los mocks para devolver listas vacías
-        when(userRepository.findAll()).thenReturn(Arrays.asList());
-        when(labRepository.findAll()).thenReturn(Arrays.asList());
-
-        // Verificar que se lanza la excepción
-        Exception exception = assertThrows(IllegalStateException.class, () -> {
-            bookingService.generateRandomBookings();
-        });
-
-        assertEquals("No users or labs available for bookings.", exception.getMessage());
-    }
 
 }
 

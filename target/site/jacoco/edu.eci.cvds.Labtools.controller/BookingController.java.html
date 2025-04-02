@@ -55,14 +55,6 @@ public class BookingController {
 <span class="nc" id="L55">        return ResponseEntity.ok(&quot;Booking deleted successfully.&quot;);</span>
     }
 
-    /**
-     * Endpoint para generar reservas aleatorias.
-     *
-     * @return ResponseEntity con un mensaje de éxito y un código de estado 200 (OK) si las reservas son generadas exitosamente.
-     */
-    @PostMapping(&quot;/generate&quot;)
-    public ResponseEntity&lt;String&gt; generateRandomBookings() {
-<span class="nc" id="L65">        return ResponseEntity.ok(bookingService.generateRandomBookings());</span>
-    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

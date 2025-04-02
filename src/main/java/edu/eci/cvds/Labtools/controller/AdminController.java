@@ -106,20 +106,6 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
     }
 
-    /**
-     * Endpoint para obtener las prioridades de las reservas.
-     *
-     * @param token Token de autorización del usuario que realiza la solicitud.
-     * @return ResponseEntity con una lista de prioridades y un código de estado 200 (OK) si la solicitud es exitosa,
-     *         o un código de estado 401 (UNAUTHORIZED) si el token no es válido.
-     */
-    @GetMapping()
-    public ResponseEntity<List<Integer>> getPriorities(@RequestHeader("Authorization") String token) {
-        if(jwtService.validateUserIsAdmin(token)) {
-            List<Integer> priorities = bookingService.getPriorities();
-            return ResponseEntity.status(HttpStatus.OK).body(priorities);
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-    }
+
 
 }

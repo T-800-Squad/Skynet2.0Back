@@ -13,8 +13,6 @@ public interface BookingService {
 
     void deleteBooking(DeleteBookingDTO deleteBookingDTO);
 
-    String  generateRandomBookings();
 
-    List<Integer> getPriorities();
 
 }

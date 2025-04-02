@@ -55,13 +55,5 @@ public class BookingController {
         return ResponseEntity.ok("Booking deleted successfully.");
     }
 
-    /**
-     * Endpoint para generar reservas aleatorias.
-     *
-     * @return ResponseEntity con un mensaje de éxito y un código de estado 200 (OK) si las reservas son generadas exitosamente.
-     */
-    @PostMapping("/generate")
-    public ResponseEntity<String> generateRandomBookings() {
-        return ResponseEntity.ok(bookingService.generateRandomBookings());
-    }
+
 }

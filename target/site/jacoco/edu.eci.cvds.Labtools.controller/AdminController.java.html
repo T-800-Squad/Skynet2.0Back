@@ -82,7 +82,7 @@ import java.util.List;
      */
     @PostMapping(&quot;/lab&quot;)
     public ResponseEntity&lt;Lab&gt; createLab(@RequestParam String labName, @RequestHeader(&quot;Authorization&quot;) String token) {
-<span class="fc bfc" id="L85" title="All 2 branches covered.">        if(jwtService.validateUserIsAdmin(token)) {</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        if(jwtService.validateUserIsAdmin(token)) {</span>
 <span class="nc" id="L86">            Lab lab = labService.createLab(labName);</span>
 <span class="nc" id="L87">            return ResponseEntity.status(HttpStatus.CREATED).body(lab);</span>
         }
@@ -106,21 +106,7 @@ import java.util.List;
 <span class="fc" id="L106">        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);</span>
     }
 
-    /**
-     * Endpoint para obtener las prioridades de las reservas.
-     *
-     * @param token Token de autorización del usuario que realiza la solicitud.
-     * @return ResponseEntity con una lista de prioridades y un código de estado 200 (OK) si la solicitud es exitosa,
-     *         o un código de estado 401 (UNAUTHORIZED) si el token no es válido.
-     */
-    @GetMapping()
-    public ResponseEntity&lt;List&lt;Integer&gt;&gt; getPriorities(@RequestHeader(&quot;Authorization&quot;) String token) {
-<span class="nc bnc" id="L118" title="All 2 branches missed.">        if(jwtService.validateUserIsAdmin(token)) {</span>
-<span class="nc" id="L119">            List&lt;Integer&gt; priorities = bookingService.getPriorities();</span>
-<span class="nc" id="L120">            return ResponseEntity.status(HttpStatus.OK).body(priorities);</span>
-        }
-<span class="nc" id="L122">        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);</span>
-    }
+
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
