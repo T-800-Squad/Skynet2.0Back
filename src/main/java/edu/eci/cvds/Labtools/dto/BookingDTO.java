@@ -1,6 +1,10 @@
 package edu.eci.cvds.Labtools.dto;
 
-
+/**
+ * Clase BookingDTO (Data Transfer Object) que representa la información de una reserva.
+ * Esta clase se utiliza para transferir datos entre la capa de servicio y la capa de presentación.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 public class BookingDTO {
     private String bookingId;
     private String labName;

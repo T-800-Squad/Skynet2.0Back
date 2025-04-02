@@ -74,15 +74,29 @@ autenticación y cuáles son accesibles libremente.
 ## Diseño de clases:
 ### Modelo
 ![alt text](Images/modelo.png)
-- El modelo con tiene una estructura simple, El usuario guarda sus reservas, con la
-intencion de facilitar us consulta, y las reservas contiene la informacion del laboratorio en el 
-que se realizo la reserva.
+- El modelo tiene una estructura simple, El usuario guarda sus reservas, con la
+intention de facilitar us consulta, y las reservas contiene la información del laboratorio en el 
+que se realizó la reserva.
 ### Diseño controladores, servicion y repositorios
 ![alt text](Images/clases.png)
-- El diseño se basa en una estructura bastante simple, Los controladores estan conectados con los servicios,
-y los servicios estan conectados con los repositorios correspondientes.
-- El uso de la interfaces estan fundamentadas en el patron de diseño de inyeccion de dependencias,
-se uso en busca de extensibilidad y calidad del codigo, aparte de cumplir con los princiopios SOLID.
-- La base del diese;o es que los controladores reciben la peticion, en el servicio se encuentra la logica
+- El diseño se basa en una estructura bastante simple, Los controladores están conectados con los servicios,
+y los servicios están conectados con los repositorios correspondientes.
+- El uso de las interfaces están fundamentadas en el patron de diseño de inyeccion de dependencias,
+se usó en busca de extensibilidad y calidad del codigo, aparte de cumplir con los princiopios SOLID.
+- La base del dieseño es que los controladores reciben la peticion, en el servicio se encuentra la logica
 del negocio y los repositorios se usa para consultar datos y guardarlos.
-## Modelo de componentes
+### Diagrama de componentes
+![alt text](Images/componentes.png)
+- En el diagrama se muestra el funcionamiento de la aplicacion, el proyecto sigue una arquitectura MVC (Modelo-Vista-Controlador). 
+El cliente manda peticiones al backend, el cual las filtra y responde las que pasen de forma correcta el filtro. 
+## Calidad de codigo
+### Sonar cloud
+![alt text](Images/sonar.png)
+## Pruebas Unitarias y de integracion
+- Se realizaron pruebas para comprobar que todo el codigo funcione de forma correcta.
+- Se probaron de forma aislada y unitaria las funcionalidades, y después se comprobo su correcta integracion con el
+resto del codigo.
+### Jacoco
+- Se hizo uso de jacoco para comprobar el cubrimiento del codigo con dichas pruebas, el resultado es el siguiente.
+![alt text](Images/jacoco.png)
+## [Presentacion](https://www.canva.com/design/DAGjWVCzrtI/bZ0JTORRwdW6vLL1ZjagZQ/edit?utm_content=DAGjWVCzrtI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)

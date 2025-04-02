@@ -6,23 +6,47 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST para la gestión de consultas relacionadas con la disponibilidad de laboratorios
+ * y la búsqueda de reservas de usuarios. Este controlador proporciona endpoints para verificar
+ * la disponibilidad de laboratorios en una fecha específica y para encontrar reservas asociadas a un usuario.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
+
 @RestController
 @RequestMapping(&quot;/query&quot;)
 public class QueryController {
     private QueryService queryService;
 
-<span class="fc" id="L14">    public QueryController(QueryService queryService) {</span>
-<span class="fc" id="L15">        this.queryService = queryService;</span>
-<span class="fc" id="L16">    }</span>
+    /**
+     * Constructor para inyectar el servicio de consultas.
+     *
+     * @param queryService Servicio de consultas a inyectar.
+     */
+<span class="fc" id="L26">    public QueryController(QueryService queryService) {</span>
+<span class="fc" id="L27">        this.queryService = queryService;</span>
+<span class="fc" id="L28">    }</span>
 
+    /**
+     * Endpoint para verificar la disponibilidad de laboratorios en una fecha específica.
+     *
+     * @param date La fecha para la cual se desea verificar la disponibilidad de laboratorios.
+     * @return List&lt;String&gt; que contiene los nombres de los laboratorios disponibles en la fecha especificada.
+     */
     @GetMapping(&quot;/lab&quot;)
     public List&lt;String&gt; checkAvvailability(@RequestParam String date) {
-<span class="fc" id="L20">        return queryService.checkAvailability(date);</span>
+<span class="fc" id="L38">        return queryService.checkAvailability(date);</span>
     }
 
+    /**
+     * Endpoint para encontrar las reservas asociadas a un usuario específico.
+     *
+     * @param userName El nombre de usuario para el cual se desean encontrar las reservas.
+     * @return List&lt;BookingDTO&gt; que contiene las reservas asociadas al usuario especificado.
+     */
     @GetMapping
     public List&lt;BookingDTO&gt; findBookingsById(@RequestParam String userName) {
-<span class="fc" id="L25">        return queryService.findBookingsByName(userName);</span>
+<span class="fc" id="L49">        return queryService.findBookingsByName(userName);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

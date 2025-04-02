@@ -1,6 +1,7 @@
 package edu.eci.cvds.Labtools.controller;
 
 import edu.eci.cvds.Labtools.model.BasicUser;
+import edu.eci.cvds.Labtools.repository.MongoLabRepository;
 import edu.eci.cvds.Labtools.repository.MongoUserRepository;
 import edu.eci.cvds.Labtools.service.JwtService;
 import edu.eci.cvds.Labtools.service.LabService;
@@ -46,6 +47,8 @@ public class AdminControllerTest {
     private JwtService jwtService;
     @Mock
     private MongoUserRepository userRepository;
+    @Mock
+    private MongoLabRepository mongoLabRepository;
 
     @InjectMocks
     private AdminController adminController;
@@ -148,4 +151,6 @@ public class AdminControllerTest {
         assertEquals(401, response.getStatusCodeValue());
         assertNull(response.getBody());
     }
+
+
 }

@@ -6,44 +6,63 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
-
+/**
+ * Clase Lab que representa un laboratorio en el sistema de reservas.
+ * Esta clase está mapeada a la colección &quot;laboratories&quot; en MongoDB.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 @Document(collection = &quot;laboratories&quot;)
-<span class="fc" id="L11">public class Lab {</span>
+<span class="fc" id="L15">public class Lab {</span>
     @Id
     private String labId;
     private String name;
-<span class="fc" id="L15">    private HashMap&lt;LocalDateTime, Boolean&gt; isAvailable = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L19">    private HashMap&lt;LocalDateTime, Boolean&gt; isAvailable = new HashMap&lt;&gt;();</span>
 
     public String getLabId() {
-<span class="fc" id="L18">        return labId;</span>
+<span class="fc" id="L22">        return labId;</span>
     }
     public void setLabId(String labId) {
-<span class="fc" id="L21">        this.labId = labId;</span>
-<span class="fc" id="L22">    }</span>
+<span class="fc" id="L25">        this.labId = labId;</span>
+<span class="fc" id="L26">    }</span>
 
     public String getName() {
-<span class="fc" id="L25">        return name;</span>
+<span class="fc" id="L29">        return name;</span>
     }
 
     public void setName(String name) {
-<span class="fc" id="L29">        this.name = name;</span>
-<span class="fc" id="L30">    }</span>
+<span class="fc" id="L33">        this.name = name;</span>
+<span class="fc" id="L34">    }</span>
 
     public HashMap&lt;LocalDateTime, Boolean&gt; getIsAvailable() {
-<span class="fc" id="L33">        return isAvailable;</span>
+<span class="fc" id="L37">        return isAvailable;</span>
     }
 
+    /**
+     * Establece la disponibilidad del laboratorio en una fecha y hora específicas.
+     * Si ya existe una reserva en esa fecha y hora, se lanza una excepción.
+     *
+     * @param localDateTime Fecha y hora para establecer la disponibilidad.
+     * @throws IllegalArgumentException Si ya hay una reserva en esa fecha y hora.
+     */
     public void setIsAvailable(LocalDateTime localDateTime) {
-<span class="fc bfc" id="L37" title="All 2 branches covered.">        if(isAvailable.containsKey(localDateTime)) {</span>
-<span class="fc" id="L38">            throw new IllegalArgumentException(&quot;this lab already has a booking on this date&quot;);</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        if(isAvailable.containsKey(localDateTime)) {</span>
+<span class="fc" id="L49">            throw new IllegalArgumentException(&quot;this lab already has a booking on this date&quot;);</span>
         }
-<span class="fc" id="L40">        isAvailable.put(localDateTime, true);</span>
-<span class="fc" id="L41">    }</span>
+<span class="fc" id="L51">        isAvailable.put(localDateTime, true);</span>
+<span class="fc" id="L52">    }</span>
+
+    /**
+     * Elimina la disponibilidad del laboratorio en una fecha y hora específicas.
+     * Si no hay una reserva en esa fecha y hora, se lanza una excepción.
+     *
+     * @param localDateTime Fecha y hora para eliminar la disponibilidad.
+     * @throws IllegalArgumentException Si no hay una reserva en esa fecha y hora.
+     */
     public void deleteIsAvailable(LocalDateTime localDateTime) {
-<span class="fc bfc" id="L43" title="All 2 branches covered.">        if(!isAvailable.containsKey(localDateTime)) {</span>
-<span class="fc" id="L44">            throw new IllegalArgumentException(&quot;this lab doesn't have a booking on this date&quot;);</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if(!isAvailable.containsKey(localDateTime)) {</span>
+<span class="fc" id="L63">            throw new IllegalArgumentException(&quot;this lab doesn't have a booking on this date&quot;);</span>
         }
-<span class="fc" id="L46">        isAvailable.remove(localDateTime);</span>
-<span class="fc" id="L47">    }</span>
+<span class="fc" id="L65">        isAvailable.remove(localDateTime);</span>
+<span class="fc" id="L66">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

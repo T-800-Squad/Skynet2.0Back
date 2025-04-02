@@ -6,7 +6,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-
+/**
+ * Clase Booking que representa una reserva en el sistema.
+ * Esta clase está mapeada a la colección "bookings" en MongoDB.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 @Document(collection = "bookings")
 public class Booking {
 

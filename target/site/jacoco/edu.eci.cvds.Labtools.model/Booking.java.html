@@ -6,9 +6,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-
+/**
+ * Clase Booking que representa una reserva en el sistema.
+ * Esta clase está mapeada a la colección &quot;bookings&quot; en MongoDB.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 @Document(collection = &quot;bookings&quot;)
-<span class="fc" id="L11">public class Booking {</span>
+<span class="fc" id="L15">public class Booking {</span>
 
     @Id
     private String bookingId;
@@ -17,40 +21,40 @@ import java.time.LocalDateTime;
     private int priority;
 
     public String getBookingId() {
-<span class="fc" id="L20">        return bookingId;</span>
+<span class="fc" id="L24">        return bookingId;</span>
     }
 
     public void setBookingId(String bookingId) {
-<span class="fc" id="L24">        this.bookingId = bookingId;</span>
-<span class="fc" id="L25">    }</span>
+<span class="fc" id="L28">        this.bookingId = bookingId;</span>
+<span class="fc" id="L29">    }</span>
 
     public String getDate() {
-<span class="fc" id="L28">        return date;</span>
+<span class="fc" id="L32">        return date;</span>
     }
 
     public void setDate(String date) {
-<span class="fc" id="L32">        this.date = date;</span>
-<span class="fc" id="L33">    }</span>
+<span class="fc" id="L36">        this.date = date;</span>
+<span class="fc" id="L37">    }</span>
 
 
     public Lab getLab() {
-<span class="fc" id="L37">        return lab;</span>
+<span class="fc" id="L41">        return lab;</span>
     }
 
     public void setLab(Lab lab) {
-<span class="fc" id="L41">        this.lab = lab;</span>
-<span class="fc" id="L42">    }</span>
+<span class="fc" id="L45">        this.lab = lab;</span>
+<span class="fc" id="L46">    }</span>
 
-<span class="fc" id="L44">    public int getPriority() { return  priority;}</span>
+<span class="fc" id="L48">    public int getPriority() { return  priority;}</span>
 
-<span class="fc" id="L46">    public void setPriority(int priority) { this.priority = priority;}</span>
+<span class="fc" id="L50">    public void setPriority(int priority) { this.priority = priority;}</span>
 
     @Override
     public boolean equals(Object booking) {
-<span class="pc bpc" id="L50" title="1 of 2 branches missed.">        if(booking instanceof Booking book) {</span>
-<span class="fc" id="L51">            return this.bookingId.equals(book.getBookingId());</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if(booking instanceof Booking book) {</span>
+<span class="fc" id="L55">            return this.bookingId.equals(book.getBookingId());</span>
         }
-<span class="nc" id="L53">        return false;</span>
+<span class="nc" id="L57">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

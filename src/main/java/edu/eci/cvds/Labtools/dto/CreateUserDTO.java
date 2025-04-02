@@ -1,5 +1,11 @@
 package edu.eci.cvds.Labtools.dto;
 
+/**
+ * Clase CreateUser DTO (Data Transfer Object) que representa la información necesaria
+ * para crear un nuevo usuario. Esta clase se utiliza para transferir datos desde la capa
+ * de presentación a la capa de servicio.
+ * @author Miguel Angel Vanegas Cardenas, Yojhan Toro Rivera e Ivan Cubillos Vela.
+ */
 public class CreateUserDTO {
     private String username;
     private String password;
